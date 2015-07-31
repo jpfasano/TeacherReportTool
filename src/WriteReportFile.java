@@ -2,6 +2,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintStream;
 
 import SaveSaveAs.SaveSaveAsWriteFile;
 
@@ -14,13 +15,23 @@ public class WriteReportFile implements SaveSaveAsWriteFile {
 
   public void writeFile(File f) {
 
-    BufferedWriter out = null;
+    //BufferedWriter out = null;
+    PrintStream fileStream = null;
     try  
     {
-        FileWriter fstream = new FileWriter(f); 
-        out = new BufferedWriter(fstream);
-        String reportAsString = tra.getReports();
-        out.write(reportAsString);
+      fileStream = new PrintStream(f);
+      String reportAsString = tra.getReports();
+      String [] split = reportAsString.split("\n");
+      for (String s:split) {
+        System.out.println(s);
+        fileStream.println(s);
+      }
+
+      
+      //fileStream.println(reportAsString);
+       // FileWriter out = new FileWriter(f); 
+       // out = new BufferedWriter(out);
+        //out.write(reportAsString);
     }
     catch (IOException e)
     {
@@ -29,11 +40,11 @@ public class WriteReportFile implements SaveSaveAsWriteFile {
     }
     finally
     {
-        if(out != null) {
+        if(fileStream != null) {
             try {
-              out.close();
+              fileStream.close();
             }
-            catch (IOException e) {
+            catch (Exception e) {
               System.err.println("Error: " + e.getMessage());
               e.printStackTrace();
             }

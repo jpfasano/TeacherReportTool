@@ -196,8 +196,8 @@ public class TeacherReportAssistant extends JFrame
     for (Student s : getStudents()) {
       String sReport=s.getReport().trim();
       if (sReport.length()==0) continue;
-      retVal+="\\n\\n"+s.getName();
-      retVal+="\\n"+s.getReport();
+      retVal+="\n\n"+s.getName();
+      retVal+="\n"+s.getReport();
     }
     return retVal;
   }
