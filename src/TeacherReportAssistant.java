@@ -53,8 +53,8 @@ public class TeacherReportAssistant extends JFrame
       JFileChooser dirChooser = new JFileChooser(initialPath_);
       dirChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
       int result = dirChooser.showOpenDialog(this);
-      if (result == JFileChooser.CANCEL_OPTION)
-        return;
+      //if (result == JFileChooser.CANCEL_OPTION) return;
+      if (result != JFileChooser.APPROVE_OPTION) return;
       File dir = dirChooser.getSelectedFile();
       initialPath_ = dir.getAbsolutePath();
 

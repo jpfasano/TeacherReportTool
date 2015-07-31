@@ -4,10 +4,13 @@
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JCheckBoxMenuItem;
+
+import SaveSaveAs.Save;
 
 public class MenuBar extends JMenuBar
     implements ActionListener
@@ -15,10 +18,17 @@ public class MenuBar extends JMenuBar
   private TeacherReportAssistant tra;
   private JCheckBoxMenuItem sound;
   private JMenuItem open, exit, howtoplay, about;
+  private JMenuItem save, saveAs;
+  
+  private Save saveSaveAs;
+  private WriteReportFile writeReportFile;
 
   public MenuBar(TeacherReportAssistant tra)
   {
     this.tra = tra;
+    
+    writeReportFile = new WriteReportFile(tra);
+    saveSaveAs=new Save(tra,writeReportFile);
 
     // "File" menu:
 
@@ -32,9 +42,20 @@ public class MenuBar extends JMenuBar
     sound.setMnemonic('S');
     preferences.add(sound);
 
-    open  = new JMenuItem("Open ...");
+    open  = new JMenuItem("Open Directory ...");
     open.setMnemonic('O');
     open.addActionListener(this);
+    
+
+    save  = new JMenuItem("Save");
+    save.setMnemonic('S');
+    save.addActionListener(this);  
+
+    saveAs  = new JMenuItem("Save As ...");
+    //save.setMnemonic('S');
+    saveAs.addActionListener(this);
+    
+    
 
     exit = new JMenuItem("Exit");
     exit.setMnemonic('x');
@@ -43,6 +64,10 @@ public class MenuBar extends JMenuBar
     fileMenu.add(preferences);
     fileMenu.addSeparator();
     fileMenu.add(open);
+    fileMenu.addSeparator();
+    fileMenu.add(save);
+    fileMenu.add(saveAs);
+    fileMenu.addSeparator();
     fileMenu.add(exit);
 
     add(fileMenu);
@@ -77,6 +102,9 @@ public class MenuBar extends JMenuBar
 
     if (src == open)
       tra.open();
+    else if (src ==saveAs){
+      saveSaveAs.doSaveAs();
+    }
     else if (src == howtoplay)
       HelpMenuBar.showHelp();
     else if (src == about)
