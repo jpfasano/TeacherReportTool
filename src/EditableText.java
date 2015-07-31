@@ -13,7 +13,7 @@ public class EditableText extends JTextArea
   {
     super();
     //ta = new JTextArea();
-    this.setFont(new Font("Serif", Font.ITALIC, 16));
+    this.setFont(new Font("TRUETYPE", Font.PLAIN, 16));
     this.setLineWrap(true);
     this.setWrapStyleWord(true);
     this.setEditable(true);
@@ -22,8 +22,14 @@ public class EditableText extends JTextArea
   }
   
   public void insert(String t) {
-    String curText = this.getText();
-    super.setText(curText+" "+t);  
+    int curPos = getCaretPosition();
+    int curTextLen = this.getText().length();
+    String newText = t.trim();
+    if (curPos==curTextLen && curPos!=0) newText=" "+newText;
+    super.insert(newText,curPos);
+    //String curText = this.getText();
+    //String newText = (curText+" "+t).trim();
+    //super.setText(newText);  
     //super.append(t);
   }
   

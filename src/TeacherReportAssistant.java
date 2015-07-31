@@ -3,10 +3,6 @@
  *  See Help for the rules.
  */
 
-import java.awt.ComponentOrientation;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -15,14 +11,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.BoxLayout;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTabbedPane;
 import javax.swing.UIManager;
-import javax.swing.plaf.basic.BasicArrowButton;
 
 public class TeacherReportAssistant extends JFrame
 {
@@ -194,6 +185,16 @@ public class TeacherReportAssistant extends JFrame
     String sGender=students.get(studentsIndex).getGender();
     studentNameLabel.setText(sName+" gender:"+sGender);
     */
+  }
+  
+  public String getStudentName()
+  {
+    return students.get(studentsIndex).getName();
+  }
+
+  public String getStudentGender()
+  {
+    return students.get(studentsIndex).getGender();
   }
 
 

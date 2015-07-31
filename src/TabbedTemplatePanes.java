@@ -1,3 +1,5 @@
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -19,16 +21,29 @@ public class TabbedTemplatePanes extends JTabbedPane
   {
     ArrayList<TemplateCategory> templates = tra.getTemplates();
 
-    for (TemplateCategory tc : templates)
+    //for (int i=templates.size()-1; i>=0; i--)
+    for (TemplateCategory tc: templates)
     {
+      //TemplateCategory tc = templates.get(i);
       JPanel p = new JPanel();
+      
+      GridBagLayout layout = new GridBagLayout();
+      p.setLayout(layout);
+      
+      GridBagConstraints gbc = new GridBagConstraints();
+      
+      gbc.gridx=0;
+      gbc.gridy=0;
+      gbc.weightx=1.0;
+      gbc.weighty=1.0;
+      gbc.anchor = GridBagConstraints.NORTHWEST;
 
       // Create panel to contain template check boxes
       TemplatePane tp = new TemplatePane(tra,tc);
       templatePanes.add(tp);
       
 
-      p.add(tp);
+      p.add(tp,gbc);
       
       this.add(tc.getName(), p);
     }
@@ -37,7 +52,8 @@ public class TabbedTemplatePanes extends JTabbedPane
     ChangeListener changeListner = new ChangeListener() {
       public void stateChanged(ChangeEvent changeEvent) {
         String s=apply();
-        tra.getContentPanel().insertEditableText(s);
+        if (s.length()>0)
+           tra.getContentPanel().insertEditableText(s);
       }
     };
     this.addChangeListener(changeListner);
@@ -65,16 +81,5 @@ public class TabbedTemplatePanes extends JTabbedPane
   }
 }
 
-/*
- * public String apply() { String retVal=""; for ( TemplateCheckBox tcb :
- * templateCheckBoxesInPanel) { if (tcb.isSelected()) retVal +=
- * (tcb.getText()+" "); } System.out.println(retVal); return retVal; }
- */
 
-/*
- * public void itemStateChanged(ItemEvent e) { TemplateCheckBox tcb =
- * (TemplateCheckBox) e.getItemSelectable(); System.out.println(tcb.getText());
- * 
- * }
- */
 
