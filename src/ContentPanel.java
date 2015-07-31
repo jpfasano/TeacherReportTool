@@ -14,6 +14,7 @@ public class ContentPanel extends JPanel
   
   private TeacherReportAssistant tra;
   private JLabel studentNameLabel;
+  private TabbedTemplatePanes tabbedPanes;
   private EditableText editableText;
   
  
@@ -97,7 +98,7 @@ public class ContentPanel extends JPanel
     
    
     // Second section is the Tabbed Categories with template phrases
-    TabbedTemplatePanes tabbedTemplatePanes=new TabbedTemplatePanes(tra);
+    tabbedPanes=new TabbedTemplatePanes(tra);
     gbc.gridx=0;
     gbc.gridy=1;
     gbc.gridheight=100;
@@ -107,7 +108,7 @@ public class ContentPanel extends JPanel
     gbc.weightx=0.5;
     gbc.weighty=1.;
     gbc.insets = new Insets(20,0,0,0); // top padding
-    this.add(tabbedTemplatePanes,gbc);
+    this.add(tabbedPanes,gbc);
     
     // Third section is the editable text of the report
     editableText = new EditableText(); 
@@ -127,9 +128,23 @@ public class ContentPanel extends JPanel
     
   }
 
+  public void clearEditableText()
+  {
+    editableText.clearEditableText();
+  }
   public void insertEditableText(String t)
   {
     editableText.insert(t) ;    
+  }
+  
+  public String getEditableTest()
+  {
+    return editableText.getText();
+  }
+  
+  public void setFocusToFirstTab()
+  {
+    tabbedPanes.setSelectedIndex(0);
   }
 
   

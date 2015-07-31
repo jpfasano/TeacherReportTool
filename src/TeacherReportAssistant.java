@@ -17,7 +17,7 @@ import javax.swing.UIManager;
 
 public class TeacherReportAssistant extends JFrame
 {
-  private TeacherReportAssistantMenu menuBar;
+  private MenuBar menuBar;
   private ArrayList<Student> students;
   private int studentsIndex;
   private Map<String, GenderWordPair> genderWordsDict;
@@ -34,7 +34,7 @@ public class TeacherReportAssistant extends JFrame
     templates = new ArrayList<TemplateCategory>();
     students = new ArrayList<Student>();
 
-    menuBar = new TeacherReportAssistantMenu(this);
+    menuBar = new MenuBar(this);
     setJMenuBar(menuBar);
        
     
@@ -163,17 +163,43 @@ public class TeacherReportAssistant extends JFrame
   
   public void advanceToNextStudent()
   {
+    updateStudentReportFromEditableText();
     studentsIndex++;
     if (studentsIndex>=students.size()) studentsIndex=students.size()-1;
     updateStudentNameLabel();
+    contentPanel.setFocusToFirstTab();
+    contentPanel.clearEditableText();
   }
 
   public void backToPriorStudent()
   {
+    updateStudentReportFromEditableText();
     studentsIndex--;
     if (studentsIndex<0)studentsIndex=0;
     if (students.size()==0) studentsIndex=-1;
     updateStudentNameLabel();
+    contentPanel.setFocusToFirstTab();
+    contentPanel.clearEditableText();
+  }
+  
+  public void updateStudentReportFromEditableText()
+  {
+    if (students.size()==0) return;
+    if (studentsIndex==-1) return;
+    String r=contentPanel.getEditableTest();
+    students.get(studentsIndex).setReport(r);
+  }
+  
+  public String getReports()
+  {
+    String retVal="";
+    for (Student s : getStudents()) {
+      String sReport=s.getReport().trim();
+      if (sReport.length()==0) continue;
+      retVal+="\\n\\n"+s.getName();
+      retVal+="\\n"+s.getReport();
+    }
+    return retVal;
   }
   
   private void updateStudentNameLabel()
@@ -195,6 +221,17 @@ public class TeacherReportAssistant extends JFrame
   public String getStudentGender()
   {
     return students.get(studentsIndex).getGender();
+  }
+  
+  
+  public String getStudentReport()
+  {
+    return students.get(studentsIndex).getReport();
+  }
+
+  public void setStudentReport(String r)
+  {
+    students.get(studentsIndex).setReport(r);
   }
 
 

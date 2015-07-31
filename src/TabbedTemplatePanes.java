@@ -52,6 +52,7 @@ public class TabbedTemplatePanes extends JTabbedPane
     ChangeListener changeListner = new ChangeListener() {
       public void stateChanged(ChangeEvent changeEvent) {
         String s=apply();
+        s=s.trim();
         if (s.length()>0)
            tra.getContentPanel().insertEditableText(s);
       }
@@ -64,6 +65,11 @@ public class TabbedTemplatePanes extends JTabbedPane
     for (TemplatePane tp : templatePanes)
       for (TemplateCheckBox tcb : tp.getTemplateCheckBoxesInPanel())
         tcb.setSelected(false);
+  }
+  
+  public void setFocusToFirstTab()
+  {
+    this.setSelectedIndex(0);
   }
   
   

@@ -25,12 +25,18 @@ public class EditableText extends JTextArea
     int curPos = getCaretPosition();
     int curTextLen = this.getText().length();
     String newText = t.trim();
+    if (newText.length()==0)return;
     if (curPos==curTextLen && curPos!=0) newText=" "+newText;
     super.insert(newText,curPos);
     //String curText = this.getText();
     //String newText = (curText+" "+t).trim();
     //super.setText(newText);  
     //super.append(t);
+  }
+  
+  public void clearEditableText()
+  {
+    super.setText("");
   }
   
   public String getText() {
