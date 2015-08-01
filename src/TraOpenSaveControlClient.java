@@ -155,4 +155,13 @@ public class TraOpenSaveControlClient implements OpenSaveControlClient {
     }
     
   }
+  
+  // Enable/Disable File menu bar items
+  public void enableSaveMenuItem(Boolean b) {
+    tra.getTraMenuBar().enableSaveMenuItem(b);
+  }
+  public void enableSaveAsMenuItem(Boolean b)  {
+    tra.getTraMenuBar().enableSaveAsMenuItem(b);
+  }
+  
 }

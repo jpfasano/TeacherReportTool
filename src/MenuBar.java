@@ -26,10 +26,7 @@ public class MenuBar extends JMenuBar
   public MenuBar(TeacherReportAssistant tra)
   {
     this.tra = tra;
-    
-    traOpenSaveControlClient = new TraOpenSaveControlClient(tra);
-    openSaveControl=new OpenSaveControl(tra,traOpenSaveControlClient);
-
+ 
     // "File" menu:
 
     JMenu fileMenu = new JMenu("File");
@@ -89,6 +86,14 @@ public class MenuBar extends JMenuBar
     helpMenu.add(about);
 
     add(helpMenu);
+    
+    // Must be instantiated after the menu items exist
+    traOpenSaveControlClient = new TraOpenSaveControlClient(tra);
+    openSaveControl=new OpenSaveControl(tra,traOpenSaveControlClient);
+    
+    // Save and SaveAs are not available until after Open is done
+    save.setEnabled(false);
+    saveAs.setEnabled(false);
   }
 
   public boolean soundEnabled()
@@ -118,6 +123,14 @@ public class MenuBar extends JMenuBar
       System.out.println(tra.getReports());
       System.exit(0);
     }
+  }
+  
+  // Enable/Disable File menu bar items
+  public void enableSaveMenuItem(Boolean b) {
+    save.setEnabled(b);
+  }
+  public void enableSaveAsMenuItem(Boolean b) {
+     saveAs.setEnabled(b);
   }
 }
 

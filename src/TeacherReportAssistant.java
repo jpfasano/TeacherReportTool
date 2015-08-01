@@ -11,7 +11,7 @@ import javax.swing.UIManager;
 
 public class TeacherReportAssistant extends JFrame
 {
-  private MenuBar menuBar;
+  private MenuBar traMenuBar;
   private ArrayList<Student> students;
   private int studentsIndex;
   private Map<String, GenderWordPair> genderWordsDict;
@@ -28,138 +28,15 @@ public class TeacherReportAssistant extends JFrame
     templates = new ArrayList<TemplateCategory>();
     students = new ArrayList<Student>();
 
-    menuBar = new MenuBar(this);
-    setJMenuBar(menuBar);
+    traMenuBar = new MenuBar(this);
+    setJMenuBar(traMenuBar);
        
-    
     panelWithTabs = new ContentPanel(this);
     getContentPane().add(panelWithTabs);
 
   }
 
-  /*
-  public void open()
-  {
-    //controlPanel.open(this);
-    String pathSeparator = System.getProperty("file.separator"); 
-    
-    {
-      // Dispaly dialog to get directory containing data files
-      String initialPath_ = System.getProperty("user.dir") + pathSeparator;
-      JFileChooser dirChooser = new JFileChooser(initialPath_);
-      dirChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-      int result = dirChooser.showOpenDialog(this);
-      //if (result == JFileChooser.CANCEL_OPTION) return;
-      if (result != JFileChooser.APPROVE_OPTION) return;
-      File dir = dirChooser.getSelectedFile();
-      initialPath_ = dir.getAbsolutePath();
-
-      // Loop once to read each data file in the directory
-      String[] fileNames = {"names.tra", "genderWordPairs.tra","sentenceTemplates.tra"};
-      ArrayList<Student> students = new ArrayList<Student>();
-      Map<String, GenderWordPair> genderWordsDict = new HashMap<String,GenderWordPair>();
-      ArrayList<TemplateCategory> templates = new ArrayList<TemplateCategory>();
-      TemplateCategory tc= new TemplateCategory();
-
-      for (int f = 0; f < fileNames.length; f++)
-      {
-        try
-        {
-          
-          String fullFileName = dir + pathSeparator + fileNames[f];
-          FileInputStream fstream = new FileInputStream(fullFileName);
-          BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
-
-          String strLine;
-
-          // Read File Line By Line
-          while ((strLine = br.readLine()) != null)
-          {
-            strLine=strLine.trim();
-                     
-            // check for a comment or empty line
-            if (strLine.length()==0) continue;
-            if (strLine.substring(0,1).equals("#")) continue;
-
-            if (f == 0)
-            {
-
-              // Split line into gender and name.
-              String[] parsed = strLine.split(" ", 2);
-
-              // Make sure Gender is uppercase
-              parsed[0] = parsed[0].toUpperCase();
-
-              if (!parsed[0].equals("M") && !parsed[0].equals("F"))
-              {
-                throw new Exception("Invalid Gender in " + fullFileName
-                    + ". Line is \"" + strLine + "\"");
-              }
-
-              Student s = new Student(parsed[0], parsed[1]);
-              students.add(s);
-            }
-            else if (f == 1)
-            {
-              // Split line into male and female gender words
-              String[] parsed = strLine.split(" ", 2);
-              
-              GenderWordPair gwp = new GenderWordPair(parsed[0],parsed[1]);
-              genderWordsDict.put(parsed[0],gwp);
-              genderWordsDict.put(parsed[1],gwp);
-         
-            }
-            else if (f==2)
-            {             
-              // Does strLine identifies a new category?
-              if (strLine.substring(0,1).equals("\"")) {
-                
-                // strLine identifies a new category
-                if (!tc.empty())
-                  templates.add(tc);    
-                  tc= new TemplateCategory(strLine.substring(1));
-              }
-              else {
-                // strLine is another template line
-                tc.addTemplate(strLine);
-              }
-            }
-
-          }
-          br.close();
-          if (f == 0)
-            setStudents(students);
-          else if (f==1)
-            setGenderWordsDict(genderWordsDict);
-          else if (f==2) {
-            if (!tc.empty()) templates.add(tc);    
-            setTemplates(templates);
-          }
-        }
-
-        catch (Exception e)
-        {
-          System.err.println(e.getMessage());
-        }
-      }
-      
-
-    }
- */
-/*
-    
-    getContentPane().remove(contentPanel);
-    contentPanel = new ContentPanel(this);
-    getContentPane().add(contentPanel);
-    invalidate();
-    validate();
-    
-    // update label on GUI to have name of first student
-    studentsIndex=-1;
-    advanceToNextStudent();  
-   
-  }
-   */ 
+  
   
   public void advanceToNextStudent()
   {
@@ -302,6 +179,14 @@ public class TeacherReportAssistant extends JFrame
   public ContentPanel getContentPanel()
   {
     return panelWithTabs;
+  }
+  
+  
+
+
+
+  public MenuBar getTraMenuBar() {
+    return traMenuBar;
   }
 
   public static void main(String[] args)

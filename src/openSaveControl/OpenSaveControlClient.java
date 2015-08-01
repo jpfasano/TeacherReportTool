@@ -11,5 +11,9 @@ public interface OpenSaveControlClient {
   
   // After save dialog, this method does the actual file writing
   public void writeFile(File f);
+  
+  // Enable/Disable File menu bar items
+  public void enableSaveMenuItem(Boolean b);
+  public void enableSaveAsMenuItem(Boolean b);
 
 }

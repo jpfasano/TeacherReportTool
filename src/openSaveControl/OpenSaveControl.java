@@ -15,14 +15,14 @@ public class OpenSaveControl {
   private JFileChooser saveAsFileChooser = null;
   
   private JFileChooser openDirChooser=null;
-  private OpenSaveControlClient readFileObj = null;
+  private OpenSaveControlClient oscClient = null;
   
   private JFrame frame;
 
   public OpenSaveControl(JFrame f, OpenSaveControlClient orf, String defaultSaveAsFilename){
     super();
     frame = f;
-    readFileObj = orf;
+    oscClient = orf;
     this.defaultSaveAsFilename=defaultSaveAsFilename;
     gutsOfConstrutor(); 
   }
@@ -30,7 +30,7 @@ public class OpenSaveControl {
   public OpenSaveControl(JFrame f, OpenSaveControlClient orf) {
     super();
     frame = f;
-    readFileObj = orf;
+    oscClient = orf;
     gutsOfConstrutor();
   }
   
@@ -59,16 +59,31 @@ public class OpenSaveControl {
       openDirChooser = new JFileChooser();
       openDirChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
     }
+    
+    // Until a file is opened then there is nothing to save
+    // oscClient.enableSaveMenuItem(false);
+    // oscClient.enableSaveAsMenuItem(false);
 
   }
   
-  public void doSave() {
+  public void doOpen() {
 
-    String pathSeparator = System.getProperty("file.separator");
-    File file = new File(defaultDirectory + pathSeparator + defaultSaveAsFilename);
+    File dir = new File(defaultDirectory);
+    openDirChooser.setSelectedFile(dir);
     
-    readFileObj.writeFile(file);
+    int result = openDirChooser.showOpenDialog(frame);
+    if (result != JFileChooser.APPROVE_OPTION) return;
+    dir = openDirChooser.getSelectedFile();
+    defaultDirectory = dir.getAbsolutePath(); 
+    
+    // File either doesn't exist or it is ok to overwrite;
+    oscClient.openReadFile(dir);
+    
+    oscClient.enableSaveMenuItem(false);
+    oscClient.enableSaveAsMenuItem(true);
+    
   }
+  
 
   public void doSaveAs() {
 
@@ -94,24 +109,20 @@ public class OpenSaveControl {
     }
     
     // File either doesn't exist or it is ok to overwrite;
-    readFileObj.writeFile(saveAsFile);
+    oscClient.writeFile(saveAsFile);
+
+    oscClient.enableSaveMenuItem(true);
   }
   
 
-  public void doOpen() {
+  public void doSave() {
 
-    File dir = new File(defaultDirectory);
-    openDirChooser.setSelectedFile(dir);
+    String pathSeparator = System.getProperty("file.separator");
+    File file = new File(defaultDirectory + pathSeparator + defaultSaveAsFilename);
     
-    int result = openDirChooser.showOpenDialog(frame);
-    if (result != JFileChooser.APPROVE_OPTION) return;
-    dir = openDirChooser.getSelectedFile();
-    defaultDirectory = dir.getAbsolutePath(); 
-    
-    // File either doesn't exist or it is ok to overwrite;
-    readFileObj.openReadFile(dir);
-    
+    oscClient.writeFile(file);
   }
+  
                   
 }
     
