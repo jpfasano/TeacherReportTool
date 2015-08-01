@@ -163,12 +163,15 @@ public class TeacherReportAssistant extends JFrame
   
   public void advanceToNextStudent()
   {
+    // copy checked templates to editable text
     updateStudentReportFromEditableText();
     studentsIndex++;
     if (studentsIndex>=students.size()) studentsIndex=students.size()-1;
     updateStudentNameLabel();
     contentPanel.setFocusToFirstTab();
-    contentPanel.clearEditableText();
+    
+    // Set editable text to text for student
+    updateEditableTextFromStudentReport();
   }
 
   public void backToPriorStudent()
@@ -179,7 +182,9 @@ public class TeacherReportAssistant extends JFrame
     if (students.size()==0) studentsIndex=-1;
     updateStudentNameLabel();
     contentPanel.setFocusToFirstTab();
-    contentPanel.clearEditableText();
+
+    // Set editable text to text for student
+    updateEditableTextFromStudentReport();
   }
   
   public void updateStudentReportFromEditableText()
@@ -190,8 +195,24 @@ public class TeacherReportAssistant extends JFrame
     students.get(studentsIndex).setReport(r);
   }
   
+
+  public void updateEditableTextFromStudentReport()
+  {
+    String sr="";
+    if (students.size()==0)
+      sr="";
+    else if (studentsIndex==-1) 
+      sr="";
+    else
+      sr = students.get(studentsIndex).getReport();
+    contentPanel.setEditableText(sr);
+  }
+  
   public String getReports()
   {
+    // Make sure current editable text is copied to student
+    updateStudentReportFromEditableText();
+    
     String retVal="";
     for (Student s : getStudents()) {
       String sReport=s.getReport().trim();

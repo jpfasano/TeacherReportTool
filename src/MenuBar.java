@@ -10,7 +10,7 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JCheckBoxMenuItem;
 
-import SaveSaveAs.Save;
+import openSaveControl.OpenSaveControl;
 
 public class MenuBar extends JMenuBar
     implements ActionListener
@@ -20,7 +20,7 @@ public class MenuBar extends JMenuBar
   private JMenuItem open, exit, howtoplay, about;
   private JMenuItem save, saveAs;
   
-  private Save saveSaveAs;
+  private OpenSaveControl saveSaveAs;
   private WriteReportFile writeReportFile;
 
   public MenuBar(TeacherReportAssistant tra)
@@ -28,7 +28,7 @@ public class MenuBar extends JMenuBar
     this.tra = tra;
     
     writeReportFile = new WriteReportFile(tra);
-    saveSaveAs=new Save(tra,writeReportFile);
+    saveSaveAs=new OpenSaveControl(tra,writeReportFile);
 
     // "File" menu:
 
@@ -47,11 +47,11 @@ public class MenuBar extends JMenuBar
     open.addActionListener(this);
     
 
-    save  = new JMenuItem("Save");
+    save  = new JMenuItem("OpenSaveControl");
     save.setMnemonic('S');
     save.addActionListener(this);  
 
-    saveAs  = new JMenuItem("Save As ...");
+    saveAs  = new JMenuItem("OpenSaveControl As ...");
     //save.setMnemonic('S');
     saveAs.addActionListener(this);
     

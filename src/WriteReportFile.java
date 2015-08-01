@@ -4,7 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 
-import SaveSaveAs.SaveSaveAsWriteFile;
+import openSaveControl.SaveSaveAsWriteFile;
 
 public class WriteReportFile implements SaveSaveAsWriteFile {
 

@@ -1,4 +1,4 @@
-package SaveSaveAs;
+package openSaveControl;
 
 import java.awt.event.ActionEvent;
 import java.io.File;
@@ -8,14 +8,14 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-public class Save {
+public class OpenSaveControl {
 
   private String defaultSaveAsFilename = "report.txt";
   private JFileChooser saveAsFileChooser = null;
   private SaveSaveAsWriteFile writeFileObj = null;
   private JFrame frame;
 
-  public Save(JFrame f,SaveSaveAsWriteFile obj, String defaultSaveAsFilename){
+  public OpenSaveControl(JFrame f,SaveSaveAsWriteFile obj, String defaultSaveAsFilename){
     super();
     frame = f;
     writeFileObj = obj;
@@ -23,7 +23,7 @@ public class Save {
     gutsOfConstrutor(); 
   }
   
-  public Save(JFrame f,SaveSaveAsWriteFile obj) {
+  public OpenSaveControl(JFrame f,SaveSaveAsWriteFile obj) {
     super();
     frame = f;
     writeFileObj = obj;

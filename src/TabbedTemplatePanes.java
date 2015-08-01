@@ -11,6 +11,7 @@ public class TabbedTemplatePanes extends JTabbedPane
 // implements ItemListener
 {
   private ArrayList<TemplatePane> templatePanes = new ArrayList<TemplatePane>();
+  private TeacherReportAssistant tra;
 
   public TabbedTemplatePanes()
   {
@@ -20,6 +21,7 @@ public class TabbedTemplatePanes extends JTabbedPane
   public TabbedTemplatePanes(TeacherReportAssistant tra)
   {
     ArrayList<TemplateCategory> templates = tra.getTemplates();
+    this.tra = tra;
 
     //for (int i=templates.size()-1; i>=0; i--)
     for (TemplateCategory tc: templates)
@@ -51,10 +53,14 @@ public class TabbedTemplatePanes extends JTabbedPane
     // Call apply() when tab is changed;
     ChangeListener changeListner = new ChangeListener() {
       public void stateChanged(ChangeEvent changeEvent) {
+        apply();
+        /*
         String s=apply();
+       
         s=s.trim();
         if (s.length()>0)
            tra.getContentPanel().insertEditableText(s);
+         */
       }
     };
     this.addChangeListener(changeListner);
@@ -75,12 +81,20 @@ public class TabbedTemplatePanes extends JTabbedPane
   
   public String apply()
   {
+    // Get text associated with checked boxes
     String retVal="";
     for (TemplatePane tp : templatePanes)
     {
       String paneText=tp.apply();
        retVal+=paneText;
     }
+    /*
+    // Add text associated with checked boxes to editable text region
+    retVal=retVal.trim();
+    if (retVal.length()>0)
+       tra.getContentPanel().insertEditableText(retVal);
+       */
+    
     System.out.println("|"+retVal+"|");
     uncheckBoxes();
     return retVal;

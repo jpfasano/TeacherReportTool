@@ -136,9 +136,16 @@ public class ContentPanel extends JPanel
   {
     editableText.insert(t) ;    
   }
+
+  public void setEditableText(String t)
+  {
+    editableText.setText(t) ;    
+  }
   
   public String getEditableTest()
   {
+    // First update editable text to contain any current checked templates
+    tabbedPanes.apply();
     return editableText.getText();
   }
   
