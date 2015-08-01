@@ -42,6 +42,7 @@ public class OpenSaveControl {
     saveAsFileChooser = new JFileChooser();
 
     saveAsFileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+    saveAsFileChooser.setApproveButtonText("Save");
 
     // Setup file filters
     // The filters should not be hard coded.

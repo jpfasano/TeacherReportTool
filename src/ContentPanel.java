@@ -29,7 +29,7 @@ public class ContentPanel extends JPanel
     // See: https://docs.oracle.com/javase/tutorial/uiswing/layout/gridbag.html
     
     // Top section is student name
-    studentNameLabel = new JLabel("Student Name", JLabel.CENTER);  
+    studentNameLabel = new JLabel("   ", JLabel.CENTER);  
     
     BasicArrowButton backButton=new BasicArrowButton(BasicArrowButton.WEST);
     
