@@ -13,26 +13,23 @@ public class OpenSaveControl {
   private String defaultDirectory = "";
   
   private JFileChooser saveAsFileChooser = null;
-  private SaveSaveAsWriteFile writeFileObj = null;
   
   private JFileChooser openDirChooser=null;
-  private OpenReadFile readFileObj = null;
+  private OpenSaveControlClient readFileObj = null;
   
   private JFrame frame;
 
-  public OpenSaveControl(JFrame f,SaveSaveAsWriteFile obj, OpenReadFile orf, String defaultSaveAsFilename){
+  public OpenSaveControl(JFrame f, OpenSaveControlClient orf, String defaultSaveAsFilename){
     super();
     frame = f;
-    writeFileObj = obj;
     readFileObj = orf;
     this.defaultSaveAsFilename=defaultSaveAsFilename;
     gutsOfConstrutor(); 
   }
   
-  public OpenSaveControl(JFrame f,SaveSaveAsWriteFile obj, OpenReadFile orf) {
+  public OpenSaveControl(JFrame f, OpenSaveControlClient orf) {
     super();
     frame = f;
-    writeFileObj = obj;
     readFileObj = orf;
     gutsOfConstrutor();
   }
@@ -70,7 +67,7 @@ public class OpenSaveControl {
     String pathSeparator = System.getProperty("file.separator");
     File file = new File(defaultDirectory + pathSeparator + defaultSaveAsFilename);
     
-    writeFileObj.writeFile(file);
+    readFileObj.writeFile(file);
   }
 
   public void doSaveAs() {
@@ -97,7 +94,7 @@ public class OpenSaveControl {
     }
     
     // File either doesn't exist or it is ok to overwrite;
-    writeFileObj.writeFile(saveAsFile);
+    readFileObj.writeFile(saveAsFile);
   }
   
 

@@ -20,17 +20,15 @@ public class MenuBar extends JMenuBar
   private JMenuItem open, exit, howtoplay, about;
   private JMenuItem save, saveAs;
   
-  private OpenSaveControl saveSaveAs;
-  private WriteReportFile writeReportFile;
-  private ReadDataFiles readDataFiles;
+  private OpenSaveControl openSaveControl;
+  private TraOpenSaveControlClient traOpenSaveControlClient;
 
   public MenuBar(TeacherReportAssistant tra)
   {
     this.tra = tra;
     
-    writeReportFile = new WriteReportFile(tra);
-    readDataFiles = new ReadDataFiles(tra);
-    saveSaveAs=new OpenSaveControl(tra,writeReportFile,readDataFiles);
+    traOpenSaveControlClient = new TraOpenSaveControlClient(tra);
+    openSaveControl=new OpenSaveControl(tra,traOpenSaveControlClient);
 
     // "File" menu:
 
@@ -103,13 +101,13 @@ public class MenuBar extends JMenuBar
     JMenuItem src = (JMenuItem)e.getSource();
 
     if (src == open) {
-      saveSaveAs.doOpen();
+      openSaveControl.doOpen();
     }
     else if (src ==save){
-      saveSaveAs.doSave();
+      openSaveControl.doSave();
     }
     else if (src ==saveAs){
-      saveSaveAs.doSaveAs();
+      openSaveControl.doSaveAs();
     }
     else if (src == howtoplay)
       HelpMenuBar.showHelp();

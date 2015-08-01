@@ -1,18 +1,20 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import openSaveControl.OpenReadFile;
+import openSaveControl.OpenSaveControlClient;
 
-public class ReadDataFiles implements OpenReadFile {
+public class TraOpenSaveControlClient implements OpenSaveControlClient {
 
   TeacherReportAssistant tra;
 
-  public ReadDataFiles(TeacherReportAssistant tra) {
+  public TraOpenSaveControlClient(TeacherReportAssistant tra) {
     this.tra = tra;
   }
 
@@ -112,5 +114,45 @@ public class ReadDataFiles implements OpenReadFile {
     //studentsIndex=-1;
     tra.advanceToNextStudent(); 
 
+  }
+  
+  public void writeFile(File f) {
+
+    //BufferedWriter out = null;
+    PrintStream fileStream = null;
+    try  
+    {
+      fileStream = new PrintStream(f);
+      String reportAsString = tra.getReports();
+      String [] split = reportAsString.split("\n");
+      for (String s:split) {
+        System.out.println(s);
+        fileStream.println(s);
+      }
+
+      
+      //fileStream.println(reportAsString);
+       // FileWriter out = new FileWriter(f); 
+       // out = new BufferedWriter(out);
+        //out.write(reportAsString);
+    }
+    catch (IOException e)
+    {
+        System.err.println("Error: " + e.getMessage());
+        e.printStackTrace();
+    }
+    finally
+    {
+        if(fileStream != null) {
+            try {
+              fileStream.close();
+            }
+            catch (Exception e) {
+              System.err.println("Error: " + e.getMessage());
+              e.printStackTrace();
+            }
+        }
+    }
+    
   }
 }
