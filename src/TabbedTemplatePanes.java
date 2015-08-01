@@ -97,7 +97,7 @@ public class TabbedTemplatePanes extends JTabbedPane
        tra.getContentPanel().insertEditableText(retVal);
        */
     
-    System.out.println("|"+retVal+"|");
+   // System.out.println("|"+retVal+"|");
     uncheckBoxes();
     return retVal;
   }

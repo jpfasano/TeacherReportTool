@@ -8,9 +8,13 @@ public class EditableText extends JTextArea
 {
   //JTextArea ta = new JTextArea();
 
-  public EditableText()
+  private TeacherReportAssistant tra;
+  
+
+  public EditableText(TeacherReportAssistant tra)
   {
     super();
+    this.tra = tra;
     //ta = new JTextArea();
     this.setFont(new Font("TRUETYPE", Font.PLAIN, 16));
     this.setLineWrap(true);
@@ -25,12 +29,15 @@ public class EditableText extends JTextArea
     int curTextLen = this.getText().length();
     String newText = t.trim();
     if (newText.length()==0)return;
-    if (curPos==curTextLen && curPos!=0) newText=" "+newText;
-    super.insert(newText,curPos);
-    //String curText = this.getText();
-    //String newText = (curText+" "+t).trim();
-    //super.setText(newText);  
-    //super.append(t);
+    
+    if (tra.getTraMenuBar().insertAtCursorEnabled() ) {
+        if (curPos==curTextLen && curPos!=0) newText=" "+newText;
+        super.insert(newText,curPos);
+    }
+    else {
+      if (curTextLen!=0) newText=" "+newText;
+      super.append(newText);
+    }
   }
   
   public void clearEditableText()

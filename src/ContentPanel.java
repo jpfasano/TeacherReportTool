@@ -111,7 +111,7 @@ public class ContentPanel extends JPanel
     this.add(tabbedPanes,gbc);
     
     // Third section is the editable text of the report
-    editableText = new EditableText(); 
+    editableText = new EditableText(tra); 
     //insertEditableText("Seth Winick, a spokesperson for the Texas Charter School Association, isn't completely sure what's working, but he says it likely has to do with how intensely focused charters are on serving English-language learners, students in poverty, and other underserved populations.");
   
     gbc.gridx=0;

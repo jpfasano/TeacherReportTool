@@ -16,7 +16,7 @@ public class MenuBar extends JMenuBar
     implements ActionListener
 {
   private TeacherReportAssistant tra;
-  private JCheckBoxMenuItem sound;
+  private JCheckBoxMenuItem insertAtCursor;
   private JMenuItem open, exit, howtoplay, about;
   private JMenuItem save, saveAs;
   
@@ -35,9 +35,9 @@ public class MenuBar extends JMenuBar
     // Second level menu under "Preferences":
     JMenu preferences = new JMenu("Preferences");
     preferences.setMnemonic('P');
-    sound = new JCheckBoxMenuItem("Play Sound", true);
-    sound.setMnemonic('S');
-    preferences.add(sound);
+    insertAtCursor = new JCheckBoxMenuItem("Insert at cursor", false);
+    insertAtCursor.setMnemonic('I');
+    preferences.add(insertAtCursor);
 
     open  = new JMenuItem("Open Directory ...");
     open.setMnemonic('O');
@@ -96,9 +96,9 @@ public class MenuBar extends JMenuBar
     saveAs.setEnabled(false);
   }
 
-  public boolean soundEnabled()
+  public boolean insertAtCursorEnabled()
   {
-    return sound.isSelected();
+    return insertAtCursor.isSelected();
   }
 
   public void actionPerformed(ActionEvent e)
