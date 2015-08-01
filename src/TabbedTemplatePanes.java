@@ -13,10 +13,12 @@ public class TabbedTemplatePanes extends JTabbedPane
   private ArrayList<TemplatePane> templatePanes = new ArrayList<TemplatePane>();
   private TeacherReportAssistant tra;
 
+  /*
   public TabbedTemplatePanes()
   {
     super();
   }
+  */
 
   public TabbedTemplatePanes(TeacherReportAssistant tra)
   {

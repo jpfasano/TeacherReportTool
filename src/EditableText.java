@@ -1,6 +1,5 @@
 import java.awt.Font;
 
-import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 
