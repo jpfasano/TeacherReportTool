@@ -39,8 +39,7 @@ public class OpenSaveControl {
   }
   
   private void gutsOfConstrutor() {
-    String pathSeparator = System.getProperty("file.separator");
-    defaultDirectory = System.getProperty("user.dir") + pathSeparator;
+    defaultDirectory = System.getProperty("user.dir");
 
     // Setup SaveAs Dialog
     {
@@ -66,10 +65,19 @@ public class OpenSaveControl {
     }
 
   }
+  
+  public void doSave() {
+
+    String pathSeparator = System.getProperty("file.separator");
+    File file = new File(defaultDirectory + pathSeparator + defaultSaveAsFilename);
+    
+    writeFileObj.writeFile(file);
+  }
 
   public void doSaveAs() {
-    
-    File file = new File(defaultDirectory + defaultSaveAsFilename);
+
+    String pathSeparator = System.getProperty("file.separator");
+    File file = new File(defaultDirectory + pathSeparator + defaultSaveAsFilename);
     saveAsFileChooser.setSelectedFile(file);
     
     // JFileChooser chooser = new JFileChooser(initialPath);
@@ -77,8 +85,9 @@ public class OpenSaveControl {
     if (result != JFileChooser.APPROVE_OPTION)
       return;
     File saveAsFile = saveAsFileChooser.getSelectedFile();
+
     defaultSaveAsFilename = saveAsFile.getName();
-    defaultDirectory = saveAsFile.getAbsolutePath(); 
+    defaultDirectory = saveAsFile.getParent(); 
     
     // Check to see if the existing file exists. 
     if(saveAsFile.exists()) {

@@ -49,11 +49,11 @@ public class MenuBar extends JMenuBar
     open.addActionListener(this);
     
 
-    save  = new JMenuItem("OpenSaveControl");
+    save  = new JMenuItem("Save");
     save.setMnemonic('S');
     save.addActionListener(this);  
 
-    saveAs  = new JMenuItem("OpenSaveControl As ...");
+    saveAs  = new JMenuItem("Save As ...");
     //save.setMnemonic('S');
     saveAs.addActionListener(this);
     
@@ -104,6 +104,9 @@ public class MenuBar extends JMenuBar
 
     if (src == open) {
       saveSaveAs.doOpen();
+    }
+    else if (src ==save){
+      saveSaveAs.doSave();
     }
     else if (src ==saveAs){
       saveSaveAs.doSaveAs();
