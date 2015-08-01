@@ -24,7 +24,7 @@ public class TeacherReportAssistant extends JFrame
   private ArrayList<TemplateCategory> templates;
   //private JLabel studentNameLabel;
   //private JTabbedPane tempatePane;
-  private ContentPanel contentPanel;
+  private ContentPanel panelWithTabs;
  
 
   public TeacherReportAssistant()
@@ -38,18 +38,20 @@ public class TeacherReportAssistant extends JFrame
     setJMenuBar(menuBar);
        
     
-    contentPanel = new ContentPanel(this);
-    getContentPane().add(contentPanel);
+    panelWithTabs = new ContentPanel(this);
+    getContentPane().add(panelWithTabs);
 
   }
 
+  /*
   public void open()
   {
     //controlPanel.open(this);
+    String pathSeparator = System.getProperty("file.separator"); 
     
     {
       // Dispaly dialog to get directory containing data files
-      String initialPath_ = System.getProperty("user.dir") + "/";
+      String initialPath_ = System.getProperty("user.dir") + pathSeparator;
       JFileChooser dirChooser = new JFileChooser(initialPath_);
       dirChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
       int result = dirChooser.showOpenDialog(this);
@@ -69,7 +71,7 @@ public class TeacherReportAssistant extends JFrame
       {
         try
         {
-          String pathSeparator = System.getProperty("file.separator");        	
+          
           String fullFileName = dir + pathSeparator + fileNames[f];
           FileInputStream fstream = new FileInputStream(fullFileName);
           BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
@@ -146,10 +148,11 @@ public class TeacherReportAssistant extends JFrame
           System.err.println(e.getMessage());
         }
       }
+      
 
     }
- 
-
+ */
+/*
     
     getContentPane().remove(contentPanel);
     contentPanel = new ContentPanel(this);
@@ -159,8 +162,10 @@ public class TeacherReportAssistant extends JFrame
     
     // update label on GUI to have name of first student
     studentsIndex=-1;
-    advanceToNextStudent();   
+    advanceToNextStudent();  
+   
   }
+   */ 
   
   public void advanceToNextStudent()
   {
@@ -169,7 +174,7 @@ public class TeacherReportAssistant extends JFrame
     studentsIndex++;
     if (studentsIndex>=students.size()) studentsIndex=students.size()-1;
     updateStudentNameLabel();
-    contentPanel.setFocusToFirstTab();
+    panelWithTabs.setFocusToFirstTab();
     
     // Set editable text to text for student
     updateEditableTextFromStudentReport();
@@ -182,7 +187,7 @@ public class TeacherReportAssistant extends JFrame
     if (studentsIndex<0)studentsIndex=0;
     if (students.size()==0) studentsIndex=-1;
     updateStudentNameLabel();
-    contentPanel.setFocusToFirstTab();
+    panelWithTabs.setFocusToFirstTab();
 
     // Set editable text to text for student
     updateEditableTextFromStudentReport();
@@ -192,7 +197,7 @@ public class TeacherReportAssistant extends JFrame
   {
     if (students.size()==0) return;
     if (studentsIndex==-1) return;
-    String r=contentPanel.getEditableTest();
+    String r=panelWithTabs.getEditableTest();
     students.get(studentsIndex).setReport(r);
   }
   
@@ -206,7 +211,7 @@ public class TeacherReportAssistant extends JFrame
       sr="";
     else
       sr = students.get(studentsIndex).getReport();
-    contentPanel.setEditableText(sr);
+    panelWithTabs.setEditableText(sr);
   }
   
   public String getReports()
@@ -227,7 +232,7 @@ public class TeacherReportAssistant extends JFrame
   private void updateStudentNameLabel()
   {
     if(studentsIndex<0)return;
-    contentPanel.updateStudentNameLabel(students.get(studentsIndex));
+    panelWithTabs.updateStudentNameLabel(students.get(studentsIndex));
     /*
     String sName=students.get(studentsIndex).getName();
     String sGender=students.get(studentsIndex).getGender();
@@ -281,6 +286,7 @@ public class TeacherReportAssistant extends JFrame
   public void setStudents(ArrayList<Student> students)
   {
     this.students = students;
+    studentsIndex = -1;
   }
 
   public ArrayList<Student> getStudents()
@@ -290,9 +296,18 @@ public class TeacherReportAssistant extends JFrame
   
   
 
+  public void setPanelWithTabs(ContentPanel panelWithTabs) {
+    this.panelWithTabs = panelWithTabs;
+  }
+  
+
+  public ContentPanel getPanelWithTabs() {
+    return panelWithTabs;
+  }
+
   public ContentPanel getContentPanel()
   {
-    return contentPanel;
+    return panelWithTabs;
   }
 
   public static void main(String[] args)

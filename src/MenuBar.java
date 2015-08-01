@@ -22,13 +22,15 @@ public class MenuBar extends JMenuBar
   
   private OpenSaveControl saveSaveAs;
   private WriteReportFile writeReportFile;
+  private ReadDataFiles readDataFiles;
 
   public MenuBar(TeacherReportAssistant tra)
   {
     this.tra = tra;
     
     writeReportFile = new WriteReportFile(tra);
-    saveSaveAs=new OpenSaveControl(tra,writeReportFile);
+    readDataFiles = new ReadDataFiles(tra);
+    saveSaveAs=new OpenSaveControl(tra,writeReportFile,readDataFiles);
 
     // "File" menu:
 
@@ -100,8 +102,9 @@ public class MenuBar extends JMenuBar
   {
     JMenuItem src = (JMenuItem)e.getSource();
 
-    if (src == open)
-      tra.open();
+    if (src == open) {
+      saveSaveAs.doOpen();
+    }
     else if (src ==saveAs){
       saveSaveAs.doSaveAs();
     }
