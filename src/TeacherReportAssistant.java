@@ -69,7 +69,8 @@ public class TeacherReportAssistant extends JFrame
       {
         try
         {
-          String fullFileName = dir + "\\" + fileNames[f];
+          String pathSeparator = System.getProperty("file.separator");        	
+          String fullFileName = dir + pathSeparator + fileNames[f];
           FileInputStream fstream = new FileInputStream(fullFileName);
           BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
