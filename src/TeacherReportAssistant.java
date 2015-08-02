@@ -3,7 +3,12 @@
  *  See Help for the rules.
  */
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JFrame;
@@ -27,12 +32,15 @@ public class TeacherReportAssistant extends JFrame
     
     templates = new ArrayList<TemplateCategory>();
     students = new ArrayList<Student>();
+    genderWordsDict = new HashMap<String, GenderWordPair>();
 
     traMenuBar = new MenuBar(this);
     setJMenuBar(traMenuBar);
        
     panelWithTabs = new ContentPanel(this);
     getContentPane().add(panelWithTabs);
+    
+    readGenderWordPairs();
 
   }
 
@@ -104,11 +112,6 @@ public class TeacherReportAssistant extends JFrame
   {
     if(studentsIndex<0)return;
     panelWithTabs.updateStudentNameLabel(students.get(studentsIndex));
-    /*
-    String sName=students.get(studentsIndex).getName();
-    String sGender=students.get(studentsIndex).getGender();
-    studentNameLabel.setText(sName+" gender:"+sGender);
-    */
   }
   
   public String getStudentName()
@@ -181,6 +184,41 @@ public class TeacherReportAssistant extends JFrame
     return panelWithTabs;
   }
   
+  private void readGenderWordPairs() {
+    //String pathSeparator = System.getProperty("file.separator"); 
+    try {
+
+     
+      ClassLoader classLoader = getClass().getClassLoader();
+      //File file = new File(classLoader.getResource(".."+pathSeparator+"resources"+pathSeparator+"genderWordPairs.tra").getFile());
+      File file = new File(classLoader.getResource("resources/genderWordPairs.tra").getFile());
+      FileInputStream fstream = new FileInputStream(file);
+      BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+
+      String strLine;
+
+      // Read File Line By Line
+      while ((strLine = br.readLine()) != null) {
+        strLine = strLine.trim();
+
+        // check for a comment or empty line
+        if (strLine.length() == 0)
+          continue;
+        if (strLine.substring(0, 1).equals("#"))
+          continue;
+        // Split line into male and female gender words
+        String[] parsed = strLine.split(" ", 2);
+
+        GenderWordPair gwp = new GenderWordPair(parsed[0], parsed[1]);
+        genderWordsDict.put(parsed[0], gwp);
+        genderWordsDict.put(parsed[1], gwp);
+      }
+      br.close();
+    }
+    catch (Exception e) {
+      System.err.println(e.getMessage());
+    }
+  }
   
 
 
