@@ -55,6 +55,7 @@ public class HelpMenuBar {
     textArea.setContentType("text/html");
     textArea.setText(longMessage);
     textArea.setEditable(false);
+    textArea.setCaretPosition(0);
 
     // wrap a scrollpane around it
     JScrollPane scrollPane = new JScrollPane(textArea);
@@ -92,7 +93,7 @@ public class HelpMenuBar {
     jf = new JFrame();
     jf.setContentPane(jp);
     jf.setTitle("TeacherReportAssistant Help");
-    jf.setSize(480, 480);
+    jf.setSize(800, 480);
     jf.setVisible(true);
 
   }
