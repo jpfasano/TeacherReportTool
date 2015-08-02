@@ -33,11 +33,9 @@ public class HelpMenuBar
     
     //JTextArea textArea = new JTextArea();
     JTextPane textArea = new JTextPane();
-    //textArea.setContentType("text/html");
+    textArea.setContentType("text/html");
     textArea.setText(longMessage);
     textArea.setEditable(false);
-    //textArea.setLineWrap(true);
-    //textArea.setWrapStyleWord(true);
      
     // wrap a scrollpane around it
     JScrollPane scrollPane = new JScrollPane(textArea);
