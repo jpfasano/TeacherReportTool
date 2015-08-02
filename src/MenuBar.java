@@ -74,8 +74,8 @@ public class MenuBar extends JMenuBar
     JMenu helpMenu = new JMenu("Help");
     helpMenu.setMnemonic('H');
 
-    howtoplay = new JMenuItem("How to play...");
-    howtoplay.setMnemonic('p');
+    howtoplay = new JMenuItem("Help ...");
+    howtoplay.setMnemonic('H');
     howtoplay.addActionListener(this);
 
     about = new JMenuItem("About...");
@@ -115,7 +115,7 @@ public class MenuBar extends JMenuBar
       openSaveControl.doSaveAs();
     }
     else if (src == howtoplay)
-      HelpMenuBar.showHelp();
+      new HelpMenuBar().showHelp();
     else if (src == about)
       HelpMenuBar.showAbout();
     else if (src == exit) {
