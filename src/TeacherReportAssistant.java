@@ -20,9 +20,8 @@ public class TeacherReportAssistant extends JFrame
   private int studentsIndex;
   private Map<String, GenderWordPair> genderWordsDict;
   private ArrayList<TemplateCategory> templates;
-  //private JLabel studentNameLabel;
-  //private JTabbedPane tempatePane;
-  private ContentPanel panelWithTabs;
+  private ContentPanel contentPanel;
+  
  
 
   public TeacherReportAssistant()
@@ -36,8 +35,8 @@ public class TeacherReportAssistant extends JFrame
     traMenuBar = new MenuBar(this);
     setJMenuBar(traMenuBar);
        
-    panelWithTabs = new ContentPanel(this);
-    getContentPane().add(panelWithTabs);
+    contentPanel = new ContentPanel(this);
+    setContentPane(contentPanel);
     
     readGenderWordPairs();
 
@@ -52,7 +51,7 @@ public class TeacherReportAssistant extends JFrame
     studentsIndex++;
     if (studentsIndex>=students.size()) studentsIndex=students.size()-1;
     updateStudentNameLabel();
-    panelWithTabs.setFocusToFirstTab();
+    contentPanel.setFocusToFirstTab();
     
     // Set editable text to text for student
     updateEditableTextFromStudentReport();
@@ -65,7 +64,7 @@ public class TeacherReportAssistant extends JFrame
     if (studentsIndex<0)studentsIndex=0;
     if (students.size()==0) studentsIndex=-1;
     updateStudentNameLabel();
-    panelWithTabs.setFocusToFirstTab();
+    contentPanel.setFocusToFirstTab();
 
     // Set editable text to text for student
     updateEditableTextFromStudentReport();
@@ -75,7 +74,7 @@ public class TeacherReportAssistant extends JFrame
   {
     if (students.size()==0) return;
     if (studentsIndex==-1) return;
-    String r=panelWithTabs.getEditableTest();
+    String r=contentPanel.getEditableTest();
     students.get(studentsIndex).setReport(r);
   }
   
@@ -89,7 +88,7 @@ public class TeacherReportAssistant extends JFrame
       sr="";
     else
       sr = students.get(studentsIndex).getReport();
-    panelWithTabs.setEditableText(sr);
+    contentPanel.setEditableText(sr);
   }
   
   public String getReports()
@@ -110,7 +109,7 @@ public class TeacherReportAssistant extends JFrame
   private void updateStudentNameLabel()
   {
     if(studentsIndex<0)return;
-    panelWithTabs.updateStudentNameLabel(students.get(studentsIndex));
+    contentPanel.updateStudentNameLabel(students.get(studentsIndex));
   }
   
   public String getStudentName()
@@ -167,7 +166,7 @@ public class TeacherReportAssistant extends JFrame
     return students;
   }
   
-  
+  /*
 
   public void setPanelWithTabs(ContentPanel panelWithTabs) {
     this.panelWithTabs = panelWithTabs;
@@ -177,10 +176,19 @@ public class TeacherReportAssistant extends JFrame
   public ContentPanel getPanelWithTabs() {
     return panelWithTabs;
   }
+  */
 
   public ContentPanel getContentPanel()
   {
-    return panelWithTabs;
+    return contentPanel;
+  }
+  public void setContentPanel(ContentPanel cp)
+  {
+    contentPanel=cp;
+    this.setContentPane(contentPanel);
+
+    this.invalidate();
+    this.validate();
   }
   
   private void readGenderWordPairs() {

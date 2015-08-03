@@ -70,7 +70,11 @@ public class TabbedTemplatePanel extends JPanel
   
   public void setFocusToFirstTab()
   {
-    jTabbedPane.setSelectedIndex(0);
+    if (jTabbedPane != null) {
+      int cnt = jTabbedPane.getTabCount();    
+      if (cnt > 0)
+          jTabbedPane.setSelectedIndex(0);
+    }
   }
   
   

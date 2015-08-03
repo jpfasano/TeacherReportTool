@@ -70,15 +70,7 @@ public class TraOpenSaveControlClient implements OpenSaveControlClient {
 
             Student s = new Student(parsed[0], parsed[1]);
             students.add(s);
-          } else if (f == 1) {/*
-            // Split line into male and female gender words
-            String[] parsed = strLine.split(" ", 2);
-
-            GenderWordPair gwp = new GenderWordPair(parsed[0], parsed[1]);
-            genderWordsDict.put(parsed[0], gwp);
-            genderWordsDict.put(parsed[1], gwp);
-
-          } else if (f == 2) {*/
+          } else if (f == 1) {
             // Does strLine identifies a new category?
             if (strLine.substring(0, 1).equals("\"")) {
 
@@ -96,9 +88,7 @@ public class TraOpenSaveControlClient implements OpenSaveControlClient {
         br.close();
         if (f == 0)
           tra.setStudents(students);
-        else if (f == 1) /*
-          tra.setGenderWordsDict(genderWordsDict);
-        else if (f == 2) */{
+        else if (f == 1){
           if (!tc.empty())
             templates.add(tc);
           tra.setTemplates(templates);
@@ -110,13 +100,17 @@ public class TraOpenSaveControlClient implements OpenSaveControlClient {
       }
     }
     
-    
+    /*
     tra.getContentPane().remove(tra.getPanelWithTabs());
     ContentPanel contentPanel = new ContentPanel(tra);
     tra.setPanelWithTabs(contentPanel);
     tra.getContentPane().add(contentPanel);
     tra.invalidate();
     tra.validate();
+    */
+    ContentPanel cp = new ContentPanel(tra);
+    tra.setContentPanel(cp);
+    
     
 
     // update label on GUI to have name of first student
