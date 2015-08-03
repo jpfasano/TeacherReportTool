@@ -4,6 +4,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicArrowButton;
@@ -13,15 +14,54 @@ public class ContentPanel extends JPanel
 {
   
   private TeacherReportAssistant tra;
-  private JLabel studentNameLabel;
-  private TabbedTemplatePanes tabbedPanes;
-  private EditableText editableText;
+  private StudentPanel studentPanel;
+  private TabbedTemplatePanel tabbedTemplatePanel;
+  private EditableTextPanel editableTextPanel;
   
  
 
   public ContentPanel(TeacherReportAssistant tra)
   {
+    super();
     this.tra=tra;
+
+    this.setLayout(new GridBagLayout());
+    GridBagConstraints gbc = new GridBagConstraints();
+    
+    
+    // There are 3 parts to the content panel: Students, Templates, and Editable text.
+    // Create each one and add to the panel.
+
+    // Student Panel
+    studentPanel=new StudentPanel(tra);
+    gbc.gridx = 0;
+    gbc.gridy = 0;
+    gbc.weightx = 1.0;
+    gbc.weighty = .2;
+    gbc.fill = GridBagConstraints.BOTH;
+    this.add(studentPanel,gbc);
+
+    // Template Panel
+    tabbedTemplatePanel = new TabbedTemplatePanel(tra);
+    gbc.gridx = 0;
+    gbc.gridy = 1;
+    gbc.weightx = 1.0;
+    gbc.weighty = .7;
+    gbc.fill = GridBagConstraints.BOTH;
+    this.add(tabbedTemplatePanel,gbc);
+
+    editableTextPanel =new EditableTextPanel(tra);
+    gbc.gridx = 0;
+    gbc.gridy = 2;
+    gbc.weightx = 1.0;
+    gbc.weighty = .7;
+    gbc.fill = GridBagConstraints.BOTH;
+    this.add(editableTextPanel,gbc);
+  
+    
+    
+    
+  /*
     
     // Add components Top to Bottom
     this.setLayout(new GridBagLayout());
@@ -98,7 +138,7 @@ public class ContentPanel extends JPanel
     
    
     // Second section is the Tabbed Categories with template phrases
-    tabbedPanes=new TabbedTemplatePanes(tra);
+    tabbedPanes=new TabbedTemplatePanesX(tra);
     gbc.gridx=0;
     gbc.gridy=1;
     gbc.gridheight=100;
@@ -111,7 +151,7 @@ public class ContentPanel extends JPanel
     this.add(tabbedPanes,gbc);
     
     // Third section is the editable text of the report
-    editableText = new EditableText(tra); 
+    editableTextX = new EditableTextX(tra); 
     //insertEditableText("Seth Winick, a spokesperson for the Texas Charter School Association, isn't completely sure what's working, but he says it likely has to do with how intensely focused charters are on serving English-language learners, students in poverty, and other underserved populations.");
   
     gbc.gridx=0;
@@ -123,43 +163,42 @@ public class ContentPanel extends JPanel
     gbc.weightx=0.5;
     gbc.weighty=1.;
     gbc.insets = new Insets(0,0,0,0); // top padding
-    this.add(editableText,gbc);
-    
+    this.add(editableTextX,gbc);
+    */
     
   }
 
   public void clearEditableText()
   {
-    editableText.clearEditableText();
+    editableTextPanel.clearEditableText();
   }
   public void insertEditableText(String t)
   {
-    editableText.insert(t) ;    
+    editableTextPanel.insert(t) ;    
   }
 
   public void setEditableText(String t)
   {
-    editableText.setText(t) ;    
+    editableTextPanel.setText(t) ;    
   }
   
   public String getEditableTest()
   {
     // First update editable text to contain any current checked templates
-    tabbedPanes.apply();
-    return editableText.getText();
+    tabbedTemplatePanel.apply();
+    return editableTextPanel.getText();
   }
   
   public void setFocusToFirstTab()
   {
-    tabbedPanes.setSelectedIndex(0);
+    if(tabbedTemplatePanel!=null)
+      tabbedTemplatePanel.setFocusToFirstTab();
   }
 
   
   public void updateStudentNameLabel(Student student)
   {
-    String sName=student.getName();
-    String sGender=student.getGender();
-    studentNameLabel.setText(sName+" gender:"+sGender); 
+    studentPanel.updateStudentNameLabel(student);
   }
 
 }

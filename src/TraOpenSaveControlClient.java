@@ -1,3 +1,5 @@
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -7,6 +9,9 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import openSaveControl.OpenSaveControlClient;
 
@@ -113,9 +118,60 @@ public class TraOpenSaveControlClient implements OpenSaveControlClient {
     tra.invalidate();
     tra.validate();
     
+
     // update label on GUI to have name of first student
     //studentsIndex=-1;
     tra.advanceToNextStudent(); 
+    
+    /*
+    //Test new GUI Elements
+    {
+      StudentPanel sp=new StudentPanel(tra);
+
+      TemplateCategory tc1 = tra.getTemplates().get(1);
+      TemplatePanel tp=new TemplatePanel(tra,tc1);
+      
+      TabbedTemplatePanel ttp = new TabbedTemplatePanel(tra);
+
+      EditableTextPanel etp=new EditableTextPanel(tra);
+      
+      JPanel p=new JPanel(new GridBagLayout());
+      
+      GridBagConstraints gbc = new GridBagConstraints();
+      /*
+      gbc.gridx = 0;
+      gbc.gridy = 0;
+      gbc.weightx = 1;
+      gbc.weighty = .1;
+      gbc.fill = GridBagConstraints.BOTH;
+      p.add(sp,gbc);
+      
+
+      gbc.gridx = 0;
+      gbc.gridy = 1;
+      gbc.weightx = 1;
+      gbc.weighty = .9;
+      gbc.fill = GridBagConstraints.BOTH;
+      p.add(etp,gbc);
+      */
+      /*
+      gbc.gridx = 0;
+      gbc.gridy = 0;
+      gbc.weightx = 1;
+      gbc.weighty = 1;
+      gbc.fill = GridBagConstraints.BOTH;
+      p.add(ttp,gbc);
+      
+      
+      JFrame jf = new JFrame();
+      jf.setContentPane(p);
+      jf.setTitle("Test New Main Window");
+      jf.setSize(800, 480);
+      jf.setVisible(true);
+      
+     
+    }
+   */
 
   }
   

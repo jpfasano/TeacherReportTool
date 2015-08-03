@@ -1,4 +1,4 @@
-/** Help for the TeacherReportAssistant game
+/** Help for the TeacherReportAssistant 
  */
 
 import java.awt.Dimension;

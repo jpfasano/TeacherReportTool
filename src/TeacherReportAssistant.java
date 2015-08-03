@@ -1,6 +1,5 @@
 /**
- * This is the main class for the TeacherReportAssistant game.
- *  See Help for the rules.
+ * This is the main class for the TeacherReportAssistant.
  */
 
 import java.io.BufferedReader;

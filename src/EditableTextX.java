@@ -3,15 +3,15 @@ import java.awt.Font;
 import javax.swing.JTextArea;
 
 
-//public class EditableText extends JScrollPane
-public class EditableText extends JTextArea
+//public class EditableTextX extends JScrollPane
+public class EditableTextX extends JTextArea
 {
   //JTextArea ta = new JTextArea();
 
   private TeacherReportAssistant tra;
   
 
-  public EditableText(TeacherReportAssistant tra)
+  public EditableTextX(TeacherReportAssistant tra)
   {
     super();
     this.tra = tra;

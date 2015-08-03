@@ -7,20 +7,20 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-public class TabbedTemplatePanes extends JTabbedPane
+public class TabbedTemplatePanesX extends JTabbedPane
 // implements ItemListener
 {
   private ArrayList<TemplatePane> templatePanes = new ArrayList<TemplatePane>();
   private TeacherReportAssistant tra;
 
   /*
-  public TabbedTemplatePanes()
+  public TabbedTemplatePanesX()
   {
     super();
   }
   */
 
-  public TabbedTemplatePanes(TeacherReportAssistant tra)
+  public TabbedTemplatePanesX(TeacherReportAssistant tra)
   {
     ArrayList<TemplateCategory> templates = tra.getTemplates();
     this.tra = tra;
