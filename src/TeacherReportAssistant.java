@@ -184,6 +184,7 @@ public class TeacherReportAssistant extends JFrame
   }
   
   private void readGenderWordPairs() {
+
     //String pathSeparator = System.getProperty("file.separator"); 
     try {
 
