@@ -29,7 +29,7 @@ public class TeacherReportAssistant extends JFrame
   public TeacherReportAssistant()
   {
     super("TeacherReportAssistant");
-    super.setSize(800, 480);
+    //super.setSize(800, 480);
     super.getContentPane().add(new JPanel());
     
     templates = new ArrayList<TemplateCategory>();
@@ -38,12 +38,12 @@ public class TeacherReportAssistant extends JFrame
     
     students.add(new Student(" ","First: File->Open Student Names"));
     ArrayList<String> tmPlates = new ArrayList<String>();
-    tmPlates.add("  ");
-    tmPlates.add("  ");
+    //tmPlates.add("  ");
+    //tmPlates.add("  ");
     TemplateCategory tc=new TemplateCategory(" ",tmPlates);
     templates.add(tc);
-
-    templates.add(tc);
+//
+  //templates.add(tc);
     
 
     traMenuBar = new MenuBar(this);
@@ -197,18 +197,23 @@ public class TeacherReportAssistant extends JFrame
     gbc.weighty=1.0;
     gbc.fill = GridBagConstraints.BOTH;
 
+    {
     JFrame jf = new JFrame();
     jf.getContentPane().removeAll();
- 
-    jf.getContentPane().add(new ContentPanelWDesigner(this));
+
+    //jf.getContentPane().add(new TemplatesPanelIncApplyWDesigner(this,templates.get(1/*templates.size()-1*/)));
+    jf.getContentPane().add(new TabbedTemplatePanel2WDesigner(this));
     //jf.setContentPane(cp,gbc);
     jf.setTitle("Test Content Panel");
     jf.setSize(800, 480);
+    jf.pack();
     jf.setVisible(true);
+    }
   
     
     this.getContentPane().removeAll();
     this.getContentPane().add(cp);
+    this.pack();
     //this.setContentPane(contentPanel);
     this.getContentPane().revalidate();
     this.repaint();
@@ -275,7 +280,7 @@ public class TeacherReportAssistant extends JFrame
 
     TeacherReportAssistant window = new TeacherReportAssistant();
     //window.setBounds(100, 100, 900, 600);
-    window.setBounds(100, 100, 900, 300);
+    window.setBounds(100, 50, 620, 750);
     window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     window.setVisible(true);
   }

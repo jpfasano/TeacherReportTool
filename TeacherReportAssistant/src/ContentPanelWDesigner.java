@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicArrowButton;
+import javax.swing.JSplitPane;
 
 
 public class ContentPanelWDesigner extends JPanel
@@ -16,8 +17,7 @@ public class ContentPanelWDesigner extends JPanel
   private TeacherReportAssistant tra;
   private StudentPanel studentPanel;
   private EditableTextPanel editableTextPanel;
-  private TabbedTemplatePanel2WDesigner tabbedTemplatePanel;
-  private GridBagConstraints gbc_1;
+  private TabbedTemplatePanel2WDesigner tabbedTemplatePanel2WDesigner;
   
  
 
@@ -27,7 +27,7 @@ public class ContentPanelWDesigner extends JPanel
     this.tra=tra;
 
     GridBagLayout gridBagLayout = new GridBagLayout();
-    gridBagLayout.rowWeights = new double[]{0.0, 1.0, 0.0};
+    gridBagLayout.rowWeights = new double[]{0.0};
     gridBagLayout.columnWeights = new double[]{1.0};
     this.setLayout(gridBagLayout);
     GridBagConstraints gbc = new GridBagConstraints();
@@ -39,29 +39,31 @@ public class ContentPanelWDesigner extends JPanel
 
     // Student Panel
     studentPanel=new StudentPanel(tra);
+//    GridBagLayout gridBagLayout_1 = (GridBagLayout) studentPanel.getLayout();
+//    gridBagLayout_1.rowWeights = new double[]{0.0, 1.0};
+//    gridBagLayout_1.columnWeights = new double[]{0.0, 1.0, 0.0};
     gbc.gridx = 0;
     gbc.gridy = 0;
     gbc.weightx = 1.0;
-    gbc.weighty = .2;
+    gbc.weighty = .5;
     gbc.fill = GridBagConstraints.BOTH;
     this.add(studentPanel,gbc);
     
-    tabbedTemplatePanel = new TabbedTemplatePanel2WDesigner(tra);
-    GridBagConstraints gbc_tabbedTemplatePanelWDesigner = new GridBagConstraints();
-    gbc_tabbedTemplatePanelWDesigner.insets = new Insets(0, 0, 5, 0);
-    gbc_tabbedTemplatePanelWDesigner.fill = GridBagConstraints.BOTH;
-    gbc_tabbedTemplatePanelWDesigner.gridx = 0;
-    gbc_tabbedTemplatePanelWDesigner.gridy = 1;
-    add(tabbedTemplatePanel, gbc_tabbedTemplatePanelWDesigner);
-
-    editableTextPanel =new EditableTextPanel(tra);
-    gbc_1 = new GridBagConstraints();
-    gbc_1.gridx = 0;
-    gbc_1.gridy = 2;
-    gbc_1.weightx = 1.0;
-    gbc_1.weighty = .7;
-    gbc_1.fill = GridBagConstraints.BOTH;
-    this.add(editableTextPanel,gbc_1);
+    JSplitPane splitPane = new JSplitPane();
+    splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
+    GridBagConstraints gbc_splitPane = new GridBagConstraints();
+    gbc_splitPane.gridwidth = 3;
+    gbc_splitPane.insets = new Insets(0, 0, 0, 5);
+    gbc_splitPane.fill = GridBagConstraints.BOTH;
+    gbc_splitPane.gridx = 0;
+    gbc_splitPane.gridy = 1;
+    studentPanel.add(splitPane, gbc_splitPane);
+    
+    editableTextPanel = new EditableTextPanel(tra);
+    splitPane.setRightComponent(editableTextPanel);
+    
+    tabbedTemplatePanel2WDesigner = new TabbedTemplatePanel2WDesigner(tra);
+    splitPane.setLeftComponent(tabbedTemplatePanel2WDesigner);
   
    
    
@@ -69,29 +71,29 @@ public class ContentPanelWDesigner extends JPanel
 
   public void clearEditableText()
   {
-    editableTextPanel.clearEditableText();
+	  getEditableTextPanel().clearEditableText();
   }
   public void insertEditableText(String t)
   {
-    editableTextPanel.insert(t) ;    
+	  getEditableTextPanel().insert(t) ;    
   }
 
   public void setEditableText(String t)
   {
-    editableTextPanel.setText(t) ;    
+	  getEditableTextPanel().setText(t) ;    
   }
   
   public String getEditableTest()
   {
     // First update editable text to contain any current checked templates
-    tabbedTemplatePanel.apply();
-    return editableTextPanel.getText();
+	  getTabbedTemplatePanel().apply();
+    return getEditableTextPanel().getText();
   }
   
   public void setFocusToFirstTab()
   {
-    if(tabbedTemplatePanel!=null)
-      tabbedTemplatePanel.setFocusToFirstTab();
+    if(getTabbedTemplatePanel()!=null)
+    	getTabbedTemplatePanel().setFocusToFirstTab();
   }
 
   
@@ -100,4 +102,10 @@ public class ContentPanelWDesigner extends JPanel
     studentPanel.updateStudentNameLabel(student);
   }
 
+	public EditableTextPanel getEditableTextPanel() {
+		return editableTextPanel;
+	}
+	public TabbedTemplatePanel2WDesigner getTabbedTemplatePanel() {
+		return tabbedTemplatePanel2WDesigner;
+	}
 }

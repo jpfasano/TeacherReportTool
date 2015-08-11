@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
@@ -16,6 +17,7 @@ public class StudentPanel extends JPanel {
   public StudentPanel(TeacherReportAssistant tra) {
     super();
     this.tra = tra;
+    this.setMinimumSize(new Dimension(600,5));
     studentNameLabel = new JLabel("First: File-> Open Student Names", JLabel.CENTER);  
     
    BasicArrowButton backButton=new BasicArrowButton(BasicArrowButton.WEST);

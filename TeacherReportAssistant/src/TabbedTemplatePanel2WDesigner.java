@@ -24,9 +24,15 @@ public class TabbedTemplatePanel2WDesigner extends JPanel {
 	    this.tra = tra;
 	    ArrayList<TemplateCategory> templates = tra.getTemplateCategories();
 	    
+//	    setLayout(null);
+//		
+//		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+//		tabbedPane.setBounds(10, 11, 430, 278);
+//		add(tabbedPane);
+	    
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{220, 0};
-		gridBagLayout.rowHeights = new int[]{10, 0};
+		gridBagLayout.columnWidths = new int[]{600};
+		gridBagLayout.rowHeights = new int[]{350};
 		gridBagLayout.columnWeights = new double[]{0.0};
 		gridBagLayout.rowWeights = new double[]{0.0};
 		setLayout(gridBagLayout);
@@ -38,6 +44,12 @@ public class TabbedTemplatePanel2WDesigner extends JPanel {
 		gbc_tabbedPane.gridx = 0;
 		gbc_tabbedPane.gridy = 0;
 		add(tabbedPane, gbc_tabbedPane);
+//		
+//		TemplatesPanelIncApplyWDesigner tpl0 = new TemplatesPanelIncApplyWDesigner(tra,templates.get(0));
+//        tabbedPane.addTab(templates.get(0).getName(), null, tpl0, null);
+//		
+//		TemplatesPanelIncApplyWDesigner tpl1 = new TemplatesPanelIncApplyWDesigner(tra,templates.get(1));
+//        tabbedPane.addTab(templates.get(1).getName(), null, tpl1, null);
 		
 		for (TemplateCategory tc: templates)
 	    {
@@ -59,7 +71,7 @@ public class TabbedTemplatePanel2WDesigner extends JPanel {
 	public void uncheckBoxes()
 	  {
 	    for (TemplatesPanelIncApplyWDesigner tp : templatePanels)
-	      for (TemplateCheckBox tcb : tp.getTemplateCheckBoxesInPanel())
+	      for (TemplateItemCheckBoxWithDesigner tcb : tp.getTemplateCheckBoxesInPanel())
 	        tcb.setSelected(false);
 	  }
 	  

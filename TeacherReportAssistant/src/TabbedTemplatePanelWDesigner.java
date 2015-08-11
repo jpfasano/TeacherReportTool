@@ -68,7 +68,7 @@ public class TabbedTemplatePanelWDesigner extends JPanel
   public void uncheckBoxes()
   {
     for (TemplatesPanelIncApplyWDesigner tp : templatePanels)
-      for (TemplateCheckBox tcb : tp.getTemplateCheckBoxesInPanel())
+      for (TemplateItemCheckBoxWithDesigner tcb : tp.getTemplateCheckBoxesInPanel())
         tcb.setSelected(false);
   }
   

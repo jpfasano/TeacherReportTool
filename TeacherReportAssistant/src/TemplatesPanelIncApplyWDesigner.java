@@ -15,7 +15,7 @@ public class TemplatesPanelIncApplyWDesigner extends JPanel
 {
   private TeacherReportAssistant tra;
   
-  private ArrayList<TemplateCheckBox> templateCheckBoxesInPanel = new ArrayList<TemplateCheckBox>();
+  private ArrayList<TemplateItemCheckBoxWithDesigner> templateCheckBoxesInPanel = new ArrayList<TemplateItemCheckBoxWithDesigner>();
 /*
   public TemplatePanel()
   {
@@ -41,13 +41,13 @@ public class TemplatesPanelIncApplyWDesigner extends JPanel
       gbc.gridx=0;
       gbc.gridy=0;
       gbc.weightx=0.2;
-      gbc.weighty=1.0;
+      gbc.weighty=0.0;
       gbc.fill = GridBagConstraints.BOTH;
       
       
       // Loop once for each template in category tc
       for (String t : ts){
-        TemplateCheckBox tcb = new TemplateCheckBox(t);
+    	  TemplateItemCheckBoxWithDesigner tcb = new TemplateItemCheckBoxWithDesigner(t);
         
         checkBoxPanel.add(tcb,gbc);
         templateCheckBoxesInPanel.add(tcb);
@@ -60,10 +60,10 @@ public class TemplatesPanelIncApplyWDesigner extends JPanel
       
       
       
-      //JScrollPane scrollPane = new JScrollPane();
-      //scrollPane.setViewportView(checkBoxPanel);
-      //scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-      //scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+      JScrollPane scrollPane = new JScrollPane();
+      scrollPane.setViewportView(checkBoxPanel);
+      scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+      scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
       
       
       
@@ -84,28 +84,29 @@ public class TemplatesPanelIncApplyWDesigner extends JPanel
       gbc.weightx=1.0;
       gbc.weighty=0.9;
       gbc.fill = GridBagConstraints.BOTH;
-      //this.add(scrollPane, gbc);
-      this.add(checkBoxPanel, gbc);
+      gbc.anchor = GridBagConstraints.NORTH;
+      this.add(scrollPane, gbc);
+      //this.add(checkBoxPanel, gbc);
       
 
       gbc = new GridBagConstraints();
       gbc.gridy=1;
       gbc.weightx=0.2;
       gbc.weighty=0.1;
-      gbc.fill = GridBagConstraints.VERTICAL;
+      gbc.fill = GridBagConstraints.BOTH;
       this.add(applyButton, gbc);
       
     }
 
   
-  public ArrayList<TemplateCheckBox> getTemplateCheckBoxesInPanel()
+  public ArrayList<TemplateItemCheckBoxWithDesigner> getTemplateCheckBoxesInPanel()
   {
     return templateCheckBoxesInPanel;
   }
 
   public void uncheckBoxes()
   {
-    for ( TemplateCheckBox tcb : templateCheckBoxesInPanel) {
+    for ( TemplateItemCheckBoxWithDesigner tcb : templateCheckBoxesInPanel) {
       tcb.setSelected(false);
     }
   }
@@ -113,7 +114,7 @@ public class TemplatesPanelIncApplyWDesigner extends JPanel
   public String apply()
   {
     String retVal="";
-    for ( TemplateCheckBox tcb : templateCheckBoxesInPanel) {
+    for ( TemplateItemCheckBoxWithDesigner tcb : templateCheckBoxesInPanel) {
       if (tcb.isSelected())
            retVal += (tcb.getTemplateWoComment()+" ");
     }

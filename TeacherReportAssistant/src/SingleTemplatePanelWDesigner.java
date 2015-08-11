@@ -15,7 +15,7 @@ public class SingleTemplatePanelWDesigner extends JPanel
 {
   private TeacherReportAssistant tra;
   
-  private ArrayList<TemplateCheckBox> templateCheckBoxesInPanel = new ArrayList<TemplateCheckBox>();
+  private ArrayList<TemplateItemCheckBoxWithDesigner> templateCheckBoxesInPanel = new ArrayList<TemplateItemCheckBoxWithDesigner>();
 
   public SingleTemplatePanelWDesigner()
   {
@@ -58,7 +58,7 @@ public class SingleTemplatePanelWDesigner extends JPanel
       ArrayList<String> ts=tc.getTemplates();
       // Loop once for each template in category tc
       for (String t : ts){
-        TemplateCheckBox tcb = new TemplateCheckBox(t);
+    	  TemplateItemCheckBoxWithDesigner tcb = new TemplateItemCheckBoxWithDesigner(t);
         
         panel.add(tcb,gbc);
         templateCheckBoxesInPanel.add(tcb);
@@ -101,14 +101,14 @@ public class SingleTemplatePanelWDesigner extends JPanel
     }
 
   
-  public ArrayList<TemplateCheckBox> getTemplateCheckBoxesInPanel()
+  public ArrayList<TemplateItemCheckBoxWithDesigner> getTemplateCheckBoxesInPanel()
   {
     return templateCheckBoxesInPanel;
   }
 
   public void uncheckBoxes()
   {
-    for ( TemplateCheckBox tcb : templateCheckBoxesInPanel) {
+    for ( TemplateItemCheckBoxWithDesigner tcb : templateCheckBoxesInPanel) {
       tcb.setSelected(false);
     }
   }
@@ -116,7 +116,7 @@ public class SingleTemplatePanelWDesigner extends JPanel
   public String apply()
   {
     String retVal="";
-    for ( TemplateCheckBox tcb : templateCheckBoxesInPanel) {
+    for ( TemplateItemCheckBoxWithDesigner tcb : templateCheckBoxesInPanel) {
       if (tcb.isSelected())
            retVal += (tcb.getTemplateWoComment()+" ");
     }

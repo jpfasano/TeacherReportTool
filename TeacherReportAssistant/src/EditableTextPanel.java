@@ -1,4 +1,5 @@
 
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -20,6 +21,7 @@ public class EditableTextPanel extends JPanel
   {
     super();
     this.tra = tra;
+    this.setMinimumSize(new Dimension(600,300));
     ta = new JTextArea();
     ta.setFont(new Font("TRUETYPE", Font.PLAIN, 16));
     ta.setLineWrap(true);
