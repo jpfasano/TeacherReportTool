@@ -26,7 +26,7 @@ public class TraOpenSaveControlClient implements OpenSaveControlClient {
     String[] fileNames = { "names.tra",  "sentenceTemplates.tra" };
     ArrayList<Student> students = new ArrayList<Student>();
     Map<String, GenderWordPair> genderWordsDict = new HashMap<String, GenderWordPair>();
-    ArrayList<TemplateCategory> templates = new ArrayList<TemplateCategory>();
+    Templates templates = new Templates();
     TemplateCategory tc = new TemplateCategory();
     String pathSeparator = System.getProperty("file.separator"); 
 

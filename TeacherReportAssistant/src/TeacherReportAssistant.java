@@ -21,7 +21,7 @@ public class TeacherReportAssistant extends JFrame
   private ArrayList<Student> students;
   private int studentsIndex;
   private Map<String, GenderWordPair> genderWordsDict;
-  private ArrayList<TemplateCategory> templates;
+  private Templates templates;
   private ContentPanelWDesigner contentPanel;
   
  
@@ -32,7 +32,7 @@ public class TeacherReportAssistant extends JFrame
     //super.setSize(800, 480);
     super.getContentPane().add(new JPanel());
     
-    templates = new ArrayList<TemplateCategory>();
+    templates = new Templates();
     students = new ArrayList<Student>();
     genderWordsDict = new HashMap<String, GenderWordPair>();
     
@@ -150,12 +150,12 @@ public class TeacherReportAssistant extends JFrame
 
 
  
-  public ArrayList<TemplateCategory> getTemplateCategories()
+  public Templates getTemplateCategories()
   {
     return templates;
   }
 
-  public void setTemplates(ArrayList<TemplateCategory> templates)
+  public void setTemplates(Templates templates)
   {
     this.templates = templates;
   }
@@ -197,18 +197,18 @@ public class TeacherReportAssistant extends JFrame
     gbc.weighty=1.0;
     gbc.fill = GridBagConstraints.BOTH;
 
-    {
-    JFrame jf = new JFrame();
-    jf.getContentPane().removeAll();
-
-    //jf.getContentPane().add(new TemplatesPanelIncApplyWDesigner(this,templates.get(1/*templates.size()-1*/)));
-    jf.getContentPane().add(new TabbedTemplatePanel2WDesigner(this));
-    //jf.setContentPane(cp,gbc);
-    jf.setTitle("Test Content Panel");
-    jf.setSize(800, 480);
-    jf.pack();
-    jf.setVisible(true);
-    }
+//    {
+//    JFrame jf = new JFrame();
+//    jf.getContentPane().removeAll();
+//
+//    //jf.getContentPane().add(new TemplatesPanelIncApplyWDesigner(this,templates.get(1/*templates.size()-1*/)));
+//    jf.getContentPane().add(new TabbedTemplatePanel2WDesigner(this));
+//    //jf.setContentPane(cp,gbc);
+//    jf.setTitle("Test Content Panel");
+//    jf.setSize(800, 480);
+//    jf.pack();
+//    jf.setVisible(true);
+//    }
   
     
     this.getContentPane().removeAll();

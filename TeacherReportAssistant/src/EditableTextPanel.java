@@ -20,7 +20,7 @@ public class EditableTextPanel extends JPanel
   {
     super();
     this.tra = tra;
-    this.setMinimumSize(new Dimension(600,300));
+    this.setMinimumSize(new Dimension(600,200));
     ta = new JTextArea();
     ta.setFont(new Font("TRUETYPE", Font.PLAIN, 16));
     ta.setLineWrap(true);

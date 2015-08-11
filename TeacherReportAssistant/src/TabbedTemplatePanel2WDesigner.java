@@ -1,3 +1,4 @@
+import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
@@ -21,6 +22,9 @@ public class TabbedTemplatePanel2WDesigner extends JPanel {
 
 	    super();
 	    this.tra = tra;
+
+	    this. setMinimumSize(new Dimension(600,250));
+	    
 	    ArrayList<TemplateCategory> templates = tra.getTemplateCategories();
 	    
 //	    setLayout(null);
@@ -30,11 +34,13 @@ public class TabbedTemplatePanel2WDesigner extends JPanel {
 //		add(tabbedPane);
 	    
 		GridBagLayout gridBagLayout = new GridBagLayout();
-		gridBagLayout.columnWidths = new int[]{600};
-		gridBagLayout.rowHeights = new int[]{350};
-		gridBagLayout.columnWeights = new double[]{0.0};
-		gridBagLayout.rowWeights = new double[]{0.0};
+//		gridBagLayout.columnWidths = new int[]{600};
+//		gridBagLayout.rowHeights = new int[]{350};
+//		gridBagLayout.columnWeights = new double[]{0.0};
+//		gridBagLayout.rowWeights = new double[]{0.0};
 		setLayout(gridBagLayout);
+	    
+	    
 		
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
@@ -42,6 +48,8 @@ public class TabbedTemplatePanel2WDesigner extends JPanel {
 		gbc_tabbedPane.fill = GridBagConstraints.BOTH;
 		gbc_tabbedPane.gridx = 0;
 		gbc_tabbedPane.gridy = 0;
+		gbc_tabbedPane.weightx = .5;
+		gbc_tabbedPane.weighty = 1.;
 		add(tabbedPane, gbc_tabbedPane);
 //		
 //		TemplatesPanelIncApplyWDesigner tpl0 = new TemplatesPanelIncApplyWDesigner(tra,templates.get(0));
