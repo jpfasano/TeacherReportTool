@@ -12,13 +12,13 @@ public class TabbedTemplatePanelWDesigner extends JPanel
 // implements ItemListener
 {
   private ArrayList<TemplatesPanelIncApplyWDesigner> templatePanels = new ArrayList<TemplatesPanelIncApplyWDesigner>();
-  private TeacherReportAssistant tra;
+  //private TeacherReportAssistant tra;
   JTabbedPane jTabbedPane;
 
   public TabbedTemplatePanelWDesigner(TeacherReportAssistant tra)
   {
     super();
-    this.tra = tra;
+    //this.tra = tra;
     ArrayList<TemplateCategory> templates = tra.getTemplateCategories();
     
     jTabbedPane = new JTabbedPane();

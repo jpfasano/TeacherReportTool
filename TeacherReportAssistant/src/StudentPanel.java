@@ -10,12 +10,12 @@ import javax.swing.plaf.basic.BasicArrowButton;
 
 
 public class StudentPanel extends JPanel {
-  private TeacherReportAssistant tra;
+  //private TeacherReportAssistant tra;
   private JLabel studentNameLabel;
 
   public StudentPanel(TeacherReportAssistant tra) {
     super();
-    this.tra = tra;
+    //this.tra = tra;
     this.setMinimumSize(new Dimension(600,18));
     studentNameLabel = new JLabel("First: File-> Open Student Names", JLabel.CENTER);  
     

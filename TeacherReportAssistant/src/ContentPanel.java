@@ -7,7 +7,7 @@ import javax.swing.JPanel;
 public class ContentPanel extends JPanel
 {
   
-  private TeacherReportAssistant tra;
+  //private TeacherReportAssistant tra;
   private StudentPanel studentPanel;
   private TabbedTemplatePanel2WDesigner tabbedTemplatePanel;
   private EditableTextPanel editableTextPanel;
@@ -17,7 +17,7 @@ public class ContentPanel extends JPanel
   public ContentPanel(TeacherReportAssistant tra)
   {
     super();
-    this.tra=tra;
+    //this.tra=tra;
 
     this.setLayout(new GridBagLayout());
     GridBagConstraints gbc = new GridBagConstraints();

@@ -5,8 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import openSaveControl.OpenSaveControlClient;
 
@@ -25,7 +23,7 @@ public class TraOpenSaveControlClient implements OpenSaveControlClient {
 
     String[] fileNames = { "names.tra",  "sentenceTemplates.tra" };
     ArrayList<Student> students = new ArrayList<Student>();
-    Map<String, GenderWordPair> genderWordsDict = new HashMap<String, GenderWordPair>();
+    //Map<String, GenderWordPair> genderWordsDict = new HashMap<String, GenderWordPair>();
     Templates templates = new Templates();
     TemplateCategory tc = new TemplateCategory();
     String pathSeparator = System.getProperty("file.separator"); 

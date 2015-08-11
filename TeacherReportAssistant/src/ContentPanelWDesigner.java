@@ -9,7 +9,7 @@ import javax.swing.JSplitPane;
 public class ContentPanelWDesigner extends JPanel
 {
   
-  private TeacherReportAssistant tra;
+  //private TeacherReportAssistant tra;
   private StudentPanel studentPanel;
   private EditableTextPanel editableTextPanel;
   private TabbedTemplatePanel2WDesigner tabbedTemplatePanel2WDesigner;
@@ -19,7 +19,7 @@ public class ContentPanelWDesigner extends JPanel
   public ContentPanelWDesigner(TeacherReportAssistant tra)
   {
     super();
-    this.tra=tra;
+    //this.tra=tra;
 
     GridBagLayout gridBagLayout = new GridBagLayout();
     gridBagLayout.rowWeights = new double[]{0.0};

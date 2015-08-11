@@ -11,7 +11,7 @@ import javax.swing.event.ChangeListener;
 public class TabbedTemplatePanel2WDesigner extends JPanel {
 	
 	private ArrayList<TemplatesPanelIncApplyWDesigner> templatePanels = new ArrayList<TemplatesPanelIncApplyWDesigner>();
-	  private TeacherReportAssistant tra;
+	  //private TeacherReportAssistant tra;
 	  private JTabbedPane tabbedPane;
 
 	/**
@@ -21,7 +21,7 @@ public class TabbedTemplatePanel2WDesigner extends JPanel {
 		
 
 	    super();
-	    this.tra = tra;
+	    //this.tra = tra;
 
 	    this. setMinimumSize(new Dimension(600,250));
 	    
