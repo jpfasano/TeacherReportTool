@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -59,6 +60,17 @@ public class SingleTemplatePanelWDesigner extends JPanel
       // Loop once for each template in category tc
       for (String t : ts){
     	  TemplateItemCheckBoxWithDesigner tcb = new TemplateItemCheckBoxWithDesigner(t);
+    	  
+    	  {
+  		    JFrame jf = new JFrame();
+  		    
+  		    jf.getContentPane().add(new TemplateItemCheckBoxWithDesigner(t));
+  		    
+  		    jf.setTitle("Test TemplateItemCheckBoxWithDesigner Panel");
+  		    jf.setSize(620, 750);
+  		    jf.pack();
+  		    jf.setVisible(true);
+  		 }
         
         panel.add(tcb,gbc);
         templateCheckBoxesInPanel.add(tcb);
