@@ -1,10 +1,9 @@
-import javax.swing.JPanel;
-import javax.swing.JCheckBox;
-import net.miginfocom.swing.MigLayout;
-import javax.swing.SwingConstants;
-import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import java.awt.GridBagLayout;
+
+import javax.swing.JCheckBox;
+import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public class TemplateItemCheckBoxWithDesigner extends JPanel {
 

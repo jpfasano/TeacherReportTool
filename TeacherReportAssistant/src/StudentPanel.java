@@ -4,7 +4,6 @@ import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.plaf.basic.BasicArrowButton;
@@ -17,7 +16,7 @@ public class StudentPanel extends JPanel {
   public StudentPanel(TeacherReportAssistant tra) {
     super();
     this.tra = tra;
-    this.setMinimumSize(new Dimension(600,5));
+    this.setMinimumSize(new Dimension(600,18));
     studentNameLabel = new JLabel("First: File-> Open Student Names", JLabel.CENTER);  
     
    BasicArrowButton backButton=new BasicArrowButton(BasicArrowButton.WEST);
@@ -43,21 +42,21 @@ public class StudentPanel extends JPanel {
     gbc.gridx = 0;
     gbc.gridy = 0;
     gbc.weightx = .1;
-    gbc.weighty = 1;
+    gbc.weighty = 0;
     gbc.fill = GridBagConstraints.BOTH;
     this.add(backButton,gbc);
 
     gbc.gridx = 1;
     gbc.gridy = 0;
     gbc.weightx = .8;
-    gbc.weighty = 1;
+    gbc.weighty = 0;
     gbc.fill = GridBagConstraints.BOTH;
     this.add(studentNameLabel,gbc);
     
     gbc.gridx = 2;
     gbc.gridy = 0;
     gbc.weightx = .1;
-    gbc.weighty = 1;
+    gbc.weighty = 0;
     gbc.fill = GridBagConstraints.BOTH;
     this.add(fowardButton,gbc);
 

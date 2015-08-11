@@ -1,5 +1,3 @@
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -9,9 +7,6 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import openSaveControl.OpenSaveControlClient;
 

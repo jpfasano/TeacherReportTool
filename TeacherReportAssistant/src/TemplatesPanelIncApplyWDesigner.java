@@ -90,6 +90,7 @@ public class TemplatesPanelIncApplyWDesigner extends JPanel
       
 
       gbc = new GridBagConstraints();
+      gbc.gridx=0;
       gbc.gridy=1;
       gbc.weightx=0.2;
       gbc.weighty=0.1;

@@ -1,13 +1,8 @@
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.plaf.basic.BasicArrowButton;
 import javax.swing.JSplitPane;
 
 
@@ -31,7 +26,7 @@ public class ContentPanelWDesigner extends JPanel
     gridBagLayout.columnWeights = new double[]{1.0};
     this.setLayout(gridBagLayout);
     GridBagConstraints gbc = new GridBagConstraints();
-    gbc.insets = new Insets(0, 0, 5, 0);
+    gbc.insets = new Insets(0, 0, 0, 0);
     
     
     // There are 3 parts to the content panel: Students, Templates, and Editable text.
@@ -45,19 +40,21 @@ public class ContentPanelWDesigner extends JPanel
     gbc.gridx = 0;
     gbc.gridy = 0;
     gbc.weightx = 1.0;
-    gbc.weighty = .5;
+    gbc.weighty = .0;
     gbc.fill = GridBagConstraints.BOTH;
     this.add(studentPanel,gbc);
     
     JSplitPane splitPane = new JSplitPane();
     splitPane.setOrientation(JSplitPane.VERTICAL_SPLIT);
     GridBagConstraints gbc_splitPane = new GridBagConstraints();
-    gbc_splitPane.gridwidth = 3;
-    gbc_splitPane.insets = new Insets(0, 0, 0, 5);
+    gbc_splitPane.gridwidth = 1;
+    //gbc_splitPane.insets = new Insets(0, 0, 0, 5);
     gbc_splitPane.fill = GridBagConstraints.BOTH;
     gbc_splitPane.gridx = 0;
     gbc_splitPane.gridy = 1;
-    studentPanel.add(splitPane, gbc_splitPane);
+    gbc_splitPane.weightx = 1.0;
+    gbc_splitPane.weighty = .9;
+    this.add(splitPane, gbc_splitPane);
     
     editableTextPanel = new EditableTextPanel(tra);
     splitPane.setRightComponent(editableTextPanel);
