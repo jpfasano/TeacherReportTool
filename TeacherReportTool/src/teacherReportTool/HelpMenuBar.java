@@ -23,6 +23,7 @@ package teacherReportTool;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -81,6 +82,7 @@ public class HelpMenuBar {
     textArea.setText(longMessage);
     textArea.setEditable(false);
     textArea.setCaretPosition(0);
+    textArea.setMargin( new Insets(15,15,15,15) );
 
     // wrap a scrollpane around it
     JScrollPane scrollPane = new JScrollPane(textArea);
@@ -125,7 +127,8 @@ public class HelpMenuBar {
 
   public static void showAbout() {
     JOptionPane.showMessageDialog(null, "Teacher Report Tool.\n"
-        + "Java Source Code is available on GitHub", "About", // Dialog title
+    		+ "Copyright (c) 2015 JP Fasano.\n"
+        + "Java source code is available on GitHub.com", "About", // Dialog title
         JOptionPane.PLAIN_MESSAGE);
   }
 }
