@@ -33,6 +33,7 @@ public interface OpenSaveControlClient {
   // Enable/Disable File menu bar items
   public void enableSaveMenuItem(Boolean b);
   public void enableSaveAsMenuItem(Boolean b);
+  public void enableSaveMenuItems(Boolean b);
   
   public boolean unsavedWork();
   

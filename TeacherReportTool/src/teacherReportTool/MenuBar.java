@@ -31,156 +31,168 @@ import javax.swing.JMenuItem;
 
 import openSaveControl.OpenSaveControl;
 
-public class MenuBar extends JMenuBar
-    implements ActionListener
-{
-  private TeacherReportTool trl;
-  private JCheckBoxMenuItem insertAtCursor;
-  private JMenuItem openNames, openSentenceTemplates, openDir, exit, showHelp, about;
-  private JMenuItem save, saveAs;
-  
-  private OpenSaveControl openSaveControl;
-  private TrtOpenSaveControlClient trtOpenSaveControlClient;
+public class MenuBar extends JMenuBar implements ActionListener {
+	private TeacherReportTool trl;
+	private JCheckBoxMenuItem insertAtCursor;
+	private JMenuItem openNames, openSentenceTemplates, openDir, exit, showHelp, about;
+	private JMenuItem save, saveAs;
+	private boolean saveFileDefined = false;
 
-  public MenuBar(TeacherReportTool trl)
-  {
-    this.trl = trl;
- 
-    // "File" menu:
+	private OpenSaveControl openSaveControl;
+	private TrtOpenSaveControlClient trtOpenSaveControlClient;
 
-    JMenu fileMenu = new JMenu("File");
-    fileMenu.setMnemonic('F');
+	public MenuBar(TeacherReportTool trl) {
+		this.trl = trl;
 
-    // Second level menu under "Preferences":
-    JMenu preferences = new JMenu("Preferences");
-    preferences.setMnemonic('P');
-    insertAtCursor = new JCheckBoxMenuItem("Insert at cursor", false);
-    insertAtCursor.setMnemonic('I');
-    preferences.add(insertAtCursor);
+		// "File" menu:
 
-    openNames  = new JMenuItem("Open Student Names ...");
-    openNames.setMnemonic('N');
-    openNames.addActionListener(this);
+		JMenu fileMenu = new JMenu("File");
+		fileMenu.setMnemonic('F');
 
-    openSentenceTemplates  = new JMenuItem("Open Sentence Templates ...");
-    openSentenceTemplates.setMnemonic('S');
-    openSentenceTemplates.addActionListener(this);
+		// Second level menu under "Preferences":
+		JMenu preferences = new JMenu("Preferences");
+		preferences.setMnemonic('P');
+		insertAtCursor = new JCheckBoxMenuItem("Insert at cursor", false);
+		insertAtCursor.setMnemonic('I');
+		preferences.add(insertAtCursor);
 
-    openDir  = new JMenuItem("Open Directory ...");
-    openDir.setMnemonic('O');
-    openDir.addActionListener(this);
-    
+		openNames = new JMenuItem("Open Student Names ...");
+		openNames.setMnemonic('N');
+		openNames.addActionListener(this);
 
-    save  = new JMenuItem("Save");
-    save.setMnemonic('S');
-    save.addActionListener(this);  
+		openSentenceTemplates = new JMenuItem("Open Sentence Templates ...");
+		openSentenceTemplates.setMnemonic('S');
+		openSentenceTemplates.addActionListener(this);
 
-    saveAs  = new JMenuItem("Save As ...");
-    //save.setMnemonic('S');
-    saveAs.addActionListener(this);
-    
-    
+		openDir = new JMenuItem("Open Directory ...");
+		openDir.setMnemonic('O');
+		openDir.addActionListener(this);
 
-    exit = new JMenuItem("Exit");
-    exit.setMnemonic('x');
-    exit.addActionListener(this);
+		save = new JMenuItem("Save");
+		save.setMnemonic('S');
+		save.addActionListener(this);
 
-    fileMenu.add(preferences);
-    fileMenu.addSeparator();
-    fileMenu.add(openNames);
-    fileMenu.add(openSentenceTemplates);
-    fileMenu.add(openDir);
-    fileMenu.addSeparator();
-    fileMenu.add(save);
-    fileMenu.add(saveAs);
-    fileMenu.addSeparator();
-    fileMenu.add(exit);
+		saveAs = new JMenuItem("Save As ...");
+		// save.setMnemonic('S');
+		saveAs.addActionListener(this);
 
-    add(fileMenu);
+		exit = new JMenuItem("Exit");
+		exit.setMnemonic('x');
+		exit.addActionListener(this);
 
-    // "Help" menu:
+		fileMenu.add(preferences);
+		fileMenu.addSeparator();
+		fileMenu.add(openNames);
+		fileMenu.add(openSentenceTemplates);
+		fileMenu.add(openDir);
+		fileMenu.addSeparator();
+		fileMenu.add(save);
+		fileMenu.add(saveAs);
+		fileMenu.addSeparator();
+		fileMenu.add(exit);
 
-    JMenu helpMenu = new JMenu("Help");
-    helpMenu.setMnemonic('H');
+		add(fileMenu);
 
-    showHelp = new JMenuItem("Help ...");
-    showHelp.setMnemonic('H');
-    showHelp.addActionListener(this);
+		// "Help" menu:
 
-    about = new JMenuItem("About...");
-    about.setMnemonic('A');
-    about.addActionListener(this);
+		JMenu helpMenu = new JMenu("Help");
+		helpMenu.setMnemonic('H');
 
-    helpMenu.add(showHelp);
-    helpMenu.add(about);
+		showHelp = new JMenuItem("Help ...");
+		showHelp.setMnemonic('H');
+		showHelp.addActionListener(this);
 
-    add(helpMenu);
-    
-    // Must be instantiated after the menu items exist
-    trtOpenSaveControlClient = new TrtOpenSaveControlClient(trl);
-    openSaveControl=new OpenSaveControl(trl,trtOpenSaveControlClient);
-    
-    // Save and SaveAs are not available until after OpenDir or OpenSentenceTemplates are done.
-    // This could be changed so that save is only available when there are some changes to the editable text.
-    save.setEnabled(false);
-    saveAs.setEnabled(false);
+		about = new JMenuItem("About...");
+		about.setMnemonic('A');
+		about.addActionListener(this);
 
-    // Names file must be opened before SentenceTemplates file.
-    openSentenceTemplates.setEnabled(false);
-  }
+		helpMenu.add(showHelp);
+		helpMenu.add(about);
 
-  public boolean insertAtCursorEnabled()
-  {
-    return insertAtCursor.isSelected();
-  }
+		add(helpMenu);
 
-  public void actionPerformed(ActionEvent e)
-  {
-    JMenuItem src = (JMenuItem)e.getSource();
+		// Must be instantiated after the menu items exist
+		trtOpenSaveControlClient = new TrtOpenSaveControlClient(trl);
+		openSaveControl = new OpenSaveControl(trl, trtOpenSaveControlClient);
 
-    if (src == openNames) {
-    	openSaveControl.doOpenNames();
-      }
-    else if (src == openSentenceTemplates) {
-    	openSaveControl.doOpenSentenceTemplates();
-    }
-    else if (src == openDir) {
-        openSaveControl.doOpen();
-    }
-    else if (src ==save){
-      openSaveControl.doSave();
-    }
-    else if (src ==saveAs){
-      openSaveControl.doSaveAs();
-    }
-    else if (src == showHelp)
-      new HelpMenuBar().showHelp();
-    else if (src == about)
-      HelpMenuBar.showAbout();
-    else if (src == exit) {
-      trl.updateStudentReportFromEditableText();
-      if ( !openSaveControl.unsavedWork() ){
-          System.exit(0);
-      }
-      //System.out.println(trl.getReports());
-    }
-  }
-  
-  
+		// Save and SaveAs are not available until after OpenDir or
+		// OpenSentenceTemplates are done.
+		// This could be changed so that save is only available when there are
+		// some changes to the editable text.
+		save.setEnabled(false);
+		saveAs.setEnabled(false);
 
-  // Enable/Disable File menu bar items
+		// Names file must be opened before SentenceTemplates file.
+		openSentenceTemplates.setEnabled(false);
+	}
+
+	public boolean insertAtCursorEnabled() {
+		return insertAtCursor.isSelected();
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		JMenuItem src = (JMenuItem) e.getSource();
+
+		if (src == openNames) {
+			openSaveControl.doOpenNames();
+		} else if (src == openSentenceTemplates) {
+			openSaveControl.doOpenSentenceTemplates();
+		} else if (src == openDir) {
+			openSaveControl.doOpen();
+		} else if (src == save) {
+			openSaveControl.doSave();
+		} else if (src == saveAs) {
+			openSaveControl.doSaveAs();
+		} else if (src == showHelp)
+			new HelpMenuBar().showHelp();
+		else if (src == about)
+			HelpMenuBar.showAbout();
+		else if (src == exit) {
+			trl.updateStudentReportFromEditableText();
+			if (!openSaveControl.unsavedWork()) {
+				System.exit(0);
+			}
+			// System.out.println(trl.getReports());
+		}
+	}
+
+	// Enable/Disable File menu bar items
 	public void enableOpenNamesMenuItem(Boolean b) {
 		openNames.setEnabled(b);
 	}
+
 	public void enableOpenSentenceTemplatesMenuItem(Boolean b) {
 		openSentenceTemplates.setEnabled(b);
 	}
-	
-  public void enableSaveMenuItem(Boolean b) {
-    save.setEnabled(b);
-  }
-  public void enableSaveAsMenuItem(Boolean b) {
-     saveAs.setEnabled(b);
-  }
-}
 
+	public void enableSaveMenuItem(Boolean b) {
+		save.setEnabled(b);
+	}
+
+	public void enableSaveAsMenuItem(Boolean b) {
+		saveAs.setEnabled(b);
+	}
+
+	public void enableSaveMenuItems(Boolean b) {
+		if (!EditableTextPanel.unsavedChanges()) {
+			saveAs.setEnabled(false);
+			save.setEnabled(false);
+		} else {
+			if (b) {
+				saveAs.setEnabled(true);
+				if (saveFileDefined)
+					save.setEnabled(true);
+				else
+					save.setEnabled(false);
+			} else {
+				saveAs.setEnabled(false);
+				save.setEnabled(false);
+			}
+		}
+	}
+
+	public void setSaveFileDefined(boolean saveFileDefined) {
+		this.saveFileDefined = saveFileDefined;
+	}
+
+}

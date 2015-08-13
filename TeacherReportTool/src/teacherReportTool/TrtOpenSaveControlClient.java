@@ -108,6 +108,8 @@ public class TrtOpenSaveControlClient implements OpenSaveControlClient {
 		ContentPanel cp = new ContentPanel(trt);
 		trt.setContentPanel(cp);
 
+		trt.getTraMenuBar().setSaveFileDefined(false);
+		trt.getTraMenuBar().enableSaveMenuItems(false);
 		return true;
 
 	}
@@ -210,6 +212,7 @@ public class TrtOpenSaveControlClient implements OpenSaveControlClient {
 			String templatesFullFileName = dirFile.getAbsolutePath() + pathSeparator + fileNames[1];
 			File templatesFile = new File(templatesFullFileName);
 			openReadSentenceTemplatesFile(templatesFile);
+			
 		}
 
 	}
@@ -239,6 +242,8 @@ public class TrtOpenSaveControlClient implements OpenSaveControlClient {
 				try {
 					fileStream.close();
 					EditableTextPanel.textSaved();
+					trt.getTraMenuBar().setSaveFileDefined(true);
+					trt.getTraMenuBar().enableSaveMenuItems(false);
 				} catch (Exception e) {
 					System.err.println("Error: " + e.getMessage());
 					e.printStackTrace();
@@ -276,6 +281,11 @@ public class TrtOpenSaveControlClient implements OpenSaveControlClient {
 
 	public void enableSaveAsMenuItem(Boolean b) {
 		trt.getTraMenuBar().enableSaveAsMenuItem(b);
+	}
+	
+
+	public void enableSaveMenuItems(Boolean b) {
+		trt.getTraMenuBar().enableSaveMenuItems(b);
 	}
 
 }

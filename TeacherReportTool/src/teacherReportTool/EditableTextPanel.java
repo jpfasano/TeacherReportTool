@@ -76,15 +76,15 @@ public class EditableTextPanel extends JPanel implements DocumentListener
   // Document Listener Methods
   public void insertUpdate(DocumentEvent e)
   {
-	  unsavedChanges=true;
+	  setUnsavedChanges(true);
   }
   public void removeUpdate(DocumentEvent e)
   {
-	  unsavedChanges=true;
+	  setUnsavedChanges(true);
   }
   public void changedUpdate(DocumentEvent e)
   {
-	  unsavedChanges=true;
+	  setUnsavedChanges(true);
   }
   
   public void insert(String t) {
@@ -93,7 +93,9 @@ public class EditableTextPanel extends JPanel implements DocumentListener
     String newText = t.trim();
     if (newText.length()==0)return;
     
-    unsavedChanges=true;
+    setUnsavedChanges(true);
+    trt.getTraMenuBar().enableSaveMenuItems(true);
+    
     if (trt.getTraMenuBar().insertAtCursorEnabled() ) {
         if (curPos==curTextLen && curPos!=0) newText=" "+newText;
         ta.insert(newText,curPos);
@@ -107,7 +109,8 @@ public class EditableTextPanel extends JPanel implements DocumentListener
   public void clearEditableText()
   {
     ta.setText("");
-    unsavedChanges=false;
+    setUnsavedChanges(false);
+    trt.getTraMenuBar().enableSaveMenuItems(false);
   }
   
   public String getText() {
@@ -121,11 +124,17 @@ public class EditableTextPanel extends JPanel implements DocumentListener
   }
   
   public static void textSaved(){
-	  unsavedChanges=false;
+	  setUnsavedChanges(false);
   }
 
   public static boolean unsavedChanges() {
 	return unsavedChanges;
   }
+
+private static void setUnsavedChanges(boolean unsavedChanges) {
+	EditableTextPanel.unsavedChanges = unsavedChanges;
+}
+  
+  
 
 }

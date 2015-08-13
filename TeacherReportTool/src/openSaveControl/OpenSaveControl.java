@@ -143,8 +143,7 @@ public class OpenSaveControl {
 
 		oscClient.openReadSentenceTemplatesFile(file);
 
-		oscClient.enableSaveMenuItem(false);
-		oscClient.enableSaveAsMenuItem(true);
+		//oscClient.enableSaveMenuItems(true);
 
 	}
 	
@@ -162,8 +161,7 @@ public class OpenSaveControl {
 
 		oscClient.openReadFile(dir);
 
-		oscClient.enableSaveMenuItem(false);
-		oscClient.enableSaveAsMenuItem(true);
+		//oscClient.enableSaveMenuItems(true);
 
 	}
 
@@ -194,7 +192,7 @@ public class OpenSaveControl {
 		// File either doesn't exist or it is ok to overwrite;
 		oscClient.writeFile(saveAsFile);
 
-		oscClient.enableSaveMenuItem(true);
+		//oscClient.enableSaveMenuItem(true);
 	}
 
 	public void doSave() {

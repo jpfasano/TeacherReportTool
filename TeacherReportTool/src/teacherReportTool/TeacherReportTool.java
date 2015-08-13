@@ -268,7 +268,7 @@ public class TeacherReportTool extends JFrame
 
      
       ClassLoader classLoader = getClass().getClassLoader();
-      File file = new File(classLoader.getResource("resources/genderWordPairs.trt").getFile());
+      File file = new File(classLoader.getResource("genderWordPairs.trt").getFile());
       FileInputStream fstream = new FileInputStream(file);
       BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
