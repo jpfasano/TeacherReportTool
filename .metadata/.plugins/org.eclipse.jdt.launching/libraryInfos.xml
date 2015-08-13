@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<libraryInfos>
+<libraryInfo home="G:\Java" version="1.8.0_51">
+<bootpath>
+<entry path="G:\Java\lib\resources.jar"/>
+<entry path="G:\Java\lib\rt.jar"/>
+<entry path="G:\Java\lib\sunrsasign.jar"/>
+<entry path="G:\Java\lib\jsse.jar"/>
+<entry path="G:\Java\lib\jce.jar"/>
+<entry path="G:\Java\lib\charsets.jar"/>
+<entry path="G:\Java\lib\jfr.jar"/>
+<entry path="G:\Java\classes"/>
+</bootpath>
+<extensionDirs>
+<entry path="G:\Java\lib\ext"/>
+<entry path="C:\WINDOWS\Sun\Java\lib\ext"/>
+</extensionDirs>
+<endorsedDirs>
+<entry path="G:\Java\lib\endorsed"/>
+</endorsedDirs>
+</libraryInfo>
+</libraryInfos>

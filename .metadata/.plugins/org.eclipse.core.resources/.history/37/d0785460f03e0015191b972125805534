@@ -1,0 +1,12 @@
+import javax.swing.JPanel;
+
+public class TabbedTemplatePanel3WDesigner extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public TabbedTemplatePanel3WDesigner() {
+
+	}
+
+}

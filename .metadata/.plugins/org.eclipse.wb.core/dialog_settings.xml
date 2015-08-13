@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.wb.internal.core.model.util.ExposeComponentSupport$ExposeDialog">
+		<item value="568" key="x"/>
+		<item value="525" key="width"/>
+		<item value="309" key="y"/>
+		<item value="281" key="height"/>
+	</section>
+	<section name="org.eclipse.wb.internal.core.editor.actions.errors.ErrorsDialog">
+		<item value="489" key="x"/>
+		<item value="684" key="width"/>
+		<item value="127" key="y"/>
+		<item value="646" key="height"/>
+	</section>
+</section>

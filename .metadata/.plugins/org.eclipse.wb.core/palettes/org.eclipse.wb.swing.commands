@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<commands>
+	<addCategory
+		id="category_1439146482259"
+		name="Custom"
+		description="Container for custom components"
+		visible="true"
+		open="true"/>
+	<addComponent
+		id="custom_1439146482259"
+		name="TabbedTemplatePanelWDesigner"
+		description="Creates TabbedTemplatePanelWDesigner component."
+		visible="true"
+		class="TabbedTemplatePanelWDesigner"
+		category="category_1439146482259"/>
+	<addComponent
+		id="custom_1439146500801"
+		name="TabbedTemplatePanelWDesigner"
+		description="Creates TabbedTemplatePanelWDesigner component."
+		visible="true"
+		class="TabbedTemplatePanelWDesigner"
+		category="category_1439146482259"/>
+	<addComponent
+		id="custom_1439146730012"
+		name="SingleTemplatePanelWDesigner"
+		description="Creates SingleTemplatePanelWDesigner component."
+		visible="true"
+		class="SingleTemplatePanelWDesigner"
+		category="category_1439146482259"/>
+	<removeEntry
+		id="custom_1439146500801"/>
+	<removeEntry
+		id="custom_1439146482259"/>
+	<addComponent
+		id="custom_1439153421286"
+		name="TabbedTemplatePanel2WDesigner"
+		description="Creates TabbedTemplatePanel2WDesigner component."
+		visible="true"
+		class="TabbedTemplatePanel2WDesigner"
+		category="category_1439146482259"/>
+	<addComponent
+		id="custom_1439153537455"
+		name="EditableTextPanel"
+		description="Creates EditableTextPanel component."
+		visible="true"
+		class="EditableTextPanel"
+		category="category_1439146482259"/>
+	<addComponent
+		id="custom_1439162522584"
+		name="TemplatesPanelIncApplyWDesigner"
+		description="Creates TemplatesPanelIncApplyWDesigner component."
+		visible="true"
+		class="TemplatesPanelIncApplyWDesigner"
+		category="category_1439146482259"/>
+</commands>

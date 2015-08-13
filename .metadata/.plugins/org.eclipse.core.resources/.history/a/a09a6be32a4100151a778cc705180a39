@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>Teacher Report Tool</h1>
+<p>
+This tool (TRT) is to assist teachers when writing comments about their students by using sentence templates that when selected are filled in with the student name and correct gender pronouns. 
+The input files are: 
+
+<ul>
+<li>names.trt:&nbsp;&nbsp Contains student names with their gender.</li>
+<li>sentenceTemplates.trt:&nbsp;&nbsp Contains sentence templates to be used in the student report</li>
+</ul>
+
+From the menu bar select 
+<ul>
+<li><em>File</em> &rarr; <em>Open student names&hellip;</em>&nbsp;&nbsp to specify the names.trt file, and then </li>
+<li><em>File</em> &rarr; <em>Open sentence templates&hellip;</em>&nbsp;&nbsp to specify the sentenceTemplates.trt file.</li>
+</ul>
+</p>
+<h2>Input File Formats</h2>
+<h3>names.trt</h3>
+<p>
+This file contains the name and gender of each student, one student per line.&nbsp;&nbsp
+The first character of each line is M or F to indicate male or female.&nbsp;&nbsp
+The students name follows this initial character.&nbsp;&nbsp
+Here is an example:<br>
+<code>
+&nbsp;&nbsp;  M Donald Duck<br>
+&nbsp;&nbsp;  F Minnie Mouse<br>
+&nbsp;&nbsp;  M Bugs Bunnie<br>
+&nbsp;&nbsp;  F Flipper<br>
+</code>
+</p>
+<h3>sentenceTemplates.trt</h3>
+<p>
+This file contains the sentence templates.  All occurrences of <em>_NAME</em> in a template are replaced with the student's name. 
+Similarly, any occurrence of <em>_HE</em>, <em>_HIM</em>, and <em>_HIS</em> are replaced with the gender appropriate pronoun.
+</p>
+<p>
+The sentence templates are in categories.  Example categories might be:
+<ul>
+<li>Current Performance</li>
+<li>Class Work</li>
+<li>Homework</li>
+<li>Conclusion</li>
+</ul>
+A new category is indicated by a line that begins with &quot;.  
+Here is an example:<br>
+<code>
+&nbsp;&nbsp;  &quot;Current Performance<br>
+&nbsp;&nbsp;  _NAME is do extremely well.<br>
+&nbsp;&nbsp;  _NAME is not performing to _HIS potential.<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;  &quot;Class Work<br>
+&nbsp;&nbsp;  _HIS classwork is always excellent.<br>
+&nbsp;&nbsp;  _NAME is not always focused so _HIS classwork suffers.<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;  &quot;Homework<br>
+&nbsp;&nbsp;  It is obvious that _NAME takes great pride in _HIS homework.<br>
+&nbsp;&nbsp;  Too often _NAME has not completed _HIS homework.<br>
+&nbsp;&nbsp;<br>
+&nbsp;&nbsp;  &quot;Conclusion<br>
+&nbsp;&nbsp;  It is a pleasure having _NAME in class. <br>
+&nbsp;&nbsp;  _NAME should seek extra help to improve _HIS current grade.<br>
+</code>
+Please see the directory <em>trlSampleFiles</em> for another example of these files.
+</p>
+<h2>Creating Reports</h2>
+<p>
+There are left and right arrows to advance to the next student or return to a prior student.&nbsp;&nbsp
+There is a tab for each category of comments.&nbsp;&nbsp  On the tabbed pane select the desired comments to be included in the report.&nbsp;&nbsp
+The student reports are editable on the window.
+</p>
+<h2>Saving the Reports</h2>
+<p>
+From the menu bar select <em>File</em> &rarr; <em>Save as&hellip;</em> to specify the file to be written with all student reports.
+Alternatively, the report text can be copied from the editable text window and then pasted into another document.
+</p>
+</body>
+</html>

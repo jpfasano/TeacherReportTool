@@ -1,0 +1,23 @@
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+
+public class TabbedTemplatePanel3WDesigner extends JPanel {
+
+	/**
+	 * Create the panel.
+	 */
+	public TabbedTemplatePanel3WDesigner() {
+		setLayout(null);
+		
+		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBounds(10, 11, 430, 278);
+		add(tabbedPane);
+		
+		SingleTemplatePanelWDesigner singleTemplatePanelWDesigner = new SingleTemplatePanelWDesigner();
+		tabbedPane.addTab("New tab", null, singleTemplatePanelWDesigner, null);
+		
+		SingleTemplatePanelWDesigner singleTemplatePanelWDesigner_1 = new SingleTemplatePanelWDesigner();
+		tabbedPane.addTab("New tab", null, singleTemplatePanelWDesigner_1, null);
+
+	}
+}

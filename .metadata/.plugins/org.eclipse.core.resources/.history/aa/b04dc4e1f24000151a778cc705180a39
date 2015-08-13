@@ -1,0 +1,253 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintStream;
+import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+import openSaveControl.OpenSaveControlClient;
+
+public class TraOpenSaveControlClient implements OpenSaveControlClient {
+
+	TeacherReportAssistant tra;
+
+	public TraOpenSaveControlClient(TeacherReportAssistant tra) {
+		this.tra = tra;
+	}
+
+	// Return false if unsuccessful 
+	public boolean openReadNamesFile(File nf) {
+		BufferedReader br = null;
+
+		ArrayList<Student> students = new ArrayList<Student>();
+		String pathSeparator = System.getProperty("file.separator");
+
+		// Loop once to read each data file in the directory
+		//for (int f = 0; f < fileNames.length; f++) {
+			try {
+
+				String fullFileName = nf.getAbsolutePath();
+
+				// Check to make sure the file exists.
+				//File file = new File(fullFileName);
+				if (!nf.exists() || nf.isDirectory()) {
+					JOptionPane.showMessageDialog(tra,
+						    "File with student names does not exist: "+fullFileName,
+						    "File does not exist",
+						    JOptionPane.ERROR_MESSAGE);
+					return false;
+				}
+
+				FileInputStream fstream = new FileInputStream(nf);
+
+				br = new BufferedReader(new InputStreamReader(fstream));
+
+				String strLine;
+
+				// Read File Line By Line
+				while ((strLine = br.readLine()) != null) {
+					strLine = strLine.trim();
+
+
+					// check for a comment 
+					if (isComment(strLine)) continue;
+
+					
+						// Split line into gender and name.
+						String[] parsed = strLine.split(" ", 2);
+
+						// Make sure Gender is uppercase
+						parsed[0] = parsed[0].toUpperCase();
+
+						if (!parsed[0].equals("M") && !parsed[0].equals("F")) {
+							JOptionPane.showMessageDialog(tra,
+								    "Invalid Gender in " + fullFileName + ". Line is \"" + strLine + "\"\n"+
+							        "Line must begin with an M or F followed by a space.",
+								    "Gender Not Specfied",
+								    JOptionPane.ERROR_MESSAGE);
+							return false;
+							
+						}
+
+						Student s = new Student(parsed[0], parsed[1]);
+						students.add(s);
+					
+
+				}
+				
+				
+				
+			}
+
+			catch (Exception e) {
+				System.err.println(e.getMessage());
+			} finally {
+				if (br != null)
+					try {
+						br.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				tra.setStudents(students);
+			}
+
+			return true;
+		//}
+
+			//tra.advanceToNextStudent();
+
+	}
+	
+	
+	public void openReadTemplatesFile(File nf) {
+		BufferedReader br = null;
+
+		Templates templates = new Templates();
+		TemplateCategory tc = new TemplateCategory();
+		//String pathSeparator = System.getProperty("file.separator");
+
+		// Loop once to read each data file in the directory
+		//for (int f = 0; f < fileNames.length; f++) {
+			try {
+
+				String fullFileName = nf.getAbsolutePath();
+
+				// Check to make sure the file exists.
+				//File file = new File(fullFileName);
+				if (!nf.exists() || nf.isDirectory()) {
+					JOptionPane.showMessageDialog(tra,
+						    "File does not exist: "+fullFileName,
+						    "Sentence Template File Does Not Exist",
+						    JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+
+				FileInputStream fstream = new FileInputStream(nf);
+
+				br = new BufferedReader(new InputStreamReader(fstream));
+
+				String strLine;
+
+				// Read File Line By Line
+				while ((strLine = br.readLine()) != null) {
+					strLine = strLine.trim();
+
+					// check for a comment 
+					if (isComment(strLine)) continue;
+
+					
+					// Does strLine identifies a new category?
+					if (strLine.substring(0, 1).equals("\"")) {
+
+						// strLine identifies a new category
+						if (!tc.empty())
+							templates.add(tc);
+						tc = new TemplateCategory(strLine.substring(1));
+					} else {
+						// strLine is another template line
+						tc.addTemplate(strLine);
+					}
+					
+
+				}
+				
+				
+			}
+
+			catch (Exception e) {
+				System.err.println(e.getMessage());
+			} finally {
+				if (br != null)
+					try {
+						br.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				if (!tc.empty())
+					templates.add(tc);
+				tra.setTemplates(templates);
+			}
+		//}
+			
+			ContentPanelWDesigner cp = new ContentPanelWDesigner(tra);
+			tra.setContentPanel(cp);
+
+	}
+	
+	private boolean isComment(String strLine) {
+		// check for a comment or empty line
+		if (strLine.length() == 0)
+			return true;
+		if (strLine.substring(0, 1).equals("#"))
+			return true;
+		return false;
+	}
+
+	// Open Directory.
+	public void openReadFile(File dirFile) {
+		// Read 2 input data files
+
+
+		String[] fileNames = { "names.tra", "sentenceTemplates.tra" };
+		String pathSeparator = System.getProperty("file.separator");
+		
+
+		String nameFullFileName = dirFile.getAbsolutePath() + pathSeparator + fileNames[0];
+		File namesFile = new File(nameFullFileName);
+		boolean success = openReadNamesFile(namesFile);
+		
+        if (success){
+		String templatesFullFileName = dirFile.getAbsolutePath() + pathSeparator + fileNames[1];
+		File templatesFile = new File(templatesFullFileName);
+		openReadTemplatesFile(templatesFile);
+        }
+
+	}
+
+	public void writeFile(File f) {
+
+		// BufferedWriter out = null;
+		PrintStream fileStream = null;
+		try {
+			fileStream = new PrintStream(f);
+			String reportAsString = tra.getReports();
+			String[] split = reportAsString.split("\n");
+			for (String s : split) {
+				System.out.println(s);
+				fileStream.println(s);
+			}
+
+			// fileStream.println(reportAsString);
+			// FileWriter out = new FileWriter(f);
+			// out = new BufferedWriter(out);
+			// out.write(reportAsString);
+		} catch (IOException e) {
+			System.err.println("Error: " + e.getMessage());
+			e.printStackTrace();
+		} finally {
+			if (fileStream != null) {
+				try {
+					fileStream.close();
+				} catch (Exception e) {
+					System.err.println("Error: " + e.getMessage());
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+
+	// Enable/Disable File menu bar items
+	public void enableSaveMenuItem(Boolean b) {
+		tra.getTraMenuBar().enableSaveMenuItem(b);
+	}
+
+	public void enableSaveAsMenuItem(Boolean b) {
+		tra.getTraMenuBar().enableSaveAsMenuItem(b);
+	}
+
+}
