@@ -43,46 +43,34 @@ import javax.swing.ScrollPaneConstants;
 public class HelpMenuBar {
 	private JFrame jf;
 
-	// This is a Kludge. The objective is to get the resource loaded when running from
+	// This is a Kludge. The objective is to get the resource loaded when
+	// running from
 	// The Eclipse IDE or an executable jar file.
 	public static URL getResourceURL(String resourceName) {
 		URL retVal = null;
 		try {
 
-			
 			ClassLoader classLoader = (new HelpMenuBar()).getClass().getClassLoader();
 
-			System.out.println("got here 0");
 			retVal = classLoader.getResource("/teacherReportTool/resources/" + resourceName);
-			System.out.println("got here 1");
-			if (retVal==null) {
-				System.out.println("got here 2");
+			if (retVal == null) {
 				retVal = classLoader.getResource("teacherReportTool/resources/" + resourceName);
-				System.out.println("got here 3");
 			}
-			if (retVal==null) {
-				System.out.println("got here 4");
+			if (retVal == null) {
 				retVal = classLoader.getResource("resources/" + resourceName);
-				System.out.println("got here 5");
 			}
-			if (retVal==null) {
-				System.out.println("got here 6");
+			if (retVal == null) {
 				retVal = classLoader.getResource("/resources/" + resourceName);
-				System.out.println("got here 7");
 			}
-			if (retVal==null) {
-				System.out.println("got here 8");
+			if (retVal == null) {
 				retVal = classLoader.getResource("/" + resourceName);
-				System.out.println("got here 9");
 			}
-			if (retVal==null) {
-				System.out.println("got here A");
-				retVal = classLoader.getResource( resourceName);
-				System.out.println("got here B");
+			if (retVal == null) {
+				retVal = classLoader.getResource(resourceName);
 			}
 		} catch (Exception e) {
-				System.err.println(e.getMessage());
-				
+			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 
 		return retVal;
@@ -94,13 +82,10 @@ public class HelpMenuBar {
 		try {
 
 			// Read help html formated help text from resource directory
-			URL url=getResourceURL("helpText.html");
-			System.out.println("URL is "+url);
+			URL url = getResourceURL("helpText.html");
 			String fileAsString = url.getFile();
-			System.out.println("fileAsString is" +fileAsString);
-			File file = new File(fileAsString); 
+			File file = new File(fileAsString);
 
-			System.out.println("File is" +file);
 			FileInputStream fstream = new FileInputStream(file);
 			BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
@@ -113,13 +98,15 @@ public class HelpMenuBar {
 			br.close();
 
 			// Read image file of screen shot from resource directory
-			//String screenShot1 = classLoader.getResource("resources/trtScreenShot.jpg").toString();
+			// String screenShot1 =
+			// classLoader.getResource("resources/trtScreenShot.jpg").toString();
 			String screenShot1 = getResourceURL("trtScreenShot.jpg").toString();
 
 			// Put screen image into html text
 			longMessage = longMessage.replace("_IMAGE1", screenShot1);
 		} catch (Exception e) {
 			System.err.println(e.getMessage());
+			e.printStackTrace();
 		}
 
 		// JTextArea textArea = new JTextArea();

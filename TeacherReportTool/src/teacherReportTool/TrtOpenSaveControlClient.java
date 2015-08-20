@@ -95,11 +95,13 @@ public class TrtOpenSaveControlClient implements OpenSaveControlClient {
 
 		catch (Exception e) {
 			System.err.println(e.getMessage());
+			e.printStackTrace();
 		} finally {
 			if (br != null)
 				try {
 					br.close();
 				} catch (IOException e) {
+					e.printStackTrace();
 					e.printStackTrace();
 				}
 			trt.setStudents(students);
@@ -168,6 +170,7 @@ public class TrtOpenSaveControlClient implements OpenSaveControlClient {
 
 		catch (Exception e) {
 			System.err.println(e.getMessage());
+			e.printStackTrace();
 		} finally {
 			if (br != null)
 				try {
@@ -211,9 +214,12 @@ public class TrtOpenSaveControlClient implements OpenSaveControlClient {
 		if (success) {
 			String templatesFullFileName = nameFullFileName.substring(0,nameFullFileName.length()-3)+"trs";
 			File templatesFile = new File(templatesFullFileName);
-			openReadSentenceTemplatesFile(templatesFile);
-			
+			success = openReadSentenceTemplatesFile(templatesFile);			
 		}
+		if (success) {	
+			this.enableOpenSentenceTemplatesMenuItem(true);
+		}
+		
 
 	}
 

@@ -63,7 +63,7 @@ public class OpenSaveControl {
 		defaultOpenSentenceTemplatesDirectory = defaultOpenNamesDirectory;
 		defaultOpenDirDirectory = defaultOpenNamesDirectory;
 
-		// Setup Open Names Dialog 
+		// Setup Open Names Dialog
 		{
 			openNamesChooser = new JFileChooser();
 			openNamesChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -73,7 +73,7 @@ public class OpenSaveControl {
 			openNamesChooser.setFileFilter(trnFilter);
 		}
 
-		// Setup Sentence Templates Directory Dialog 
+		// Setup Sentence Templates Directory Dialog
 		{
 			openSentenceTemplatesChooser = new JFileChooser();
 			openSentenceTemplatesChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -88,9 +88,11 @@ public class OpenSaveControl {
 			openDirChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
 			// Setup file filters
 			FileNameExtensionFilter trnFilter = new FileNameExtensionFilter("Student names file (*.trn)", "trn");
-			//FileNameExtensionFilter trsFilter = new FileNameExtensionFilter("Sentence templates file (*.trs)", "trs");
+			// FileNameExtensionFilter trsFilter = new
+			// FileNameExtensionFilter("Sentence templates file (*.trs)",
+			// "trs");
 			openDirChooser.addChoosableFileFilter(trnFilter);
-			//openDirChooser.addChoosableFileFilter(trsFilter);
+			// openDirChooser.addChoosableFileFilter(trsFilter);
 			openDirChooser.setAcceptAllFileFilterUsed(false);
 			openDirChooser.setFileFilter(trnFilter);
 		}
@@ -115,8 +117,7 @@ public class OpenSaveControl {
 		// oscClient.enableSaveAsMenuItem(false);
 
 	}
-	
-	
+
 	// Return true if there is unsaved work that needs to be saved.
 	public boolean unsavedWork() {
 		return oscClient.unsavedWork();
@@ -124,8 +125,9 @@ public class OpenSaveControl {
 
 	public void doOpenNames() {
 
-		if ( unsavedWork() ) return;
-		
+		if (unsavedWork())
+			return;
+
 		File file = new File(defaultOpenNamesDirectory);
 		openNamesChooser.setSelectedFile(file);
 
@@ -136,13 +138,14 @@ public class OpenSaveControl {
 		defaultOpenNamesDirectory = file.getAbsolutePath();
 		defaultOpenSentenceTemplatesDirectory = file.getParent();
 
-		oscClient.openReadNamesFile(file);
+		boolean success = oscClient.openReadNamesFile(file);
 
-		oscClient.enableOpenSentenceTemplatesMenuItem(true);
-		//oscClient.enableSaveAsMenuItem(true);
+		if (success) {
+			oscClient.enableOpenSentenceTemplatesMenuItem(true);
+			// oscClient.enableSaveAsMenuItem(true);
+		}
 
 	}
-	
 
 	public void doOpenSentenceTemplates() {
 
@@ -157,13 +160,14 @@ public class OpenSaveControl {
 
 		oscClient.openReadSentenceTemplatesFile(file);
 
-		//oscClient.enableSaveMenuItems(true);
+		// oscClient.enableSaveMenuItems(true);
 
 	}
-	
+
 	// Do Open Both
 	public void doOpen() {
-		if ( unsavedWork() ) return;
+		if (unsavedWork())
+			return;
 		File dir = new File(defaultOpenDirDirectory);
 		openDirChooser.setSelectedFile(dir);
 
@@ -175,7 +179,7 @@ public class OpenSaveControl {
 
 		oscClient.openReadFile(dir);
 
-		//oscClient.enableSaveMenuItems(true);
+		// oscClient.enableSaveMenuItems(true);
 
 	}
 
@@ -197,18 +201,17 @@ public class OpenSaveControl {
 		// Check to see if the existing file exists.
 		if (saveAsFile.exists()) {
 			// File exists, so ask about overwriting
-			Object[] options = {"Yes","No","Cancel"};
+			Object[] options = { "Yes", "No", "Cancel" };
 			result = JOptionPane.showOptionDialog(frame, "The file exists, overwrite?", "Existing file",
-					JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE, 
-	                  null, options, options[1]);
-			if (result != 0)  // If Yes was not chosen
+					JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[1]);
+			if (result != 0) // If Yes was not chosen
 				return;
 		}
 
 		// File either doesn't exist or it is ok to overwrite;
 		oscClient.writeFile(saveAsFile);
 
-		//oscClient.enableSaveMenuItem(true);
+		// oscClient.enableSaveMenuItem(true);
 	}
 
 	public void doSave() {
