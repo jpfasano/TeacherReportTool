@@ -106,9 +106,9 @@ public class OpenSaveControl {
 
 			// Setup file filters
 			FileNameExtensionFilter txtFilter = new FileNameExtensionFilter("txt files (*.txt)", "txt");
-			FileNameExtensionFilter docFilter = new FileNameExtensionFilter("doc files (*.doc)", "doc");
+			//FileNameExtensionFilter docFilter = new FileNameExtensionFilter("doc files (*.doc)", "doc");
 			saveAsFileChooser.addChoosableFileFilter(txtFilter);
-			saveAsFileChooser.addChoosableFileFilter(docFilter);
+			//saveAsFileChooser.addChoosableFileFilter(docFilter);
 			saveAsFileChooser.setFileFilter(txtFilter);
 		}
 
