@@ -25,8 +25,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-import teacherReportTool.EditableTextPanel;
-
 public class OpenSaveControl {
 
 	private String defaultSaveAsFilename = "report.txt";
