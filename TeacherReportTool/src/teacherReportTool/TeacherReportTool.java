@@ -26,6 +26,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -267,8 +268,9 @@ public class TeacherReportTool extends JFrame
     try {
 
      
-      ClassLoader classLoader = getClass().getClassLoader();
-      File file = new File(classLoader.getResource("genderWordPairs.trt").getFile());
+      //ClassLoader classLoader = getClass().getClassLoader();
+      URL url =	HelpMenuBar.getResourceURL("genderWordPairs.trt");
+      File file = new File(url.getFile());
       FileInputStream fstream = new FileInputStream(file);
       BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 

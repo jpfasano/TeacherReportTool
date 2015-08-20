@@ -11,11 +11,6 @@
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="true" exportOutputFolder="false">
-        <file path="/TeacherReportTool/COPYING"/>
-        <file path="/TeacherReportTool/README"/>
         <javaElement handleIdentifier="=TeacherReportTool/src"/>
-        <javaElement handleIdentifier="=TeacherReportTool/resources"/>
-        <file path="/TeacherReportTool/teacherreporttool-manifest.jardesc"/>
-        <file path="/TeacherReportTool/teacherreporttool-manifest"/>
     </selectedElements>
 </jardesc>
