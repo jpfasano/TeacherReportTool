@@ -67,17 +67,32 @@ public class OpenSaveControl {
 		{
 			openNamesChooser = new JFileChooser();
 			openNamesChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			// Setup file filters
+			FileNameExtensionFilter trnFilter = new FileNameExtensionFilter("Student names file (*.trn)", "trn");
+			openNamesChooser.addChoosableFileFilter(trnFilter);
+			openNamesChooser.setFileFilter(trnFilter);
 		}
 
 		// Setup Sentence Templates Directory Dialog 
 		{
 			openSentenceTemplatesChooser = new JFileChooser();
 			openSentenceTemplatesChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			// Setup file filters
+			FileNameExtensionFilter trsFilter = new FileNameExtensionFilter("Sentence templates file (*.trs)", "trs");
+			openSentenceTemplatesChooser.addChoosableFileFilter(trsFilter);
+			openSentenceTemplatesChooser.setFileFilter(trsFilter);
 		}
 		// Setup Open Directory Dialog (directory containing input data files)
 		{
 			openDirChooser = new JFileChooser();
-			openDirChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			openDirChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			// Setup file filters
+			FileNameExtensionFilter trnFilter = new FileNameExtensionFilter("Student names file (*.trn)", "trn");
+			//FileNameExtensionFilter trsFilter = new FileNameExtensionFilter("Sentence templates file (*.trs)", "trs");
+			openDirChooser.addChoosableFileFilter(trnFilter);
+			//openDirChooser.addChoosableFileFilter(trsFilter);
+			openDirChooser.setAcceptAllFileFilterUsed(false);
+			openDirChooser.setFileFilter(trnFilter);
 		}
 
 		// Setup SaveAs Dialog
@@ -88,7 +103,6 @@ public class OpenSaveControl {
 			saveAsFileChooser.setApproveButtonText("Save");
 
 			// Setup file filters
-			// The filters should not be hard coded.
 			FileNameExtensionFilter txtFilter = new FileNameExtensionFilter("txt files (*.txt)", "txt");
 			FileNameExtensionFilter docFilter = new FileNameExtensionFilter("doc files (*.doc)", "doc");
 			saveAsFileChooser.addChoosableFileFilter(txtFilter);
@@ -147,7 +161,7 @@ public class OpenSaveControl {
 
 	}
 	
-	// Opens directory containing both input file
+	// Do Open Both
 	public void doOpen() {
 		if ( unsavedWork() ) return;
 		File dir = new File(defaultOpenDirDirectory);

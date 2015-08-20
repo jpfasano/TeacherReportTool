@@ -87,8 +87,8 @@ public class MenuBar extends JMenuBar implements ActionListener {
 		
 		// Open Directory
 
-		openDir = new JMenuItem("Open Directory ...");
-		openDir.setMnemonic(KeyEvent.VK_D);
+		openDir = new JMenuItem("Open Both Files ...");
+		openDir.setMnemonic(KeyEvent.VK_B);
 		openDir.addActionListener(this);
 
 		// Save

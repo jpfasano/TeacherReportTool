@@ -197,19 +197,19 @@ public class TrtOpenSaveControlClient implements OpenSaveControlClient {
 		return false;
 	}
 
-	// Open Directory.
+	// Open Both Files.
 	public void openReadFile(File dirFile) {
 		// Read 2 input data files
 
-		String[] fileNames = { "names.trt", "sentenceTemplates.trt" };
-		String pathSeparator = System.getProperty("file.separator");
+		//String[] fileNames = { "names.trt", "sentenceTemplates.trt" };
+		//String pathSeparator = System.getProperty("file.separator");
 
-		String nameFullFileName = dirFile.getAbsolutePath() + pathSeparator + fileNames[0];
+		String nameFullFileName = dirFile.getAbsolutePath();
 		File namesFile = new File(nameFullFileName);
 		boolean success = openReadNamesFile(namesFile);
 
 		if (success) {
-			String templatesFullFileName = dirFile.getAbsolutePath() + pathSeparator + fileNames[1];
+			String templatesFullFileName = nameFullFileName.substring(0,nameFullFileName.length()-3)+"trs";
 			File templatesFile = new File(templatesFullFileName);
 			openReadSentenceTemplatesFile(templatesFile);
 			
