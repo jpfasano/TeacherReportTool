@@ -37,7 +37,7 @@ import javax.swing.KeyStroke;
 import openSaveControl.OpenSaveControl;
 
 public class MenuBar extends JMenuBar implements ActionListener {
-	private TeacherReportTool trl;
+	private TeacherReportTool trt;
 	private JCheckBoxMenuItem insertAtCursor;
 	private JMenuItem openNames, openSentenceTemplates, openDir, exit, showHelp, about;
 	private JMenuItem save, saveAs;
@@ -46,8 +46,8 @@ public class MenuBar extends JMenuBar implements ActionListener {
 	private OpenSaveControl openSaveControl;
 	private TrtOpenSaveControlClient trtOpenSaveControlClient;
 
-	public MenuBar(TeacherReportTool trl) {
-		this.trl = trl;
+	public MenuBar(TeacherReportTool trt) {
+		this.trt = trt;
 
 		// "File" menu:
 
@@ -144,8 +144,8 @@ public class MenuBar extends JMenuBar implements ActionListener {
 		add(helpMenu);
 
 		// Must be instantiated after the menu items exist
-		trtOpenSaveControlClient = new TrtOpenSaveControlClient(trl);
-		openSaveControl = new OpenSaveControl(trl, trtOpenSaveControlClient);
+		trtOpenSaveControlClient = new TrtOpenSaveControlClient(trt);
+		openSaveControl = new OpenSaveControl(trt, trtOpenSaveControlClient);
 
 		// Save and SaveAs are not available until after OpenDir or
 		// OpenSentenceTemplates are done.
@@ -180,7 +180,7 @@ public class MenuBar extends JMenuBar implements ActionListener {
 		else if (src == about)
 			HelpMenuBar.showAbout();
 		else if (src == exit) {
-			trl.updateStudentReportFromEditableText();
+			trt.updateStudentReportFromEditableText();
 			if (!openSaveControl.unsavedWork()) {
 				System.exit(0);
 			}
@@ -221,6 +221,12 @@ public class MenuBar extends JMenuBar implements ActionListener {
 				save.setEnabled(false);
 			}
 		}
+		
+		String newTitle = "TeacherReportTool";
+		if (EditableTextPanel.unsavedChanges()) {
+		   newTitle += "*";
+		}
+		trt.setTitle(newTitle);
 	}
 
 	public void setSaveFileDefined(boolean saveFileDefined) {

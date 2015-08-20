@@ -150,7 +150,8 @@ public class OpenSaveControl {
 	public void doOpenSentenceTemplates() {
 
 		File file = new File(defaultOpenSentenceTemplatesDirectory);
-		openSentenceTemplatesChooser.setSelectedFile(file);
+		//openSentenceTemplatesChooser.setSelectedFile(file);
+		openSentenceTemplatesChooser.setCurrentDirectory(file);
 
 		int result = openSentenceTemplatesChooser.showOpenDialog(frame);
 		if (result != JFileChooser.APPROVE_OPTION)
@@ -169,7 +170,8 @@ public class OpenSaveControl {
 		if (unsavedWork())
 			return;
 		File dir = new File(defaultOpenDirDirectory);
-		openDirChooser.setSelectedFile(dir);
+		//openDirChooser.setSelectedFile(dir);
+		openDirChooser.setCurrentDirectory(dir);
 
 		int result = openDirChooser.showOpenDialog(frame);
 		if (result != JFileChooser.APPROVE_OPTION)
@@ -178,6 +180,7 @@ public class OpenSaveControl {
 		defaultOpenDirDirectory = dir.getAbsolutePath();
 
 		oscClient.openReadFile(dir);
+		defaultOpenSentenceTemplatesDirectory=defaultOpenDirDirectory;
 
 		// oscClient.enableSaveMenuItems(true);
 

@@ -41,7 +41,7 @@ public class TemplateCategory
   public TemplateCategory()
   {
     super();
-    this.name = "undefined";
+    this.name = "No Category Specified";
     this.templates = new ArrayList<String>();
   }
   
