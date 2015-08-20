@@ -34,7 +34,7 @@ import javax.swing.JScrollPane;
 public class TemplateCategoryPanel extends JPanel {
 	private TeacherReportTool trt;
 
-	private ArrayList<TemplateSentencePanel> templateCheckBoxesInPanel = new ArrayList<TemplateSentencePanel>();
+	private ArrayList<TemplateSentencePanel> templateSentencePanels = new ArrayList<TemplateSentencePanel>();
 
 	
 	public TemplateCategoryPanel(TeacherReportTool trt, TemplateCategory tc) {
@@ -63,7 +63,7 @@ public class TemplateCategoryPanel extends JPanel {
 			TemplateSentencePanel tcb = new TemplateSentencePanel(t);
 
 			checkBoxPanel.add(tcb, gbc);
-			templateCheckBoxesInPanel.add(tcb);
+			templateSentencePanels.add(tcb);
 
 			gbc.gridy++;
 			gbc.anchor = GridBagConstraints.WEST;
@@ -120,18 +120,18 @@ public class TemplateCategoryPanel extends JPanel {
 	}
 
 	public ArrayList<TemplateSentencePanel> getTemplateCheckBoxesInPanel() {
-		return templateCheckBoxesInPanel;
+		return templateSentencePanels;
 	}
 
 	public void uncheckBoxes() {
-		for (TemplateSentencePanel tcb : templateCheckBoxesInPanel) {
+		for (TemplateSentencePanel tcb : templateSentencePanels) {
 			tcb.setSelected(false);
 		}
 	}
 
 	public String apply() {
 		String retVal = "";
-		for (TemplateSentencePanel tcb : templateCheckBoxesInPanel) {
+		for (TemplateSentencePanel tcb : templateSentencePanels) {
 			if (tcb.isSelected())
 				retVal += (tcb.getTemplateWoComment() + " ");
 		}
