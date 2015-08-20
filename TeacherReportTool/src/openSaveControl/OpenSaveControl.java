@@ -183,9 +183,11 @@ public class OpenSaveControl {
 		// Check to see if the existing file exists.
 		if (saveAsFile.exists()) {
 			// File exists, so ask about overwriting
-			result = JOptionPane.showConfirmDialog(frame, "The file exists, overwrite?", "Existing file",
-					JOptionPane.YES_NO_CANCEL_OPTION);
-			if (result != JOptionPane.YES_OPTION)
+			Object[] options = {"Yes","No","Cancel"};
+			result = JOptionPane.showOptionDialog(frame, "The file exists, overwrite?", "Existing file",
+					JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE, 
+	                  null, options, options[1]);
+			if (result != 0)  // If Yes was not chosen
 				return;
 		}
 

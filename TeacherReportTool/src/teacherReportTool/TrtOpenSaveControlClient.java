@@ -258,10 +258,21 @@ public class TrtOpenSaveControlClient implements OpenSaveControlClient {
 		boolean retVal = false;
 		if (EditableTextPanel.unsavedChanges()) {
 			// There is unsaved work, so ask if it is ok to discard it
-			int result = JOptionPane.showConfirmDialog(trt, "The student report is unsaved. Discard unsaved work?",
-					"Unsaved Report Text", JOptionPane.YES_NO_CANCEL_OPTION);
-			if (result != JOptionPane.YES_OPTION)
+//			int result = JOptionPane.showConfirmDialog(trt, "The student report is unsaved. Discard unsaved work?",
+//					"Unsaved Report Text", JOptionPane.YES_NO_CANCEL_OPTION);
+//			if (result != JOptionPane.YES_OPTION)
+//				retVal = true;
+			
+			
+			Object[] options = {"Yes","No","Cancel"};
+			int result = JOptionPane.showOptionDialog(trt, "The student report is unsaved. Discard unsaved work?",
+					"Unsaved Report",
+					JOptionPane.YES_NO_CANCEL_OPTION,JOptionPane.WARNING_MESSAGE, 
+	                  null, options, options[1]);
+			if (result != 0)  // If Yes was not chosen
 				retVal = true;
+			
+			
 		}
 		return retVal;
 	}

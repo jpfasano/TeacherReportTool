@@ -21,13 +21,18 @@ package teacherReportTool;
  * A menu bar for the TeacherReportTool trl
  */
 
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
 
 import openSaveControl.OpenSaveControl;
 
@@ -47,37 +52,64 @@ public class MenuBar extends JMenuBar implements ActionListener {
 		// "File" menu:
 
 		JMenu fileMenu = new JMenu("File");
-		fileMenu.setMnemonic('F');
+		fileMenu.setMnemonic(KeyEvent.VK_F);
 
 		// Second level menu under "Preferences":
 		JMenu preferences = new JMenu("Preferences");
-		preferences.setMnemonic('P');
+		preferences.setMnemonic(KeyEvent.VK_P);
 		insertAtCursor = new JCheckBoxMenuItem("Insert at cursor", false);
-		insertAtCursor.setMnemonic('I');
+		insertAtCursor.setMnemonic(KeyEvent.VK_I);
 		preferences.add(insertAtCursor);
+		
+		// Open Student Names
 
 		openNames = new JMenuItem("Open Student Names ...");
-		openNames.setMnemonic('N');
 		openNames.addActionListener(this);
+		openNames.setMnemonic(KeyEvent.VK_N);
+
+		//		Action openStudentNames = new AbstractAction("Open Student NamesXXX") {
+//			 
+//		    @Override
+//		    public void actionPerformed(ActionEvent e) {
+//		    	openSaveControl.doOpenNames();
+//		    }
+//		};
+//		 
+//		openStudentNames.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_N);
+//		openNames.setAction(openStudentNames);
+		
+		
+		// Open Student Templates
 
 		openSentenceTemplates = new JMenuItem("Open Sentence Templates ...");
-		openSentenceTemplates.setMnemonic('S');
+		openSentenceTemplates.setMnemonic(KeyEvent.VK_T);
 		openSentenceTemplates.addActionListener(this);
+		
+		// Open Directory
 
 		openDir = new JMenuItem("Open Directory ...");
-		openDir.setMnemonic('O');
+		openDir.setMnemonic(KeyEvent.VK_D);
 		openDir.addActionListener(this);
 
+		// Save
+		
 		save = new JMenuItem("Save");
-		save.setMnemonic('S');
+		save.setMnemonic(KeyEvent.VK_S);
 		save.addActionListener(this);
+		
+		KeyStroke keyStrokeToOpen = KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK);
+		save.setAccelerator(keyStrokeToOpen);
+		
+		// Save As
 
 		saveAs = new JMenuItem("Save As ...");
-		// save.setMnemonic('S');
+		save.setMnemonic(KeyEvent.VK_A);
 		saveAs.addActionListener(this);
+		
+		// Exit
 
 		exit = new JMenuItem("Exit");
-		exit.setMnemonic('x');
+		exit.setMnemonic(KeyEvent.VK_X);
 		exit.addActionListener(this);
 
 		fileMenu.add(preferences);
@@ -96,14 +128,14 @@ public class MenuBar extends JMenuBar implements ActionListener {
 		// "Help" menu:
 
 		JMenu helpMenu = new JMenu("Help");
-		helpMenu.setMnemonic('H');
+		helpMenu.setMnemonic(KeyEvent.VK_H);
 
 		showHelp = new JMenuItem("Help ...");
-		showHelp.setMnemonic('H');
+		showHelp.setMnemonic(KeyEvent.VK_H);
 		showHelp.addActionListener(this);
 
 		about = new JMenuItem("About...");
-		about.setMnemonic('A');
+		about.setMnemonic(KeyEvent.VK_A);
 		about.addActionListener(this);
 
 		helpMenu.add(showHelp);
