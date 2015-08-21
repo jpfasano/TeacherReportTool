@@ -39,92 +39,92 @@ import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
 
 public class HelpMenuBar {
-	private JFrame jf;
+   private JFrame jf;
 
-	public void showHelp() {
-		String longMessage = "";
+   public void showHelp() {
+      String longMessage = "";
 
-		try {
+      try {
 
-			// Read help html formated help text from resource directory
-			InputStream fstream = Utilities.getResourceInputStream("helpText.html");
-			//
-			BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+         // Read help html formated help text from resource directory
+         InputStream fstream = Utilities.getResourceInputStream("helpText.html");
+         //
+         BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
-			String strLine;
+         String strLine;
 
-			// Read File Line By Line
-			while ((strLine = br.readLine()) != null) {
-				longMessage += strLine;
-			}
-			br.close();
+         // Read File Line By Line
+         while ((strLine = br.readLine()) != null) {
+            longMessage += strLine;
+         }
+         br.close();
 
-			// Read image file of screen shot from resource directory
-			String screenShot1 = Utilities.getResourceURL("trtScreenShot.jpg").toString();
+         // Read image file of screen shot from resource directory
+         String screenShot1 = Utilities.getResourceURL("trtScreenShot.jpg").toString();
 
-			// Put screen image into html text
-			longMessage = longMessage.replace("_IMAGE1", screenShot1);
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-			e.printStackTrace();
-		}
+         // Put screen image into html text
+         longMessage = longMessage.replace("_IMAGE1", screenShot1);
+      }
+      catch (Exception e) {
+         System.err.println(e.getMessage());
+         e.printStackTrace();
+      }
 
-		// JTextArea textArea = new JTextArea();
-		JTextPane textArea = new JTextPane();
-		textArea.setFont(new Font("Arial", Font.PLAIN, 14));
-		textArea.setContentType("text/html");
-		textArea.setText(longMessage);
-		textArea.setEditable(false);
-		textArea.setCaretPosition(0);
-		textArea.setMargin(new Insets(15, 15, 15, 15));
+      // JTextArea textArea = new JTextArea();
+      JTextPane textArea = new JTextPane();
+      textArea.setFont(new Font("Arial", Font.PLAIN, 14));
+      textArea.setContentType("text/html");
+      textArea.setText(longMessage);
+      textArea.setEditable(false);
+      textArea.setCaretPosition(0);
+      textArea.setMargin(new Insets(15, 15, 15, 15));
 
-		// wrap a scrollpane around it
-		JScrollPane scrollPane = new JScrollPane(textArea);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+      // wrap a scrollpane around it
+      JScrollPane scrollPane = new JScrollPane(textArea);
+      scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-		// Button to dismiss dialog
-		JButton jb = new JButton("OK");
-		jb.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				jf.dispose();
-			}
-		});
+      // Button to dismiss dialog
+      JButton jb = new JButton("OK");
+      jb.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+            jf.dispose();
+         }
+      });
 
-		GridBagLayout gbl = new GridBagLayout();
-		GridBagConstraints gbc = new GridBagConstraints();
+      GridBagLayout gbl = new GridBagLayout();
+      GridBagConstraints gbc = new GridBagConstraints();
 
-		JPanel jp = new JPanel();
-		jp.setLayout(gbl);
+      JPanel jp = new JPanel();
+      jp.setLayout(gbl);
 
-		gbc.gridx = 0;
-		gbc.gridy = 0;
-		gbc.weightx = .9;
-		gbc.weighty = .9;
-		gbc.fill = GridBagConstraints.BOTH;
-		jp.add(scrollPane, gbc);
+      gbc.gridx = 0;
+      gbc.gridy = 0;
+      gbc.weightx = .9;
+      gbc.weighty = .9;
+      gbc.fill = GridBagConstraints.BOTH;
+      jp.add(scrollPane, gbc);
 
-		gbc.gridx = 0;
-		gbc.gridy = 1;
-		gbc.weightx = .0;
-		gbc.weighty = .0;
-		gbc.fill = GridBagConstraints.NONE;
-		jp.add(jb, gbc);
+      gbc.gridx = 0;
+      gbc.gridy = 1;
+      gbc.weightx = .0;
+      gbc.weighty = .0;
+      gbc.fill = GridBagConstraints.NONE;
+      jp.add(jb, gbc);
 
-		jf = new JFrame();
-		jf.setContentPane(jp);
-		jf.setTitle("TeacherReportTool Help");
-		jf.setSize(750, 650);
-		jf.setVisible(true);
+      jf = new JFrame();
+      jf.setContentPane(jp);
+      jf.setTitle("TeacherReportTool Help");
+      jf.setSize(750, 650);
+      jf.setVisible(true);
 
-	}
+   }
 
-	public static void showAbout() {
+   public static void showAbout() {
       String buildTime = Utilities.getTime();
-		JOptionPane.showMessageDialog(null,
-				"Teacher Report Tool.\n" + "Copyright (c) 2015 JP Fasano.\n"
-	                	+ "Build Time Stamp: "+buildTime + "\n"
-						+ "Java source code is available on GitHub.com",
-				"About", // Dialog title
-				JOptionPane.PLAIN_MESSAGE);
-	}
+      JOptionPane.showMessageDialog(null,
+            "Teacher Report Tool.\n" + "Copyright (c) 2015 JP Fasano.\n" + "Build Time Stamp: " + buildTime + "\n"
+                  + "Java source code is available on GitHub.com",
+            "About", // Dialog title
+            JOptionPane.PLAIN_MESSAGE);
+   }
 }

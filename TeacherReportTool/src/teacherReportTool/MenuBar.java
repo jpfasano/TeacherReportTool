@@ -21,7 +21,6 @@ package teacherReportTool;
  * A menu bar for the TeacherReportTool trl
  */
 
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -35,200 +34,206 @@ import javax.swing.KeyStroke;
 import openSaveControl.OpenSaveControl;
 
 public class MenuBar extends JMenuBar implements ActionListener {
-	private TeacherReportTool trt;
-	private JCheckBoxMenuItem insertAtCursor;
-	private JMenuItem openNames, openSentenceTemplates, openDir, exit, showHelp, about;
-	private JMenuItem save, saveAs;
-	private boolean saveFileDefined = false;
+   private TeacherReportTool trt;
+   private JCheckBoxMenuItem insertAtCursor;
+   private JMenuItem openNames, openSentenceTemplates, openDir, exit, showHelp, about;
+   private JMenuItem save, saveAs;
+   private boolean saveFileDefined = false;
 
-	private OpenSaveControl openSaveControl;
-	private TrtOpenSaveControlClient trtOpenSaveControlClient;
+   private OpenSaveControl openSaveControl;
+   private TrtOpenSaveControlClient trtOpenSaveControlClient;
 
-	public MenuBar(TeacherReportTool trt) {
-		this.trt = trt;
+   public MenuBar(TeacherReportTool trt) {
+      this.trt = trt;
 
-		// "File" menu:
+      // "File" menu:
 
-		JMenu fileMenu = new JMenu("File");
-		fileMenu.setMnemonic(KeyEvent.VK_F);
+      JMenu fileMenu = new JMenu("File");
+      fileMenu.setMnemonic(KeyEvent.VK_F);
 
-		// Second level menu under "Preferences":
-		JMenu preferences = new JMenu("Preferences");
-		preferences.setMnemonic(KeyEvent.VK_P);
-		insertAtCursor = new JCheckBoxMenuItem("Insert at cursor", false);
-		insertAtCursor.setMnemonic(KeyEvent.VK_I);
-		preferences.add(insertAtCursor);
-		
-		// Open Student Names
+      // Second level menu under "Preferences":
+      JMenu preferences = new JMenu("Preferences");
+      preferences.setMnemonic(KeyEvent.VK_P);
+      insertAtCursor = new JCheckBoxMenuItem("Insert at cursor", false);
+      insertAtCursor.setMnemonic(KeyEvent.VK_I);
+      preferences.add(insertAtCursor);
 
-		openNames = new JMenuItem("Open Student Names ...");
-		openNames.addActionListener(this);
-		openNames.setMnemonic(KeyEvent.VK_N);
+      // Open Student Names
 
-		//		Action openStudentNames = new AbstractAction("Open Student NamesXXX") {
-//			 
-//		    @Override
-//		    public void actionPerformed(ActionEvent e) {
-//		    	openSaveControl.doOpenNames();
-//		    }
-//		};
-//		 
-//		openStudentNames.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_N);
-//		openNames.setAction(openStudentNames);
-		
-		
-		// Open Student Templates
+      openNames = new JMenuItem("Open Student Names ...");
+      openNames.addActionListener(this);
+      openNames.setMnemonic(KeyEvent.VK_N);
 
-		openSentenceTemplates = new JMenuItem("Open Sentence Templates ...");
-		openSentenceTemplates.setMnemonic(KeyEvent.VK_T);
-		openSentenceTemplates.addActionListener(this);
-		
-		// Open Directory
+      // Action openStudentNames = new AbstractAction("Open Student NamesXXX") {
+      //
+      // @Override
+      // public void actionPerformed(ActionEvent e) {
+      // openSaveControl.doOpenNames();
+      // }
+      // };
+      //
+      // openStudentNames.putValue(Action.MNEMONIC_KEY, KeyEvent.VK_N);
+      // openNames.setAction(openStudentNames);
 
-		openDir = new JMenuItem("Open Both Files ...");
-		openDir.setMnemonic(KeyEvent.VK_B);
-		openDir.addActionListener(this);
+      // Open Student Templates
 
-		// Save
-		
-		save = new JMenuItem("Save");
-		save.setMnemonic(KeyEvent.VK_S);
-		save.addActionListener(this);
-		
-		KeyStroke keyStrokeToOpen = KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK);
-		save.setAccelerator(keyStrokeToOpen);
-		
-		// Save As
+      openSentenceTemplates = new JMenuItem("Open Sentence Templates ...");
+      openSentenceTemplates.setMnemonic(KeyEvent.VK_T);
+      openSentenceTemplates.addActionListener(this);
 
-		saveAs = new JMenuItem("Save As ...");
-		save.setMnemonic(KeyEvent.VK_A);
-		saveAs.addActionListener(this);
-		
-		// Exit
+      // Open Directory
 
-		exit = new JMenuItem("Exit");
-		exit.setMnemonic(KeyEvent.VK_X);
-		exit.addActionListener(this);
+      openDir = new JMenuItem("Open Both Files ...");
+      openDir.setMnemonic(KeyEvent.VK_B);
+      openDir.addActionListener(this);
 
-		fileMenu.add(preferences);
-		fileMenu.addSeparator();
-		fileMenu.add(openNames);
-		fileMenu.add(openSentenceTemplates);
-		fileMenu.add(openDir);
-		fileMenu.addSeparator();
-		fileMenu.add(save);
-		fileMenu.add(saveAs);
-		fileMenu.addSeparator();
-		fileMenu.add(exit);
+      // Save
 
-		add(fileMenu);
+      save = new JMenuItem("Save");
+      save.setMnemonic(KeyEvent.VK_S);
+      save.addActionListener(this);
 
-		// "Help" menu:
+      KeyStroke keyStrokeToOpen = KeyStroke.getKeyStroke(KeyEvent.VK_S, KeyEvent.CTRL_DOWN_MASK);
+      save.setAccelerator(keyStrokeToOpen);
 
-		JMenu helpMenu = new JMenu("Help");
-		helpMenu.setMnemonic(KeyEvent.VK_H);
+      // Save As
 
-		showHelp = new JMenuItem("Help ...");
-		showHelp.setMnemonic(KeyEvent.VK_H);
-		showHelp.addActionListener(this);
+      saveAs = new JMenuItem("Save As ...");
+      save.setMnemonic(KeyEvent.VK_A);
+      saveAs.addActionListener(this);
 
-		about = new JMenuItem("About...");
-		about.setMnemonic(KeyEvent.VK_A);
-		about.addActionListener(this);
+      // Exit
 
-		helpMenu.add(showHelp);
-		helpMenu.add(about);
+      exit = new JMenuItem("Exit");
+      exit.setMnemonic(KeyEvent.VK_X);
+      exit.addActionListener(this);
 
-		add(helpMenu);
+      fileMenu.add(preferences);
+      fileMenu.addSeparator();
+      fileMenu.add(openNames);
+      fileMenu.add(openSentenceTemplates);
+      fileMenu.add(openDir);
+      fileMenu.addSeparator();
+      fileMenu.add(save);
+      fileMenu.add(saveAs);
+      fileMenu.addSeparator();
+      fileMenu.add(exit);
 
-		// Must be instantiated after the menu items exist
-		trtOpenSaveControlClient = new TrtOpenSaveControlClient(trt);
-		openSaveControl = new OpenSaveControl(trt, trtOpenSaveControlClient);
+      add(fileMenu);
 
-		// Save and SaveAs are not available until after OpenDir or
-		// OpenSentenceTemplates are done.
-		// This could be changed so that save is only available when there are
-		// some changes to the editable text.
-		save.setEnabled(false);
-		saveAs.setEnabled(false);
+      // "Help" menu:
 
-		// Names file must be opened before SentenceTemplates file.
-		openSentenceTemplates.setEnabled(false);
-	}
+      JMenu helpMenu = new JMenu("Help");
+      helpMenu.setMnemonic(KeyEvent.VK_H);
 
-	public boolean insertAtCursorEnabled() {
-		return insertAtCursor.isSelected();
-	}
+      showHelp = new JMenuItem("Help ...");
+      showHelp.setMnemonic(KeyEvent.VK_H);
+      showHelp.addActionListener(this);
 
-	public void actionPerformed(ActionEvent e) {
-		JMenuItem src = (JMenuItem) e.getSource();
+      about = new JMenuItem("About...");
+      about.setMnemonic(KeyEvent.VK_A);
+      about.addActionListener(this);
 
-		if (src == openNames) {
-			openSaveControl.doOpenNames();
-		} else if (src == openSentenceTemplates) {
-			openSaveControl.doOpenSentenceTemplates();
-		} else if (src == openDir) {
-			openSaveControl.doOpen();
-		} else if (src == save) {
-			openSaveControl.doSave();
-		} else if (src == saveAs) {
-			openSaveControl.doSaveAs();
-		} else if (src == showHelp)
-			new HelpMenuBar().showHelp();
-		else if (src == about)
-			HelpMenuBar.showAbout();
-		else if (src == exit) {
-			trt.updateStudentReportFromEditableText();
-			if (!openSaveControl.unsavedWork()) {
-				System.exit(0);
-			}
-			// System.out.println(trl.getReports());
-		}
-	}
+      helpMenu.add(showHelp);
+      helpMenu.add(about);
 
-	// Enable/Disable File menu bar items
-	public void enableOpenNamesMenuItem(Boolean b) {
-		openNames.setEnabled(b);
-	}
+      add(helpMenu);
 
-	public void enableOpenSentenceTemplatesMenuItem(Boolean b) {
-		openSentenceTemplates.setEnabled(b);
-	}
+      // Must be instantiated after the menu items exist
+      trtOpenSaveControlClient = new TrtOpenSaveControlClient(trt);
+      openSaveControl = new OpenSaveControl(trt, trtOpenSaveControlClient);
 
-	public void enableSaveMenuItem(Boolean b) {
-		save.setEnabled(b);
-	}
+      // Save and SaveAs are not available until after OpenDir or
+      // OpenSentenceTemplates are done.
+      // This could be changed so that save is only available when there are
+      // some changes to the editable text.
+      save.setEnabled(false);
+      saveAs.setEnabled(false);
 
-	public void enableSaveAsMenuItem(Boolean b) {
-		saveAs.setEnabled(b);
-	}
+      // Names file must be opened before SentenceTemplates file.
+      openSentenceTemplates.setEnabled(false);
+   }
 
-	public void enableSaveMenuItems(Boolean b) {
-		if (!EditableTextPanel.unsavedChanges()) {
-			saveAs.setEnabled(false);
-			save.setEnabled(false);
-		} else {
-			if (b) {
-				saveAs.setEnabled(true);
-				if (saveFileDefined)
-					save.setEnabled(true);
-				else
-					save.setEnabled(false);
-			} else {
-				saveAs.setEnabled(false);
-				save.setEnabled(false);
-			}
-		}
-		
-		String newTitle = "TeacherReportTool";
-		if (EditableTextPanel.unsavedChanges()) {
-		   newTitle += "*";
-		}
-		trt.setTitle(newTitle);
-	}
+   public boolean insertAtCursorEnabled() {
+      return insertAtCursor.isSelected();
+   }
 
-	public void setSaveFileDefined(boolean saveFileDefined) {
-		this.saveFileDefined = saveFileDefined;
-	}
+   public void actionPerformed(ActionEvent e) {
+      JMenuItem src = (JMenuItem) e.getSource();
+
+      if (src == openNames) {
+         openSaveControl.doOpenNames();
+      }
+      else if (src == openSentenceTemplates) {
+         openSaveControl.doOpenSentenceTemplates();
+      }
+      else if (src == openDir) {
+         openSaveControl.doOpen();
+      }
+      else if (src == save) {
+         openSaveControl.doSave();
+      }
+      else if (src == saveAs) {
+         openSaveControl.doSaveAs();
+      }
+      else if (src == showHelp)
+         new HelpMenuBar().showHelp();
+      else if (src == about)
+         HelpMenuBar.showAbout();
+      else if (src == exit) {
+         trt.updateStudentReportFromEditableText();
+         if (!openSaveControl.unsavedWork()) {
+            System.exit(0);
+         }
+         // System.out.println(trl.getReports());
+      }
+   }
+
+   // Enable/Disable File menu bar items
+   public void enableOpenNamesMenuItem(Boolean b) {
+      openNames.setEnabled(b);
+   }
+
+   public void enableOpenSentenceTemplatesMenuItem(Boolean b) {
+      openSentenceTemplates.setEnabled(b);
+   }
+
+   public void enableSaveMenuItem(Boolean b) {
+      save.setEnabled(b);
+   }
+
+   public void enableSaveAsMenuItem(Boolean b) {
+      saveAs.setEnabled(b);
+   }
+
+   public void enableSaveMenuItems(Boolean b) {
+      if (!EditableTextPanel.unsavedChanges()) {
+         saveAs.setEnabled(false);
+         save.setEnabled(false);
+      }
+      else {
+         if (b) {
+            saveAs.setEnabled(true);
+            if (saveFileDefined)
+               save.setEnabled(true);
+            else
+               save.setEnabled(false);
+         }
+         else {
+            saveAs.setEnabled(false);
+            save.setEnabled(false);
+         }
+      }
+
+      String newTitle = "TeacherReportTool";
+      if (EditableTextPanel.unsavedChanges()) {
+         newTitle += "*";
+      }
+      trt.setTitle(newTitle);
+   }
+
+   public void setSaveFileDefined(boolean saveFileDefined) {
+      this.saveFileDefined = saveFileDefined;
+   }
 
 }
