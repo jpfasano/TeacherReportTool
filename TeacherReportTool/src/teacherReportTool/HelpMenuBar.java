@@ -60,10 +60,41 @@ public class HelpMenuBar {
          br.close();
 
          // Read image file of screen shot from resource directory
-         String screenShot1 = Utilities.getResourceURL("trtScreenShot.jpg").toString();
+         // String screenShot1 =
+         // Utilities.getResourceURL("trtScreenShot.jpg").toString();
+         // String screenShot2 =
+         // Utilities.getResourceURL("openFiles.jpg").toString();
+         // String screenShot3 =
+         // Utilities.getResourceURL("1stCategory.jpg").toString();
+         // String screenShot4 =
+         // Utilities.getResourceURL("apply.jpg").toString();
+         // String screenShot5 =
+         // Utilities.getResourceURL("editableText.jpg").toString();
+         // String screenShot6 =
+         // Utilities.getResourceURL("2ndCategory.jpg").toString();
+         // String screenShot7 =
+         // Utilities.getResourceURL("3rdCategory.jpg").toString();
+         // String screenShot8 =
+         // Utilities.getResourceURL("rightArrow.jpg").toString();
+         //
+         // // Put screen image into html text
+         // longMessage = longMessage.replace("_IMAGE1", screenShot1);
+         // longMessage = longMessage.replace("_IMAGE2", screenShot2);
+         // longMessage = longMessage.replace("_IMAGE3", screenShot3);
+         // longMessage = longMessage.replace("_IMAGE4", screenShot4);
+         // longMessage = longMessage.replace("_IMAGE5", screenShot5);
+         // longMessage = longMessage.replace("_IMAGE6", screenShot6);
+         // longMessage = longMessage.replace("_IMAGE7", screenShot7);
+         // longMessage = longMessage.replace("_IMAGE8", screenShot8);
 
-         // Put screen image into html text
-         longMessage = longMessage.replace("_IMAGE1", screenShot1);
+         String[] jpgs = {"trtScreenShot.jpg", "openFiles.jpg", "1stCategory.jpg", "apply.jpg", "editableText.jpg",
+               "2ndCategory.jpg", "3rdCategory.jpg", "rightArrow.jpg", "saveAs.jpg", "splitPane.jpg"};
+         for (int j = jpgs.length-1; j>=0; j--) {
+            String screenShot = Utilities.getResourceURL(jpgs[j]).toString();
+            System.out.println(jpgs[j]+"  _IMAGE" + (j + 1));
+            longMessage = longMessage.replace("_IMAGE" + (j + 1), screenShot);
+         }
+
       }
       catch (Exception e) {
          System.err.println(e.getMessage());
