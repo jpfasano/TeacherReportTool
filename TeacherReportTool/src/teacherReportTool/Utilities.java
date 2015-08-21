@@ -27,88 +27,92 @@ import java.util.SimpleTimeZone;
 
 public class Utilities {
 
-	public static String getTime() {
-		String retVal = "Build Time Not Found";
-	    try {
-	    	
-	    	File jarFile = new File	((new Utilities()).getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
-   			//System.out.println("jar: " + new Date(jarFile.lastModified()));
-	    	
-	    	SimpleDateFormat sdf = new SimpleDateFormat();
-	    	sdf.setTimeZone(new SimpleTimeZone(0, "GMT"));
-	    	sdf.applyPattern("dd MMM yyyy HH:mm:ss z");
-	    	
-	    	retVal = sdf.format(new Date(jarFile.lastModified()));
-	    } catch (Exception e) {
-	        System.out.println(e.getMessage());
-	        e.printStackTrace();
-	    }
-	    return retVal;
-	}
+   public static String getTime() {
+      String retVal = "Build Time Not Found";
+      try {
 
-	// This is a Kludge. The objective is to get the resource loaded when
-	// running from
-	// The Eclipse IDE or an executable jar file.
-	public static InputStream getResourceInputStream(String resourceName) {
-		InputStream retVal = null;
-		try {
-	
-			ClassLoader classLoader = (new HelpMenuBar()).getClass().getClassLoader();
-	
-			// retVal = classLoader.getResource("/teacherReportTool/resources/"
-			// + resourceName);
-			retVal = classLoader.getResourceAsStream("/teacherReportTool/resources/" + resourceName);
-			if (retVal == null) {
-				retVal = classLoader.getResourceAsStream("teacherReportTool/resources/" + resourceName);
-			}
-			if (retVal == null) {
-				retVal = classLoader.getResourceAsStream("resources/" + resourceName);
-			}
-			if (retVal == null) {
-				retVal = classLoader.getResourceAsStream("/resources/" + resourceName);
-			}
-			if (retVal == null) {
-				retVal = classLoader.getResourceAsStream("/" + resourceName);
-			}
-			if (retVal == null) {
-				retVal = classLoader.getResourceAsStream(resourceName);
-			}
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-			e.printStackTrace();
-		}
-	
-		return retVal;
-	}
+         File jarFile = new File(
+               (new Utilities()).getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
+         // System.out.println("jar: " + new Date(jarFile.lastModified()));
 
-	public static URL getResourceURL(String resourceName) {
-		URL retVal = null;
-		try {
-	
-			ClassLoader classLoader = (new HelpMenuBar()).getClass().getClassLoader();
-	
-			retVal = classLoader.getResource("/teacherReportTool/resources/" + resourceName);
-			if (retVal == null) {
-				retVal = classLoader.getResource("teacherReportTool/resources/" + resourceName);
-			}
-			if (retVal == null) {
-				retVal = classLoader.getResource("resources/" + resourceName);
-			}
-			if (retVal == null) {
-				retVal = classLoader.getResource("/resources/" + resourceName);
-			}
-			if (retVal == null) {
-				retVal = classLoader.getResource("/" + resourceName);
-			}
-			if (retVal == null) {
-				retVal = classLoader.getResource(resourceName);
-			}
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-			e.printStackTrace();
-		}
-	
-		return retVal;
-	}
+         SimpleDateFormat sdf = new SimpleDateFormat();
+         sdf.setTimeZone(new SimpleTimeZone(0, "GMT"));
+         sdf.applyPattern("dd MMM yyyy HH:mm:ss z");
+
+         retVal = sdf.format(new Date(jarFile.lastModified()));
+      }
+      catch (Exception e) {
+         System.out.println(e.getMessage());
+         e.printStackTrace();
+      }
+      return retVal;
+   }
+
+   // This is a Kludge. The objective is to get the resource loaded when
+   // running from
+   // The Eclipse IDE or an executable jar file.
+   public static InputStream getResourceInputStream(String resourceName) {
+      InputStream retVal = null;
+      try {
+
+         ClassLoader classLoader = (new HelpMenuBar()).getClass().getClassLoader();
+
+         // retVal = classLoader.getResource("/teacherReportTool/resources/"
+         // + resourceName);
+         retVal = classLoader.getResourceAsStream("/teacherReportTool/resources/" + resourceName);
+         if (retVal == null) {
+            retVal = classLoader.getResourceAsStream("teacherReportTool/resources/" + resourceName);
+         }
+         if (retVal == null) {
+            retVal = classLoader.getResourceAsStream("resources/" + resourceName);
+         }
+         if (retVal == null) {
+            retVal = classLoader.getResourceAsStream("/resources/" + resourceName);
+         }
+         if (retVal == null) {
+            retVal = classLoader.getResourceAsStream("/" + resourceName);
+         }
+         if (retVal == null) {
+            retVal = classLoader.getResourceAsStream(resourceName);
+         }
+      }
+      catch (Exception e) {
+         System.err.println(e.getMessage());
+         e.printStackTrace();
+      }
+
+      return retVal;
+   }
+
+   public static URL getResourceURL(String resourceName) {
+      URL retVal = null;
+      try {
+
+         ClassLoader classLoader = (new HelpMenuBar()).getClass().getClassLoader();
+
+         retVal = classLoader.getResource("/teacherReportTool/resources/" + resourceName);
+         if (retVal == null) {
+            retVal = classLoader.getResource("teacherReportTool/resources/" + resourceName);
+         }
+         if (retVal == null) {
+            retVal = classLoader.getResource("resources/" + resourceName);
+         }
+         if (retVal == null) {
+            retVal = classLoader.getResource("/resources/" + resourceName);
+         }
+         if (retVal == null) {
+            retVal = classLoader.getResource("/" + resourceName);
+         }
+         if (retVal == null) {
+            retVal = classLoader.getResource(resourceName);
+         }
+      }
+      catch (Exception e) {
+         System.err.println(e.getMessage());
+         e.printStackTrace();
+      }
+
+      return retVal;
+   }
 
 }

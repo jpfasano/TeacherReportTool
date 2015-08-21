@@ -30,114 +30,111 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-public class EditableTextPanel extends JPanel implements DocumentListener
-{
-  
-  private TeacherReportTool trt;
-  private JTextArea ta;
-  private static boolean unsavedChanges = false;
-  
+public class EditableTextPanel extends JPanel implements DocumentListener {
 
-  public EditableTextPanel(TeacherReportTool trt)
-  {
-    super();
-    this.trt = trt;
-    setMinimumSize(new Dimension(200,100)); setPreferredSize(new Dimension(600,250));
-    ta = new JTextArea();
-    ta.getDocument().addDocumentListener(this);
-    ta.setFont(new Font("TRUETYPE", Font.PLAIN, 16));
-    ta.setLineWrap(true);
-    ta.setWrapStyleWord(true);
-    ta.setEditable(true);
-    // this.setText("It's also worth pointing out that charters, while growing in Texas, serve a fraction of the students traditional public schools educate each year. There were more than 8,000 public schools in the state, and only 580 charters, as of the 2011-2012 school year (the time frame the Stanford study examined).");
-    //add(ta); 
-    
-    JScrollPane scrollPane = new JScrollPane(ta);
-    scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-    
+   private TeacherReportTool trt;
+   private JTextArea ta;
+   private static boolean unsavedChanges = false;
 
-    //studentPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-    this.setLayout(new GridBagLayout());
+   public EditableTextPanel(TeacherReportTool trt) {
+      super();
+      this.trt = trt;
+      setMinimumSize(new Dimension(200, 100));
+      setPreferredSize(new Dimension(600, 250));
+      ta = new JTextArea();
+      ta.getDocument().addDocumentListener(this);
+      ta.setFont(new Font("TRUETYPE", Font.PLAIN, 16));
+      ta.setLineWrap(true);
+      ta.setWrapStyleWord(true);
+      ta.setEditable(true);
+      // this.setText("It's also worth pointing out that charters, while growing
+      // in Texas, serve a fraction of the students traditional public schools
+      // educate each year. There were more than 8,000 public schools in the
+      // state, and only 580 charters, as of the 2011-2012 school year (the time
+      // frame the Stanford study examined).");
+      // add(ta);
 
-    GridBagConstraints gbc = new GridBagConstraints();
-    
-    gbc.gridx = 0;
-    gbc.gridy = 0;
-    gbc.weightx = 1;
-    gbc.weighty = 1;
-    gbc.fill = GridBagConstraints.BOTH;
-    this.add(scrollPane,gbc);
+      JScrollPane scrollPane = new JScrollPane(ta);
+      scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-   
-  
-    
-  }
-  
-  // Document Listener Methods
-  public void insertUpdate(DocumentEvent e)
-  {
-	  setUnsavedChanges(true);
-	  trt.getTraMenuBar().enableSaveMenuItems(true);
-  }
-  public void removeUpdate(DocumentEvent e)
-  {
-	  setUnsavedChanges(true);
-	  trt.getTraMenuBar().enableSaveMenuItems(true);
-  }
-  public void changedUpdate(DocumentEvent e)
-  {
-	  setUnsavedChanges(true);
-	  trt.getTraMenuBar().enableSaveMenuItems(true);
-  }
-  
-  public void insert(String t) {
-    int curPos = ta.getCaretPosition();
-    int curTextLen = this.getText().length();
-    String newText = t.trim();
-    if (newText.length()==0)return;
-    
-    setUnsavedChanges(true);
-    trt.getTraMenuBar().enableSaveMenuItems(true);
-    
-    if (trt.getTraMenuBar().insertAtCursorEnabled() ) {
-        if (curPos==curTextLen && curPos!=0) newText=" "+newText;
-        ta.insert(newText,curPos);
-    }
-    else {
-      if (curTextLen!=0) newText=" "+newText;
-      ta.append(newText);
-    }
-  }
-  
-  public void clearEditableText()
-  {
-    ta.setText("");
-    setUnsavedChanges(false);
-    trt.getTraMenuBar().enableSaveMenuItems(false);
-  }
-  
-  public String getText() {
-    return ta.getText();
-  }
+      // studentPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+      this.setLayout(new GridBagLayout());
 
-  public void setText(String s) {
-	  if (!s.equals(getText())){
-          ta.setText(s);
-	  }
-  }
-  
-  public static void textSaved(){
-	  setUnsavedChanges(false);
-  }
+      GridBagConstraints gbc = new GridBagConstraints();
 
-  public static boolean unsavedChanges() {
-	return unsavedChanges;
-  }
+      gbc.gridx = 0;
+      gbc.gridy = 0;
+      gbc.weightx = 1;
+      gbc.weighty = 1;
+      gbc.fill = GridBagConstraints.BOTH;
+      this.add(scrollPane, gbc);
 
-private static void setUnsavedChanges(boolean unsavedChanges) {
-	EditableTextPanel.unsavedChanges = unsavedChanges;
-}
-  
-  
+   }
+
+   // Document Listener Methods
+   public void insertUpdate(DocumentEvent e) {
+      setUnsavedChanges(true);
+      trt.getTraMenuBar().enableSaveMenuItems(true);
+   }
+
+   public void removeUpdate(DocumentEvent e) {
+      setUnsavedChanges(true);
+      trt.getTraMenuBar().enableSaveMenuItems(true);
+   }
+
+   public void changedUpdate(DocumentEvent e) {
+      setUnsavedChanges(true);
+      trt.getTraMenuBar().enableSaveMenuItems(true);
+   }
+
+   public void insert(String t) {
+      int curPos = ta.getCaretPosition();
+      int curTextLen = this.getText().length();
+      String newText = t.trim();
+      if (newText.length() == 0)
+         return;
+
+      setUnsavedChanges(true);
+      trt.getTraMenuBar().enableSaveMenuItems(true);
+
+      if (trt.getTraMenuBar().insertAtCursorEnabled()) {
+         if (curPos == curTextLen && curPos != 0)
+            newText = " " + newText;
+         ta.insert(newText, curPos);
+      }
+      else {
+         if (curTextLen != 0)
+            newText = " " + newText;
+         ta.append(newText);
+      }
+   }
+
+   public void clearEditableText() {
+      ta.setText("");
+      setUnsavedChanges(false);
+      trt.getTraMenuBar().enableSaveMenuItems(false);
+   }
+
+   public String getText() {
+      return ta.getText();
+   }
+
+   public void setText(String s) {
+      if (!s.equals(getText())) {
+         ta.setText(s);
+      }
+   }
+
+   public static void textSaved() {
+      setUnsavedChanges(false);
+   }
+
+   public static boolean unsavedChanges() {
+      return unsavedChanges;
+   }
+
+   private static void setUnsavedChanges(boolean unsavedChanges) {
+      EditableTextPanel.unsavedChanges = unsavedChanges;
+   }
 
 }

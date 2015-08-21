@@ -17,6 +17,7 @@
  * along with TeacherReportTool.  If not, see <http://www.gnu.org/licenses/>.
  *******************************************************************************/
 package teacherReportTool;
+
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -28,91 +29,77 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class TemplatePanel extends JPanel {
-	
-	private ArrayList<TemplateCategoryPanel> templatePanels = new ArrayList<TemplateCategoryPanel>();
-	  //private TeacherReportTool trt;
-	  private JTabbedPane tabbedPane;
 
-	/**
-	 * Create the panel.
-	 */
-	public TemplatePanel(TeacherReportTool trt) {
-		
+   private ArrayList<TemplateCategoryPanel> templatePanels = new ArrayList<TemplateCategoryPanel>();
+   // private TeacherReportTool trt;
+   private JTabbedPane tabbedPane;
 
-	    super();
-	    //this.trt = trt;
+   /**
+    * Create the panel.
+    */
+   public TemplatePanel(TeacherReportTool trt) {
 
-	    this.setPreferredSize(new Dimension(600,250));
-	    this.setMinimumSize(new Dimension(200,100));
-	    
-	    ArrayList<TemplateCategory> templates = trt.getTemplateCategories();
-	    
+      super();
+      // this.trt = trt;
 
-	    
-		GridBagLayout gridBagLayout = new GridBagLayout();
-		setLayout(gridBagLayout);
-	    
-	    
-		
-		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
-		gbc_tabbedPane.anchor = GridBagConstraints.NORTHWEST;
-		gbc_tabbedPane.fill = GridBagConstraints.BOTH;
-		gbc_tabbedPane.gridx = 0;
-		gbc_tabbedPane.gridy = 0;
-		gbc_tabbedPane.weightx = .5;
-		gbc_tabbedPane.weighty = 1.;
-		add(tabbedPane, gbc_tabbedPane);
+      this.setPreferredSize(new Dimension(600, 250));
+      this.setMinimumSize(new Dimension(200, 100));
 
-		
-		for (TemplateCategory tc: templates)
-	    {
-	      // Create panel to contain template check boxes
-			TemplateCategoryPanel tpl = new TemplateCategoryPanel(trt,tc);
-	      tabbedPane.addTab(tc.getName(), null, tpl, null);
-	      templatePanels.add(tpl);
-	    }
-		
-		 // Call apply() when tab is changed;
-	    ChangeListener changeListner = new ChangeListener() {
-	      public void stateChanged(ChangeEvent changeEvent) {
-	        apply();
-	      }
-	    };
-	    tabbedPane.addChangeListener(changeListner);
-	    
-	   
+      ArrayList<TemplateCategory> templates = trt.getTemplateCategories();
 
-	}
-	
-	public void uncheckBoxes()
-	  {
-	    for (TemplateCategoryPanel tp : templatePanels)
-	      for (TemplateSentencePanel tcb : tp.getTemplateCheckBoxesInPanel())
-	        tcb.setSelected(false);
-	  }
-	  
-	  public void setFocusToFirstTab()
-	  {
-	    if (tabbedPane != null) {
-	      int cnt = tabbedPane.getTabCount();    
-	      if (cnt > 0)
-	    	  tabbedPane.setSelectedIndex(0);
-	    }
-	  }
-	  
-	  
-	  public String apply()
-	  {
-	    // Get text associated with checked boxes
-	    String retVal="";
-	    for (TemplateCategoryPanel tp : templatePanels)
-	    {
-	      String paneText=tp.apply();
-	       retVal+=paneText;
-	    }
-	    uncheckBoxes();
-	    return retVal;
-	  }
+      GridBagLayout gridBagLayout = new GridBagLayout();
+      setLayout(gridBagLayout);
+
+      tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+      GridBagConstraints gbc_tabbedPane = new GridBagConstraints();
+      gbc_tabbedPane.anchor = GridBagConstraints.NORTHWEST;
+      gbc_tabbedPane.fill = GridBagConstraints.BOTH;
+      gbc_tabbedPane.gridx = 0;
+      gbc_tabbedPane.gridy = 0;
+      gbc_tabbedPane.weightx = .5;
+      gbc_tabbedPane.weighty = 1.;
+      add(tabbedPane, gbc_tabbedPane);
+
+      for (TemplateCategory tc : templates) {
+         // Create panel to contain template check boxes
+         TemplateCategoryPanel tpl = new TemplateCategoryPanel(trt, tc);
+         tabbedPane.addTab(tc.getName(), null, tpl, null);
+         templatePanels.add(tpl);
+      }
+
+      // Call apply() when tab is changed;
+      ChangeListener changeListner = new ChangeListener() {
+         public void stateChanged(ChangeEvent changeEvent) {
+            apply();
+         }
+      };
+      tabbedPane.addChangeListener(changeListner);
+
+   }
+
+   public void uncheckBoxes() {
+      for (TemplateCategoryPanel tp : templatePanels)
+         for (TemplateSentencePanel tcb : tp.getTemplateCheckBoxesInPanel())
+            tcb.setSelected(false);
+   }
+
+   public void setFocusToFirstTab() {
+      if (tabbedPane != null) {
+         int cnt = tabbedPane.getTabCount();
+         if (cnt > 0)
+            tabbedPane.setSelectedIndex(0);
+      }
+   }
+
+   public String apply() {
+      // Get text associated with checked boxes
+      String retVal = "";
+      for (TemplateCategoryPanel tp : templatePanels) {
+         String paneText = tp.apply();
+         retVal += paneText;
+      }
+      uncheckBoxes();
+      return retVal;
+   }
 
 }
