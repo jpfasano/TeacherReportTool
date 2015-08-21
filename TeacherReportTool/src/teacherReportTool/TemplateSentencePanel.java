@@ -42,7 +42,7 @@ public class TemplateSentencePanel extends JPanel {
 
       super();
       this.setMinimumSize(new Dimension(200, 18));
-      this.setPreferredSize(new Dimension(580, 18));
+      this.setPreferredSize(new Dimension(1030, 18));
 
       // find comment character if present
       int c = template.indexOf("#");
@@ -51,7 +51,7 @@ public class TemplateSentencePanel extends JPanel {
          templateWoComment = template.trim();
       }
       else {
-         comment = template.substring(0, c);
+         comment = template.substring(0, c).trim();
          templateWoComment = template.substring(c + 1).trim();
       }
 
@@ -62,7 +62,7 @@ public class TemplateSentencePanel extends JPanel {
       checkBox = new JCheckBox(templateWoComment);
 
       checkBox.setMinimumSize(new Dimension(180, 18));
-      checkBox.setPreferredSize(new Dimension(550, 18));
+      checkBox.setPreferredSize(new Dimension(1000, 18));
 
       GridBagConstraints gbc_chckbxNewCheckBox = new GridBagConstraints();
       gbc_chckbxNewCheckBox.fill = GridBagConstraints.BOTH;
@@ -88,7 +88,7 @@ public class TemplateSentencePanel extends JPanel {
 
       gbc_label.weightx = .2;
       gbc_label.weighty = 0.0001;
-      commentLabel.setMinimumSize(new Dimension(2, 18));
+      commentLabel.setMinimumSize(new Dimension(20, 18));
       commentLabel.setPreferredSize(new Dimension(30, 18));
 
       if (!comment.isEmpty())

@@ -55,8 +55,7 @@ public class TemplateCategoryPanel extends JPanel {
       gbc.fill = GridBagConstraints.BOTH;
       gbc.anchor = GridBagConstraints.NORTHWEST;
 
-      // Loop once for each template in category tc
-      // for (String t : ts){
+      // Loop once for each sentence template in category tc
       for (int i = 0; i < ts.size(); i++) {
          String t = ts.get(i);
          TemplateSentencePanel tcb = new TemplateSentencePanel(t);
@@ -66,8 +65,7 @@ public class TemplateCategoryPanel extends JPanel {
 
          gbc.gridy++;
          gbc.anchor = GridBagConstraints.WEST;
-
-         // tcbp.addItemListener(this);
+         
       }
 
       // Add additional empty space holders so all tabbed panels are similarly
@@ -75,6 +73,8 @@ public class TemplateCategoryPanel extends JPanel {
       for (int i = ts.size(); i < trt.getTemplateCategories().maxTemplateCategorySize(); i++) {
 
          JLabel l = new JLabel(" ");
+         //TemplateSentencePanel l = new TemplateSentencePanel(" # ");
+         //l.setEnabled(false);
 
          checkBoxPanel.add(l, gbc);
 
