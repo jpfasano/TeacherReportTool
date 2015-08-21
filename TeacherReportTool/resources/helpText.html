@@ -1,108 +1,136 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Insert title here</title>
-</head>
-<body>
 <h1>Teacher Report Tool</h1>
-<p>
-This tool (TRT) is to assist teachers when writing individualized comments for each student by using 
-sentence templates that when selected are filled in with the student name and correct gender pronouns. 
-The tool iterates through the students and allows the teacher to click on the appropriate sentences for each student.
-</p>
-<figure>
-<img src="_IMAGE1" alt="Teacher Report Tool Screen Image" align="middle">
-<br>
-<figcaption>Fig. 1: Image of Teacher Report Tool</figcaption>
-</figure>
-<p>
-The input files are: 
+
+<p>This tool (TRT) is to assist teachers when writing individualized comments for each student by using sentence templates that when selected are filled in with the student name and correct gender pronouns. The tool iterates through the students and allows the teacher to click on the appropriate sentences for each student.</p>
+
+<p><img alt="Teacher Report Tool Screen Image" src="_IMAGE1" /></p>
+
+<p>Fig. 1: Image of Teacher Report Tool</p>
+
+<p>There are two required&nbsp;input files:</p>
 
 <ul>
-<li>names.trn:&nbsp;&nbsp Contains student names with their gender.</li>
-<li>sentenceTemplates.trs:&nbsp;&nbsp Contains sentence templates to be used in the student report</li>
+    <li>names.trn:&nbsp;&nbsp; Contains student names with their gender.</li>
+    <li>sentenceTemplates.trs:&nbsp;&nbsp; Contains sentence templates to be used in the student report</li>
 </ul>
 
-From the menu bar select 
+<p>To get started from the menu bar select:</p>
+
 <ul>
-<li><em>File</em> &rarr; <em>Open student names&hellip;</em>&nbsp;&nbsp; to specify a *.trn file, and then </li>
-<li><em>File</em> &rarr; <em>Open sentence templates&hellip;</em>&nbsp;&nbsp; to specify a *.trs file.</li>
+    <li><em>File</em> &rarr; <em>Open student names&hellip;</em>&nbsp;&nbsp; to specify a *.trn file, and then</li>
+    <li><em>File</em> &rarr; <em>Open sentence templates&hellip;</em>&nbsp;&nbsp; to specify a *.trs file.</li>
 </ul>
-</p>
+
+<p>&nbsp;</p>
+
 <h2>Input File Formats</h2>
+
 <h3>names.trn</h3>
-<p>
-This file contains the name and gender of each student, one student per line.&nbsp;&nbsp
-The first character of each line is M or F to indicate male or female.&nbsp;&nbsp
-The students name follows this initial character.&nbsp;&nbsp
-Here is an example:<br>
-<code>
-&nbsp;&nbsp;  M Donald Duck<br>
-&nbsp;&nbsp;  F Minnie Mouse<br>
-&nbsp;&nbsp;  M Bugs Bunnie<br>
-&nbsp;&nbsp;  F Flipper<br>
-</code>
-</p>
+
+<p>This file contains the name and gender of each student, one student per line.&nbsp;&nbsp; The first character of each line is M or F to indicate male or female.&nbsp;&nbsp; The student&#39;s name follows this initial character.&nbsp;&nbsp; Here is an example:<br />
+<code>&nbsp;&nbsp; M Donald Duck<br />
+&nbsp;&nbsp; F Minnie Mouse<br />
+&nbsp;&nbsp; M Bugs Bunnie<br />
+&nbsp;&nbsp; F Flipper</code></p>
+
 <h3>sentenceTemplates.trs</h3>
-<p>
-This file contains the sentence templates.  All occurrences of <em>_NAME</em> in a template are replaced with the student's name.&nbsp;&nbsp; 
-Similarly, any occurrence of <em>_HE</em>, <em>_HIM</em>, and <em>_HIS</em> are replaced with the gender appropriate pronoun.&nbsp;&nbsp;
-Additionally, _SON is replaced with son or daughter as appropriate. 
-</p>
-<p>
-The sentence templates are in categories.  Example categories might be:
+
+<p>This file contains the sentence templates. All occurrences of <em>_NAME</em> in a template are replaced with the student&#39;s name.&nbsp;&nbsp; Similarly, any occurrence of <em>_HE</em>, <em>_HIM</em>, and <em>_HIS</em> are replaced with the gender appropriate pronoun.&nbsp;&nbsp; Additionally, <em>_SON</em> is replaced with son or daughter as appropriate.</p>
+
+<p>The sentence templates are in categories. Example categories might be:</p>
+
 <ul>
-<li>Current Performance</li>
-<li>Class Work</li>
-<li>Homework</li>
-<li>Conclusion</li>
+    <li>Current Performance</li>
+    <li>Class Work</li>
+    <li>Homework</li>
+    <li>Conclusion</li>
 </ul>
-A new category is indicated by a line that begins with &quot;.  
-Here is an example:<br>
-<code>
-&nbsp;&nbsp;  &quot;Current Performance<br>
-&nbsp;&nbsp;  _NAME is do extremely well.<br>
-&nbsp;&nbsp;  _NAME is not performing to _HIS potential.<br>
-&nbsp;&nbsp;<br>
-&nbsp;&nbsp;  &quot;Class Work<br>
-&nbsp;&nbsp;  _HIS classwork is always excellent.<br>
-&nbsp;&nbsp;  _NAME is not always focused so _HIS classwork suffers.<br>
-&nbsp;&nbsp;<br>
-&nbsp;&nbsp;  &quot;Homework<br>
-&nbsp;&nbsp;  It is obvious that _NAME takes great pride in _HIS homework.<br>
-&nbsp;&nbsp;  Too often _NAME has not completed _HIS homework.<br>
-&nbsp;&nbsp;<br>
-&nbsp;&nbsp;  &quot;Conclusion<br>
-&nbsp;&nbsp;  It is a pleasure having _NAME in class. <br>
-&nbsp;&nbsp;  _NAME should seek extra help to improve _HIS current grade.<br>
-</code>
-Please see the directory <em>trtSampleFiles</em> for other example files.
-</p>
-<h3>Open Both Input Files with One Operation</h3>
-<p>
-If both input files have the same name except for the extension, then they can simultaneously be opened using the <em>File</em> &rarr; <em>Open both files&hellip;</em>&nbsp;&nbsp;
-An example of how the files would be named to use this option is:
+
+<p>A new category is indicated by a line that begins with &quot;. Here is an example of a file sentence template file:<br />
+<code>&nbsp;&nbsp; &quot;Current Performance<br />
+&nbsp;&nbsp; _NAME is do extremely well.<br />
+&nbsp;&nbsp; _NAME is not performing to _HIS potential.<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp; &quot;Class Work<br />
+&nbsp;&nbsp; _HIS classwork is always excellent.<br />
+&nbsp;&nbsp; _NAME is not always focused so _HIS classwork suffers.<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp; &quot;Homework<br />
+&nbsp;&nbsp; It is obvious that _NAME takes great pride in _HIS homework.<br />
+&nbsp;&nbsp; Too often _NAME has not completed _HIS homework.<br />
+&nbsp;&nbsp;<br />
+&nbsp;&nbsp; &quot;Conclusion<br />
+&nbsp;&nbsp; It is a pleasure having _NAME in class.<br />
+&nbsp;&nbsp; _NAME should seek extra help to improve _HIS current grade.</code><br />
+&nbsp;</p>
+
+<h3>Opening Both Input Files with One Operation</h3>
+
+<p>It is possible to open both input file together, if&nbsp;both&nbsp;files have the same name except for the extension and they are in the same directory. &nbsp;To open both files together, from the menubar select <em>File</em> &rarr; <em>Open Both Files&hellip;.</em>&nbsp;&nbsp; An example of how the files would be named to use this option is:</p>
+
 <ul>
-<li>precalculus.trn</li>
-<li>precalculus.trs</li>
+    <li>precalculus.trn</li>
+    <li>precalculus.trs</li>
 </ul>
-</p>
+
 <h2>Creating Reports</h2>
-<p>
-There are left and right arrows to advance to the next student or return to a prior student.&nbsp;&nbsp;
-There is a tab for each category of comments.&nbsp;&nbsp;  On the tabbed pane select the desired comments to be included in the report.&nbsp;&nbsp;
-The student reports are editable on the window.
-</p>
+
+<p>There are left and right arrows to advance to the next student or return to a prior student.&nbsp;&nbsp; There is a tab for each category of comments.&nbsp;&nbsp; On the tabbed pane select the desired comments to be included in the report.&nbsp;&nbsp; The student reports are editable in the student report box.</p>
+
 <h2>Saving the Reports</h2>
-<p>
-From the menu bar select <em>File</em> &rarr; <em>Save as&hellip;</em> to specify the file to be written with all student reports.&nbsp;&nbsp;
-Alternatively, the report text can be copied from the editable text window and then pasted into another document.
-</p>
+
+<p>From the menu bar select <em>File</em> &rarr; <em>Save as&hellip;</em> to specify the file to be written with all student reports.&nbsp;&nbsp; Alternatively, the report text can be copied from the editable text window and then pasted into another document.</p>
+
+<h2>A Typical Usage&nbsp;Scenario</h2>
+
+<ol>
+    <li>Create a file containing student names and genders. &nbsp;Call this file something like precalculus.trn. &nbsp;Be sure the file extension is <code>.trn</code>.<br />
+    &nbsp;</li>
+    <li>Create a file containing categories and sentence templates. &nbsp;Use the same file name as the prior step, but use the extension <code>.trs</code>. The two input files should be stored in the same directory.&nbsp;<br />
+    &nbsp;</li>
+    <li>Run TeacherReportTool by:
+    <ul>
+        <li>double clicking on the file TeacherReportTool.jar&nbsp;<br />
+        or</li>
+        <li>in a command window run <code>java -jar TeacherReportTool.jar</code>. &nbsp;You may have to include the path to the java executable and TeacherReportTool.jar.<br />
+        &nbsp;</li>
+    </ul>
+    </li>
+    <li>From the menubar select <em>File</em> &rarr; <em>Open Both Files&hellip;</em>.&nbsp;&nbsp;<br />
+    <img alt="Open Files" src="_IMAGE2" /><br />
+    &nbsp;</li>
+    <li>Select the *<tt>.trn</tt> file created in the first step. &nbsp;Since the two input files have the same name with the different extensions *<code>.trn</code> and *<code>.trs</code>, and because they are in the same directory, both files will be opened simultaneously.&nbsp;<br />
+    &nbsp;</li>
+    <li>Notice the first student&#39;s name and gender are&nbsp;displayed below the menu bar along with the sentence templates for the first category. &nbsp;Click on the check box for any&nbsp;sentences you would like to include in this student&#39;s report.<br />
+    <img alt="Select Sentences from 1st Category" src="_IMAGE3" /><br />
+    &nbsp;</li>
+    <li>Click the Apply Button to have the selected sentences moved to the student report box.<br />
+    <img alt="Apply Button" src="_IMAGE4" /><br />
+    &nbsp;</li>
+    <li>If required, edit the text in the student report box.<br />
+    <img alt="Editable Text" src="_IMAGE5" /><br />
+    &nbsp;</li>
+    <li>Click on the second tab to advance to the 2nd group&nbsp;of sentence templates and then check the boxes of any sentences to be included in the report.<br />
+    <img alt="Select Sentences from the 2nd Category" src="_IMAGE6" /><br />
+    &nbsp;</li>
+    <li>Click on the third tab to advance to the 3rd group of sentence templates. &nbsp;Notice that it was not necessary to click on the apply button to have the selected sentence moved to the student report box.<br />
+    <img alt="Select 3rd Tab" src="_IMAGE7" /><br />
+    &nbsp;</li>
+    <li>When finished with the first students report, click on the right arrow to advance to the next student.<br />
+    <img alt="Right Arrow to Advance to Next Student" src="_IMAGE8" /><br />
+    &nbsp;</li>
+    <li>To save the student reports to a file, from the menubar select <em>File</em> &rarr; <em>Save as&hellip;</em>.&nbsp;&nbsp; It is recommended that you frequently save your reports. Since the TeacherReportTool is relatively new and may have bugs, it would be prudent to save after completing each individual student report.<br />
+    <img alt="Save Report" src="_IMAGE9" /></li>
+</ol>
+
+<h2>Other Features</h2>
+
+<ol>
+    <li>While writing student reports, it is typical to want to add new sentence templates for&nbsp;potential&nbsp;use&nbsp;with student reports that have not yet been completed. &nbsp;This can be accomplished by editing the *<code>.trs</code> (Sentence Templates file) and reloading this file&nbsp;using&nbsp; <em>File</em> &rarr; <em>Open Sentence Templates&hellip;</em> from the menubar.&nbsp;<br />
+    &nbsp;</li>
+    <li>The screen space allocated to&nbsp;the sentence templates and the student report box can be adjusted by dragging the horizontal line below the Apply button up or down.<br />
+    <img alt="Split Pane" src="_IMAGE10" /></li>
+</ol>
+
 <h2>Alternate Tools</h2>
-<p>
-This tool is similar to the <em>Teachers Report Assistant</em> available at 
-<a href="http://www.rayslearning.com/repview.htm">www.rayslearning.com/repview.htm</a>.&nbsp;&nbsp;
-</p>
-</body>
-</html>
+
+<p>This tool is similar to the <em>Teachers Report Assistant</em> available at <a href="http://www.rayslearning.com/repview.htm">www.rayslearning.com/repview.htm</a>.&nbsp;&nbsp;</p>

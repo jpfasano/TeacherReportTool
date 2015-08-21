@@ -59,11 +59,15 @@ public class HelpMenuBar {
          }
          br.close();
 
-         // Read image file of screen shot from resource directory
-         String screenShot1 = Utilities.getResourceURL("trtScreenShot.jpg").toString();
+         // Read each image file of a screen shot from resource directory
+         // and insert into html string.
+         String[] jpgs = {"trtScreenShot.jpg", "openFiles.jpg", "1stCategory.jpg", "apply.jpg", "editableText.jpg",
+               "2ndCategory.jpg", "3rdCategory.jpg", "rightArrow.jpg", "saveAs.jpg", "splitPane.jpg"};
+         for (int j = jpgs.length-1; j>=0; j--) {
+            String screenShot = Utilities.getResourceURL(jpgs[j]).toString();
+            longMessage = longMessage.replace("_IMAGE" + (j + 1), screenShot);
+         }
 
-         // Put screen image into html text
-         longMessage = longMessage.replace("_IMAGE1", screenShot1);
       }
       catch (Exception e) {
          System.err.println(e.getMessage());
