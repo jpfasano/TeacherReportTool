@@ -77,14 +77,17 @@ public class EditableTextPanel extends JPanel implements DocumentListener
   public void insertUpdate(DocumentEvent e)
   {
 	  setUnsavedChanges(true);
+	  trt.getTraMenuBar().enableSaveMenuItems(true);
   }
   public void removeUpdate(DocumentEvent e)
   {
 	  setUnsavedChanges(true);
+	  trt.getTraMenuBar().enableSaveMenuItems(true);
   }
   public void changedUpdate(DocumentEvent e)
   {
 	  setUnsavedChanges(true);
+	  trt.getTraMenuBar().enableSaveMenuItems(true);
   }
   
   public void insert(String t) {
