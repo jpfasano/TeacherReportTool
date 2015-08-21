@@ -244,7 +244,7 @@ public class TeacherReportTool extends JFrame {
 		// String pathSeparator = System.getProperty("file.separator");
 		try {
 
-			InputStream fstream = HelpMenuBar.getResourceInputStream("genderWordPairs.trt");
+			InputStream fstream = Utilities.getResourceInputStream("genderWordPairs.trt");
 
 			BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 

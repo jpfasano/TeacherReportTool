@@ -5,11 +5,11 @@
 # _NAME is replaced with the students name which are read from the file names.trt.
 # The file names.trt contains the student names and gender.
 #
-# Based on the students gender the following substitutions are made:
+# Based on the student's gender the following substitutions are made:
 #    _HIS becomes his or her.
 #    _HE becomes he or she.
 #    _HIM becomes him or her.
-# The specfic substitutions is specified in the file genderWordPairs.trt
+#    _SON becomes son or daughter.
 #
 # A line beginning with " starts a new category of comments.  
 # Examples might be:

@@ -29,7 +29,6 @@ import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URL;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -42,78 +41,13 @@ import javax.swing.ScrollPaneConstants;
 public class HelpMenuBar {
 	private JFrame jf;
 
-	// This is a Kludge. The objective is to get the resource loaded when
-	// running from
-	// The Eclipse IDE or an executable jar file.
-	public static InputStream getResourceInputStream(String resourceName) {
-		InputStream retVal = null;
-		try {
-
-			ClassLoader classLoader = (new HelpMenuBar()).getClass().getClassLoader();
-
-			// retVal = classLoader.getResource("/teacherReportTool/resources/"
-			// + resourceName);
-			retVal = classLoader.getResourceAsStream("/teacherReportTool/resources/" + resourceName);
-			if (retVal == null) {
-				retVal = classLoader.getResourceAsStream("teacherReportTool/resources/" + resourceName);
-			}
-			if (retVal == null) {
-				retVal = classLoader.getResourceAsStream("resources/" + resourceName);
-			}
-			if (retVal == null) {
-				retVal = classLoader.getResourceAsStream("/resources/" + resourceName);
-			}
-			if (retVal == null) {
-				retVal = classLoader.getResourceAsStream("/" + resourceName);
-			}
-			if (retVal == null) {
-				retVal = classLoader.getResourceAsStream(resourceName);
-			}
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-			e.printStackTrace();
-		}
-
-		return retVal;
-	}
-
-	public static URL getResourceURL(String resourceName) {
-		URL retVal = null;
-		try {
-
-			ClassLoader classLoader = (new HelpMenuBar()).getClass().getClassLoader();
-
-			retVal = classLoader.getResource("/teacherReportTool/resources/" + resourceName);
-			if (retVal == null) {
-				retVal = classLoader.getResource("teacherReportTool/resources/" + resourceName);
-			}
-			if (retVal == null) {
-				retVal = classLoader.getResource("resources/" + resourceName);
-			}
-			if (retVal == null) {
-				retVal = classLoader.getResource("/resources/" + resourceName);
-			}
-			if (retVal == null) {
-				retVal = classLoader.getResource("/" + resourceName);
-			}
-			if (retVal == null) {
-				retVal = classLoader.getResource(resourceName);
-			}
-		} catch (Exception e) {
-			System.err.println(e.getMessage());
-			e.printStackTrace();
-		}
-
-		return retVal;
-	}
-
 	public void showHelp() {
 		String longMessage = "";
 
 		try {
 
 			// Read help html formated help text from resource directory
-			InputStream fstream = HelpMenuBar.getResourceInputStream("helpText.html");
+			InputStream fstream = Utilities.getResourceInputStream("helpText.html");
 			//
 			BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
@@ -126,7 +60,7 @@ public class HelpMenuBar {
 			br.close();
 
 			// Read image file of screen shot from resource directory
-			String screenShot1 = HelpMenuBar.getResourceURL("trtScreenShot.jpg").toString();
+			String screenShot1 = Utilities.getResourceURL("trtScreenShot.jpg").toString();
 
 			// Put screen image into html text
 			longMessage = longMessage.replace("_IMAGE1", screenShot1);
@@ -185,8 +119,10 @@ public class HelpMenuBar {
 	}
 
 	public static void showAbout() {
+      String buildTime = Utilities.getTime();
 		JOptionPane.showMessageDialog(null,
 				"Teacher Report Tool.\n" + "Copyright (c) 2015 JP Fasano.\n"
+	                	+ "Build Time Stamp: "+buildTime + "\n"
 						+ "Java source code is available on GitHub.com",
 				"About", // Dialog title
 				JOptionPane.PLAIN_MESSAGE);
