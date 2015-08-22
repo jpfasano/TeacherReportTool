@@ -67,7 +67,6 @@ public class HelpMenuBar {
             String screenShot = Utilities.getResourceURL(jpgs[j]).toString();
             longMessage = longMessage.replace("_IMAGE" + (j + 1), screenShot);
          }
-
       }
       catch (Exception e) {
          System.err.println(e.getMessage());

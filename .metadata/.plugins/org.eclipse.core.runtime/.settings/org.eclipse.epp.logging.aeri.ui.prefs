@@ -1,4 +1,5 @@
-action=ASK
+action=SILENT
 configured=true
 eclipse.preferences.version=1
-problemsZipEtag="504420-51cb136660cc0"
+problemsZipEtag="4899e0-51dcb1e736980"
+rememberSendAction=NONE

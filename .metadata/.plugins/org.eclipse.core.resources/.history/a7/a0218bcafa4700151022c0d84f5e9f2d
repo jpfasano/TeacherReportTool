@@ -1,0 +1,67 @@
+# This is an example of sentence template file read by the TeacherReportTool.
+#
+# The sentence template file typically has the extension *.trs  (for teacher report sentences).
+# A file of student names is also needed.
+# The student names file typically has the extension *.trn (for teacher report names).
+#
+# This file has the following format:
+#
+# Comments
+#    Line that begins with # is a comment
+#    The text on a line up to the initial # is a comment
+#
+# A line beginning with " starts a new category of comments.  
+# Examples might be:
+#       "Introduction 
+#       "Homework
+#       "Quizzes
+#       "ClassParticipation
+#       "Conclusion
+#
+# Each non-blank line in a category is a possible sentence in the report. 
+#
+# _NAME is replaced with the students name.
+#
+# Based on the student's gender the following substitutions are made:
+#    _HIS becomes his or her.
+#    _HE becomes he or she.
+#    _HIM becomes him or her.
+#    _SON becomes son or daughter.
+#
+
+"Scores
+In the second marking period there were three precalculus tests.  _NAME's scores were XX, YY, and ZZ.
+In the second marking period there were three precalculus tests.  Because of absences your _SON took two of the three tests. _NAME's scores were XX and ZZ.
+
+"Trend
+Excelent#  These results are excellent.
+Up# These results are trending in the right direction. I am hopeful that _NAME will continue to have similar scores.
+Up# I am hopeful that _NAME will continue to have similar results.
+UP# The first test score was disappointing to _NAME and me.  It is not representative of _NAME's capabilities as evidenced by the two most recent test scores.
+Down#  These results are good but inconsistent, suggesting more careful review would be an advantage.
+Average#   While these results have been good, but I am hopeful that they will get better.
+Poor#  These results while generally good could have been better, suggesting more careful review would be an advantage.
+C# _HIS Test results have been of an acceptable standard but it is clear that a more diligent approach to studying is needed.
+CD# I was rather disappointed with some test scores and _HE really should spend significantly more time studying and preparing for this course.
+DF# Quiz results have been poor and do not reflect _HIS ability.
+  
+"Participation
+_NAME is quiet in class.  When I call on _HIM, _HE is following along and typically answers in a way that shows conceptual understanding.
+_NAME is quiet in class.  I wish _HE was more comfortable asking questions or seeking extra help when _HE is struggling with a concept.
+_NAME is an active class participant.
+It is a pleasure to have _HIM in class.
+
+"Wrapup Remarks
+A# I am very impressed and pleased with _NAME's work. Well done!
+AB# _HE should aim to maintain the same high quality of _HIS work through the year.
+AB# I hope _HE can sustain _HIS current interest in and enthusiasm towards math.
+AB# _NAME's parents should be very proud of _HIM.
+BC# I hope _HE can maintain _HIS determination to understand all aspects of the work.
+BC# _HE should make an effort to concentrate more during classroom discussion.
+BC#  A reasonable year overall - but _HE really needs to work on _HIS areas of weakness in the future.
+BC#  If _NAME has questions, _HE should see me or consider attending the math lab. 
+BC# Overall, _NAME had a very good semester. Well done!
+CD# _HE should aim to produce _HIS best work at all times, and always prepare thoroughly for tests and quizzes.
+DF# _NAME is bright and personable.  _HE is capable of doing better.
+
+
