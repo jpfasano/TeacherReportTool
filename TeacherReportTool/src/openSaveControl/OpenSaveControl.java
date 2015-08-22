@@ -134,8 +134,12 @@ public class OpenSaveControl {
       if (result != JFileChooser.APPROVE_OPTION)
          return;
       file = openNamesChooser.getSelectedFile();
-      defaultOpenNamesDirectory = file.getAbsolutePath();
       defaultOpenSentenceTemplatesDirectory = file.getParent();
+      defaultOpenNamesDirectory = file.getAbsolutePath();
+      
+      defaultOpenDirDirectory = file.getParent();
+      String temp = file.getName();
+      defaultSaveAsFilename = temp.substring(0,temp.length()-3)+"txt";
 
       boolean success = oscClient.openReadNamesFile(file);
 
@@ -176,7 +180,11 @@ public class OpenSaveControl {
       if (result != JFileChooser.APPROVE_OPTION)
          return;
       dir = openDirChooser.getSelectedFile();
-      defaultOpenDirDirectory = dir.getAbsolutePath();
+      
+      //defaultOpenDirDirectory = dir.getAbsolutePath();
+      defaultOpenDirDirectory = dir.getParent();
+      String temp = dir.getName();
+      defaultSaveAsFilename = temp.substring(0,temp.length()-3)+"txt";
 
       oscClient.openReadFile(dir);
       defaultOpenSentenceTemplatesDirectory = defaultOpenDirDirectory;
