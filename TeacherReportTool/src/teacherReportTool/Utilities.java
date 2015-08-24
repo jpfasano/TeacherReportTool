@@ -55,7 +55,7 @@ public class Utilities {
       InputStream retVal = null;
       try {
 
-         ClassLoader classLoader = (new MenuBarHelp()).getClass().getClassLoader();
+         ClassLoader classLoader = (new GenderWordPair(" "," ")).getClass().getClassLoader();
 
          // retVal = classLoader.getResource("/teacherReportTool/resources/"
          // + resourceName);
@@ -88,7 +88,7 @@ public class Utilities {
       URL retVal = null;
       try {
 
-         ClassLoader classLoader = (new MenuBarHelp()).getClass().getClassLoader();
+         ClassLoader classLoader = (new GenderWordPair(" "," ")).getClass().getClassLoader();
 
          retVal = classLoader.getResource("/teacherReportTool/resources/" + resourceName);
          if (retVal == null) {

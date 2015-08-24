@@ -26,20 +26,61 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
 
-public class MenuBarHelp {
+public class MenuBarHelp extends JMenu {
    private JFrame jf;
+
+   public MenuBarHelp(TeacherReportTool trt) {
+      setText("Help");
+      setMnemonic(KeyEvent.VK_H);
+
+      JMenuItem menuItem = null;
+
+      // menuItem = new JMenuItem();
+      // menuItem.setText("Select All");
+      // menuItem.addActionListener(new ActionListener() {
+      // public void actionPerformed(ActionEvent e) {
+      // trt.getContentPanel().getEditableTextPanel().selectAll();
+      // }
+      // });
+      // menuItem.setMnemonic(KeyEvent.VK_A);
+      // add(menuItem);
+
+      menuItem = new JMenuItem();
+      menuItem.setText("Help ...");
+      menuItem.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+            showHelp();
+         }
+      });
+      menuItem.setMnemonic(KeyEvent.VK_H);
+      add(menuItem);
+
+      menuItem = new JMenuItem();
+      menuItem.setText("About...");
+      menuItem.setMnemonic(KeyEvent.VK_A);
+      menuItem.addActionListener(new ActionListener() {
+         public void actionPerformed(ActionEvent e) {
+            showAbout();
+         }
+      });
+      add(menuItem);
+
+   }
 
    public void showHelp() {
       String longMessage = "";
@@ -63,7 +104,7 @@ public class MenuBarHelp {
          // and insert into html string.
          String[] jpgs = {"trtScreenShot.jpg", "openFiles.jpg", "1stCategory.jpg", "apply.jpg", "editableText.jpg",
                "2ndCategory.jpg", "3rdCategory.jpg", "rightArrow.jpg", "saveAs.jpg", "splitPane.jpg"};
-         for (int j = jpgs.length-1; j>=0; j--) {
+         for (int j = jpgs.length - 1; j >= 0; j--) {
             String screenShot = Utilities.getResourceURL(jpgs[j]).toString();
             longMessage = longMessage.replace("_IMAGE" + (j + 1), screenShot);
          }
