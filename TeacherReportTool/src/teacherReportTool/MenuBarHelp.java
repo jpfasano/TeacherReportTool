@@ -38,7 +38,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.ScrollPaneConstants;
 
-public class HelpMenuBar {
+public class MenuBarHelp {
    private JFrame jf;
 
    public void showHelp() {
