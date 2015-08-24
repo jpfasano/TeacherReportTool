@@ -139,8 +139,9 @@ public class TemplateCategoryPanel extends JPanel {
       uncheckBoxes();
 
       // Substitute _NAME with student name.
-      String sn = trt.getStudentName();
-      retVal = retVal.replace("_NAME", sn);
+//      String sn = trt.getStudentName();
+//      retVal = retVal.replace("_NAME", sn);  // Fix this to avoid Chris's
+      retVal = substituteName(retVal,trt.getStudentName());
 
       // Replace gender specific pronouns.
       Map<String, GenderWordPair> gwd = trt.getGenderWordsDict();
@@ -173,6 +174,28 @@ public class TemplateCategoryPanel extends JPanel {
 
       trt.getContentPanel().insertEditableText(retVal);
 
+      return retVal;
+   }
+
+   // In sentence replace all occurrences of _Name with student Name.
+   private String substituteName(String sentence, String studentName) {
+      String [] segments=sentence.split("_NAME");
+      String retVal = segments[0];
+      
+      for (int i=1; i<segments.length; i++){
+         String seg = segments[i];
+         
+         // Is last character of studentName an s?
+         if ( studentName.substring(studentName.length()-1).equals("s")){
+            // Does the segment begin with 's?
+            if ( seg.substring(0,2).equals("'s")){
+               // Need to change the 's to just '
+               seg="'"+seg.substring(2);
+            }
+         }
+         retVal += (studentName + seg);         
+      }
+      
       return retVal;
    }
 

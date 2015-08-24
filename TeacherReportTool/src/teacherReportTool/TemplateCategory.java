@@ -20,6 +20,10 @@ package teacherReportTool;
 
 import java.util.ArrayList;
 
+
+/*
+ * A TemplateCategory contains an Array of Sentence templates for a single category
+ */
 public class TemplateCategory {
 
    private String name;
