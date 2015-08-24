@@ -138,7 +138,15 @@ public class EditableTextPanel extends JPanel implements DocumentListener {
    }
    
    public void selectAll() {
+      ta.grabFocus();
       ta.selectAll();
    }
+   
+   
+   public void grabFocus() {
+      ta.grabFocus();
+   }
+   
+   
 
 }

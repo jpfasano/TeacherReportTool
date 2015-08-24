@@ -51,6 +51,11 @@ public class MenuBarEdit extends JMenu {
 
       menuItem = new JMenuItem();
       menuItem.setText("Cut");
+      menuItem.addActionListener(new ActionListener() {     
+         public void actionPerformed(ActionEvent e) {
+            trt.getContentPanel().getEditableTextPanel().grabFocus();
+         }
+      });
       menuItem.addActionListener(new DefaultEditorKit.CutAction());
       menuItem.setMnemonic(KeyEvent.VK_T);
       keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_X, KeyEvent.CTRL_DOWN_MASK);
@@ -59,6 +64,11 @@ public class MenuBarEdit extends JMenu {
 
       menuItem = new JMenuItem();
       menuItem.setText("Copy");
+      menuItem.addActionListener(new ActionListener() {     
+         public void actionPerformed(ActionEvent e) {
+            trt.getContentPanel().getEditableTextPanel().grabFocus();
+         }
+      });
       menuItem.addActionListener(new DefaultEditorKit.CopyAction());
       menuItem.setMnemonic(KeyEvent.VK_C);
       keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_C, KeyEvent.CTRL_DOWN_MASK);
@@ -67,6 +77,11 @@ public class MenuBarEdit extends JMenu {
 
       menuItem = new JMenuItem();
       menuItem.setText("Paste");
+      menuItem.addActionListener(new ActionListener() {     
+         public void actionPerformed(ActionEvent e) {
+            trt.getContentPanel().getEditableTextPanel().grabFocus();
+         }
+      });
       menuItem.addActionListener(new DefaultEditorKit.PasteAction());
       menuItem.setMnemonic(KeyEvent.VK_P);
       keyStroke = KeyStroke.getKeyStroke(KeyEvent.VK_V, KeyEvent.CTRL_DOWN_MASK);
