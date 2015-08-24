@@ -120,6 +120,9 @@ public class MenuBar extends JMenuBar implements ActionListener {
       fileMenu.add(exit);
 
       add(fileMenu);
+      
+      // "Edit" menu:
+      add ( new MenuBarEdit(trt) );
 
       // "Help" menu:
 
@@ -177,9 +180,9 @@ public class MenuBar extends JMenuBar implements ActionListener {
          openSaveControl.doSaveAs();
       }
       else if (src == showHelp)
-         new HelpMenuBar().showHelp();
+         new MenuBarHelp().showHelp();
       else if (src == about)
-         HelpMenuBar.showAbout();
+         MenuBarHelp.showAbout();
       else if (src == exit) {
          trt.updateStudentReportFromEditableText();
          if (!openSaveControl.unsavedWork()) {

@@ -136,5 +136,9 @@ public class EditableTextPanel extends JPanel implements DocumentListener {
    private static void setUnsavedChanges(boolean unsavedChanges) {
       EditableTextPanel.unsavedChanges = unsavedChanges;
    }
+   
+   public void selectAll() {
+      ta.selectAll();
+   }
 
 }
