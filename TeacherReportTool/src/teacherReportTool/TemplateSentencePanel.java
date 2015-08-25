@@ -18,16 +18,12 @@
  *******************************************************************************/
 package teacherReportTool;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
-import javax.swing.BorderFactory;
 import javax.swing.JCheckBox;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 
 public class TemplateSentencePanel extends JPanel {
 
@@ -42,7 +38,7 @@ public class TemplateSentencePanel extends JPanel {
 
       super();
       this.setMinimumSize(new Dimension(200, 18));
-      this.setPreferredSize(new Dimension(1030, 18));
+      this.setPreferredSize(new Dimension(600, 18));
 
       // find comment character if present
       int c = template.indexOf("#");
@@ -59,16 +55,24 @@ public class TemplateSentencePanel extends JPanel {
 
       setLayout(gridBagLayout);
 
-      checkBox = new JCheckBox(templateWoComment);
+ //     checkBox = new JCheckBox(templateWoComment);
+      
+      String text=null;
+      if (comment.isEmpty())
+         text = templateWoComment;
+      else
+         text = "<html><nobr><strong><em>"+comment+":</em></strong>&nbsp;&nbsp;"+templateWoComment+"</nobr></html>";
+      checkBox = new JCheckBox(text);
 
       checkBox.setMinimumSize(new Dimension(180, 18));
-      checkBox.setPreferredSize(new Dimension(1000, 18));
-
+      checkBox.setPreferredSize(new Dimension(600, 18));
+      
+      
       GridBagConstraints gbc_chckbxNewCheckBox = new GridBagConstraints();
       gbc_chckbxNewCheckBox.fill = GridBagConstraints.BOTH;
       gbc_chckbxNewCheckBox.anchor = GridBagConstraints.NORTHWEST;
       // gbc_chckbxNewCheckBox.insets = new Insets(0, 0, 5, 0);
-      gbc_chckbxNewCheckBox.gridx = 1;
+      gbc_chckbxNewCheckBox.gridx = 0;
       gbc_chckbxNewCheckBox.gridy = 0;
 
       gbc_chckbxNewCheckBox.weightx = 1.0;
@@ -77,24 +81,24 @@ public class TemplateSentencePanel extends JPanel {
       this.add(checkBox, gbc_chckbxNewCheckBox);
 
       // Add comment before checkbox.
-      JLabel commentLabel = new JLabel(comment);
-      commentLabel.setHorizontalAlignment(SwingConstants.CENTER);
-      GridBagConstraints gbc_label = new GridBagConstraints();
-      gbc_label.fill = GridBagConstraints.BOTH;
-      gbc_label.anchor = GridBagConstraints.NORTHWEST;
-      // gbc_label.insets = new Insets(0, 0, 5, 0);
-      gbc_label.gridx = 0;
-      gbc_label.gridy = 0;
-
-      gbc_label.weightx = .2;
-      gbc_label.weighty = 0.0001;
-      commentLabel.setMinimumSize(new Dimension(20, 18));
-      commentLabel.setPreferredSize(new Dimension(30, 18));
-
-      if (!comment.isEmpty())
-         commentLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
-
-      this.add(commentLabel, gbc_label);
+//      JLabel commentLabel = new JLabel(comment);
+//      commentLabel.setHorizontalAlignment(SwingConstants.CENTER);
+//      GridBagConstraints gbc_label = new GridBagConstraints();
+//      gbc_label.fill = GridBagConstraints.BOTH;
+//      gbc_label.anchor = GridBagConstraints.NORTHWEST;
+//      // gbc_label.insets = new Insets(0, 0, 5, 0);
+//      gbc_label.gridx = 0;
+//      gbc_label.gridy = 0;
+//
+//      gbc_label.weightx = .2;
+//      gbc_label.weighty = 0.0001;
+//      commentLabel.setMinimumSize(new Dimension(20, 18));
+//      commentLabel.setPreferredSize(new Dimension(30, 18));
+//
+//      if (!comment.isEmpty())
+//         commentLabel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+//
+//      this.add(commentLabel, gbc_label);
 
    }
 
