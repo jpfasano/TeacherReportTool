@@ -74,7 +74,7 @@ public class MenuBarFile extends JMenu {
 
       // Open Templates
       openSentenceTemplates = new JMenuItem();
-      openSentenceTemplates.setText("Open Student Templates ...");
+      openSentenceTemplates.setText("Open Sentence Templates ...");
       openSentenceTemplates.setMnemonic(KeyEvent.VK_T);
       openSentenceTemplates.addActionListener(new ActionListener() {
          public void actionPerformed(ActionEvent e) {

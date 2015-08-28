@@ -122,6 +122,9 @@ public class MenuBarHelp extends JMenu {
       textArea.setEditable(false);
       textArea.setCaretPosition(0);
       textArea.setMargin(new Insets(15, 15, 15, 15));
+      
+      // Used to create Help.html file
+      //System.out.println(longMessage);
 
       // wrap a scrollpane around it
       JScrollPane scrollPane = new JScrollPane(textArea);
