@@ -1,27 +1,37 @@
-/*******************************************************************************
- * Copyright (c) 2015 JP Fasano.
+/*
+ * ******************************************************************************
+ *  Copyright (c) 2015-2016 JP Fasano.
  *
- * This file is part of the TeacherReportTool.
+ *  This file is part of the TeacherReportTool.
  *
- * TeacherReportTool is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
+ *  TeacherReportTool is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
  *
- * TeacherReportTool is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
+ *  TeacherReportTool is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
  *
- * You should have received a copy of the GNU General Public License
- * along with TeacherReportTool.  If not, see <http://www.gnu.org/licenses/>.
- *******************************************************************************/
-package teacherReportTool;
-/**
- * This is the main class for the TeacherReportTool.
+ *  You should have received a copy of the GNU General Public License
+ *  along with TeacherReportTool.  If not, see <http://www.gnu.org/licenses/>.
+ *  ******************************************************************************
  */
 
-import java.awt.GridBagConstraints;
+package teacherReportTool;
+
+import javafx.application.Application;
+import javafx.geometry.Orientation;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.SplitPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+import javafx.stage.Stage;
+
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -29,266 +39,425 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
+/**
+ * Created by JP on 6/26/2016.
+ */
+public class TeacherReportTool extends Application {
 
-public class TeacherReportTool extends JFrame {
-   private MenuBar traMenuBar;
-   private ArrayList<Student> students;
-   private int studentsIndex;
-   private Map<String, GenderWordPair> genderWordsDict;
-   private Templates templates;
-   private ContentPanel contentPanel;
 
-   public TeacherReportTool() {
-      super("TeacherReportTool");
-      // super.setSize(800, 480);
-      super.getContentPane().add(new JPanel());
+    private Stage stage_;
+    private MenuBarView menuBar_;
+    private TemplatesView templatesFx_;
+    private ReportView reportFx_;
 
-      templates = new Templates();
-      students = new ArrayList<Student>();
-      genderWordsDict = new HashMap<String, GenderWordPair>();
+    private ArrayList<Student> students_;
+    private int studentsIndex_ = -1;
+    private Map<String, GenderWordPair> genderWordsDict_;
 
-      students.add(new Student(" ", "First: File-> Open Student Names. Second: File-> Open Sentence Templates"));
-      ArrayList<String> tmPlates = new ArrayList<String>();
-      // tmPlates.add(" ");
-      // tmPlates.add(" ");
-      TemplateCategory tc = new TemplateCategory(" ", tmPlates);
-      templates.add(tc);
-      //
-      // templates.add(tc);
+    private Templates templates_;
 
-      traMenuBar = new MenuBar(this);
-      setJMenuBar(traMenuBar);
+    private StudentPanelView studentPanelFx_;
 
-      contentPanel = new ContentPanel(this);
-      // this.setContentPane(contentPanel);
-      this.setContentPanel(contentPanel);
+    private BorderPane sp1_;
+    private boolean unsavedWork_ = false;
 
-      readGenderWordPairs();
+    public static void main(String[] args) {
+        launch(args);
+    }
 
-   }
 
-   public void setToFirstStudent() {
-      // copy checked templates to editable text
-      updateStudentReportFromEditableText();
-      studentsIndex = 0;
-      if (students.size() == 0)
-         studentsIndex = -1;
-      updateStudentNameLabel();
-      if (contentPanel != null)
-         contentPanel.setFocusToFirstTab();
+    @Override
+    public void start(Stage stage) {
+        this.stage_ = stage;
+        setWindowTitle(false);
 
-      // Set editable text to text for student
-      updateEditableTextFromStudentReport();
-   }
+        stage.setOnCloseRequest(e -> {
+            e.consume();
+            closeProgram();
+        });
 
-   public void advanceToNextStudent() {
-      // copy checked templates to editable text
-      updateStudentReportFromEditableText();
-      studentsIndex++;
-      if (studentsIndex >= students.size())
-         studentsIndex = students.size() - 1;
-      updateStudentNameLabel();
-      if (contentPanel != null)
-         contentPanel.setFocusToFirstTab();
+        BorderPane topLevel = new BorderPane();
+        Scene scene = new Scene(topLevel, 600, 350);
+        scene.setFill(Color.OLDLACE);
 
-      // Set editable text to text for student
-      updateEditableTextFromStudentReport();
-   }
+        menuBar_ = new MenuBarView(this);
 
-   public void backToPriorStudent() {
-      updateStudentReportFromEditableText();
-      studentsIndex--;
-      if (studentsIndex < 0)
-         studentsIndex = 0;
-      if (students.size() == 0)
-         studentsIndex = -1;
-      updateStudentNameLabel();
-      contentPanel.setFocusToFirstTab();
 
-      // Set editable text to text for student
-      updateEditableTextFromStudentReport();
-   }
+        BorderPane splitWidget = new BorderPane();
 
-   public void updateStudentReportFromEditableText() {
-      if (students.size() == 0)
-         return;
-      if (studentsIndex == -1)
-         return;
-      if (contentPanel == null)
-         return;
-      String r = contentPanel.getEditableTest();
-      setStudentReport(r);
-   }
 
-   public void updateEditableTextFromStudentReport() {
-      String sr = "";
-      if (students.size() == 0)
-         sr = "";
-      else if (studentsIndex == -1)
-         sr = "";
-      else
-         sr = students.get(studentsIndex).getReport();
-      if (contentPanel != null)
-         contentPanel.setEditableText(sr);
-   }
+        studentPanelFx_ = new StudentPanelView(this);
 
-   public String getReports() {
-      // Make sure current editable text is copied to student
-      updateStudentReportFromEditableText();
 
-      String retVal = "";
-      for (Student s : getStudents()) {
-         String sReport = s.getReport().trim();
-         if (sReport.length() == 0)
-            continue;
-         retVal += "\n\n" + s.getName();
-         retVal += "\n" + s.getReport();
-      }
-      return retVal;
-   }
+        SplitPane sp = new SplitPane();
+        sp.setOrientation(Orientation.VERTICAL);
+        sp1_ = new BorderPane();
 
-   private void updateStudentNameLabel() {
-      if (studentsIndex < 0)
-         return;
-      if (contentPanel == null)
-         return;
-      contentPanel.updateStudentNameLabel(students.get(studentsIndex));
-   }
+        //sp1_.getChildren().add(new Label("Button One"));
+        //sp1_.setCenter(new Label("TabbedPane Area"));
+        Button apply = new Button("Apply");
+        apply.setOnAction(e -> {
+            applySelectedTemplates();
+        });
+        HBox hb = new HBox();
+        hb.setAlignment(Pos.CENTER);
+        hb.getChildren().addAll(apply);
+        sp1_.setBottom(hb);
 
-   public String getStudentName() {
-      return students.get(studentsIndex).getName();
-   }
 
-   public String getStudentGender() {
-      return students.get(studentsIndex).getGender();
-   }
+        reportFx_ = new ReportView(this);
+        reportFx_.setWrapText(true);
 
-   public String getStudentReport() {
-      return students.get(studentsIndex).getReport();
-   }
+        sp.getItems().addAll(sp1_, reportFx_);
+        sp.setDividerPositions(0.6f);
 
-   public void setStudentReport(String r) {
-      students.get(studentsIndex).setReport(r);
-   }
 
-   public Templates getTemplateCategories() {
-      return templates;
-   }
+        //splitWidget.getChildren().setAll(studentPanelFx_,sp);
+        splitWidget.setTop(studentPanelFx_);
+        splitWidget.setCenter(sp);
 
-   public void setTemplates(Templates templates) {
-      this.templates = templates;
-   }
 
-   public Map<String, GenderWordPair> getGenderWordsDict() {
-      return genderWordsDict;
-   }
+        //topLevel.getChildren().addAll(menuBar_, vbox);
+        topLevel.setTop(menuBar_);
+        topLevel.setCenter(splitWidget);
+        //((Vbox) scene.getRoot()).getChildren().addAll(menuBar_, vbox);
+        stage.setScene(scene);
+        stage.show();
 
-   public void setGenderWordsDict(Map<String, GenderWordPair> genderWordsDict) {
-      this.genderWordsDict = genderWordsDict;
-   }
+        readGenderWordPairs();
+    }
 
-   public void setStudents(ArrayList<Student> students) {
-      this.students = students;
-      studentsIndex = -1;
-   }
+    public void closeProgram() {
+        if (!isThereUnsavedWork()) {
+            // there is not unsaved work, so OK to close
+            stage_.close();
+        } else if (getMenuBar().getOpenSaveControl().okDiscardUnsavedWork()) {
+            // There is unsaved work, but user said ok to discard
+            stage_.close();
+        }
+    }
 
-   public ArrayList<Student> getStudents() {
-      return students;
-   }
+    public Stage getStage() {
+        return stage_;
+    }
 
-   public ContentPanel getContentPanel() {
-      return contentPanel;
-   }
 
-   public void setContentPanel(ContentPanel cp) {
-      contentPanel = cp;
-      this.setToFirstStudent();
+    public MenuBarView getMenuBar() {
+        return menuBar_;
+    }
 
-      GridBagConstraints gbc = new GridBagConstraints();
-      gbc.gridx = 0;
-      gbc.gridy = 0;
-      gbc.weightx = 1.0;
-      gbc.weighty = 1.0;
-      gbc.fill = GridBagConstraints.BOTH;
+    private void readGenderWordPairs() {
 
-      // {
-      // JFrame jf = new JFrame();
-      // jf.getContentPane().removeAll();
-      //
-      // //jf.getContentPane().add(new
-      // TemplatesPanelIncApplyWDesigner(this,templates.get(1/*templates.size()-1*/)));
-      // jf.getContentPane().add(new TabbedTemplatePanel2WDesigner(this));
-      // //jf.setContentPane(cp,gbc);
-      // jf.setTitle("Test Content Panel");
-      // jf.setSize(800, 480);
-      // jf.pack();
-      // jf.setVisible(true);
-      // }
+        // Read resource file with gender word pair substitutions
+        genderWordsDict_ = new HashMap<String, GenderWordPair>();
+        try {
 
-      this.getContentPane().removeAll();
-      this.getContentPane().add(cp);
-      this.pack();
-      // this.setContentPane(contentPanel);
-      this.getContentPane().revalidate();
-      this.repaint();
+            InputStream fstream = Utilities.getResourceInputStream("resources/genderWordPairs.trt");
+            BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
 
-      // this.invalidate();
-      // this.validate();
-   }
+            String strLine;
 
-   private void readGenderWordPairs() {
+            // Read File Line By Line
+            while ((strLine = br.readLine()) != null) {
+                strLine = strLine.trim();
 
-      // String pathSeparator = System.getProperty("file.separator");
-      try {
+                // check for a comment or empty line
+                if (strLine.length() == 0)
+                    continue;
+                if (strLine.substring(0, 1).equals("#"))
+                    continue;
+                // Split line into male and female gender words
+                String[] parsed = strLine.split(" ", 2);
 
-         InputStream fstream = Utilities.getResourceInputStream("genderWordPairs.trt");
+                GenderWordPair gwp = new GenderWordPair(parsed[0], parsed[1]);
+                genderWordsDict_.put(parsed[0], gwp);
+                genderWordsDict_.put(parsed[1], gwp);
+            }
+            br.close();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
 
-         BufferedReader br = new BufferedReader(new InputStreamReader(fstream));
+//        String[] male = {"his", "he", "him", "son", "man","boy","himself"};
+//        String[] female = {"her", "she", "her", "daughter", "woman","girl","herself"};
+//        genderWordsDict_ = new HashMap<String, GenderWordPair>();
+//        for (int i = 0; i < male.length; i++) {
+//            GenderWordPair gwp = new GenderWordPair(male[i], female[i]);
+//            genderWordsDict_.put(male[i], gwp);
+//            genderWordsDict_.put(female[i], gwp);
+//        }
 
-         String strLine;
+    }
 
-         // Read File Line By Line
-         while ((strLine = br.readLine()) != null) {
-            strLine = strLine.trim();
+    public void setStudents(ArrayList<Student> students) {
+        // First time
+        if (this.students_ == null) {
+            students_ = students;
+            studentsIndex_ = Math.min(0, students_.size() - 1);
+        } else {
+            // Read a second names file (unusual).  May be shouldn't do this and just position to beginning
+            this.students_ = students;
+            if (studentsIndex_ >= students_.size())
+                studentsIndex_ = Math.min(0, students_.size() - 1);
+        }
+        updateStudentNameLabel();
+    }
 
-            // check for a comment or empty line
-            if (strLine.length() == 0)
-               continue;
-            if (strLine.substring(0, 1).equals("#"))
-               continue;
-            // Split line into male and female gender words
-            String[] parsed = strLine.split(" ", 2);
+    public ArrayList<Student> getStudents() {
+        return students_;
+    }
 
-            GenderWordPair gwp = new GenderWordPair(parsed[0], parsed[1]);
-            genderWordsDict.put(parsed[0], gwp);
-            genderWordsDict.put(parsed[1], gwp);
-         }
-         br.close();
-      }
-      catch (Exception e) {
-         System.err.println(e.getMessage());
-         e.printStackTrace();
-      }
-   }
 
-   public MenuBar getTraMenuBar() {
-      return traMenuBar;
-   }
+    // Get reports for all students
+    public String getReports() {
+        // Make sure current editable text is copied to student
+        updateStudentReportFromEditableText();
 
-   public static void main(String[] args) {
-      try {
-         UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-      }
-      catch (Exception ex) {
-      }
+        String retVal = "";
+        for (Student s : getStudents()) {
+            String sReport = s.getReport().trim();
+            if (sReport.length() == 0)
+                continue;
+            retVal += "\n\n" + s.getName();
+            retVal += "\n" + s.getReport();
+        }
+        return retVal;
+    }
 
-      TeacherReportTool window = new TeacherReportTool();
-      // window.setBounds(100, 100, 900, 600);
-      window.setBounds(100, 50, 620, 600);
-      window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-      window.setVisible(true);
-   }
+
+    public String getStudentName() {
+        return students_.get(studentsIndex_).getName();
+    }
+
+    public String getStudentGender() {
+        return students_.get(studentsIndex_).getGender();
+    }
+
+    public String getStudentReport() {
+        return students_.get(studentsIndex_).getReport();
+    }
+
+    public void setStudentReport(String r) {
+        students_.get(studentsIndex_).setReport(r);
+    }
+
+    public Templates getTemplateCategories() {
+        return templates_;
+    }
+
+    public void setTemplates(Templates templates) {
+        // Get current template tab
+        int saveTabNum = 0;
+        if (templatesFx_ != null)
+            saveTabNum = templatesFx_.getSelectedTab();
+
+        this.templates_ = templates;
+
+        // update display widget
+        templatesFx_ = new TemplatesView(this, templates);
+        templatesFx_.selectTab(saveTabNum);
+        sp1_.setCenter(templatesFx_);
+    }
+
+    public Map<String, GenderWordPair> getGenderWordsDict() {
+        return genderWordsDict_;
+    }
+
+    public void setGenderWordsDict(Map<String, GenderWordPair> genderWordsDict) {
+        this.genderWordsDict_ = genderWordsDict;
+    }
+
+    public void advanceToNextStudent() {
+
+        if (students_ == null) return;
+        // copy checked templates to editable text
+
+        applySelectedTemplates();
+        templatesFx_.selectTab(0);
+
+        updateStudentReportFromEditableText();
+
+        studentsIndex_++;
+        if (studentsIndex_ >= students_.size())
+            studentsIndex_ = students_.size() - 1;
+        updateStudentNameLabel();
+
+
+        // Set focus to first tab
+        if (templatesFx_ != null)
+            templatesFx_.selectTab(0);
+
+        // Set editable text to text for student
+        updateEditableTextFromStudentReport();
+    }
+
+    public void backToPriorStudent() {
+
+        if (students_ == null) return;
+        applySelectedTemplates();
+        templatesFx_.selectTab(0);
+
+        updateStudentReportFromEditableText();
+
+        studentsIndex_--;
+        if (studentsIndex_ < 0)
+            studentsIndex_ = 0;
+        if (students_.size() == 0)
+            studentsIndex_ = -1;
+        updateStudentNameLabel();
+
+        // Set focus to first tab
+        templatesFx_.selectTab(0);
+
+        // Set editable text to text for student
+        updateEditableTextFromStudentReport();
+    }
+
+    private void updateStudentNameLabel() {
+        if (studentsIndex_ < 0)
+            return;
+        if (studentPanelFx_ == null)
+            return;
+        String suffix = " " + (studentsIndex_ + 1) + " of " + students_.size();
+        studentPanelFx_.updateStudentNameLabel(students_.get(studentsIndex_), suffix);
+    }
+
+    public void applySelectedTemplates() {
+        if (templates_ == null) return;
+        if (templatesFx_ == null) return;
+        String templates = templates_.getSentenceTemplates(templatesFx_.getPickedSentenceTemplates());
+        templates = substituteWords(templates);
+        if (menuBar_.getInsertAtCursorEnabled())
+            reportFx_.insertText(templates);
+        else
+            reportFx_.appendText(templates);
+        //System.out.println(templates);
+    }
+
+    // Replace place holders in sentence template with correct words.
+    private String substituteWords(String template) {
+        template = substituteName(template);
+        template = substituteGenderSpecificWords(template);
+        return template;
+    }
+
+    // In sentence replace all occurrences of _Name with student Name.
+    private String substituteName(String sentence) {
+        String studentName = getStudentName();
+        String[] segments = sentence.split("_NAME");
+        String retVal = segments[0];
+
+        for (int i = 1; i < segments.length; i++) {
+            String seg = segments[i];
+
+            // Is last character of studentName an s?
+            if (studentName.substring(studentName.length() - 1).equals("s")) {
+                // Does the segment begin with 's?
+                if (seg.substring(0, 2).equals("'s")) {
+                    // Need to change the 's to just '
+                    seg = "'" + seg.substring(2);
+                }
+            }
+            retVal += (studentName + seg);
+        }
+
+        return retVal;
+    }
+
+    // Substitute gender specfic words
+    private String substituteGenderSpecificWords(String sentence) {
+        String retVal = sentence;
+        // Replace gender specific pronouns.
+        String sg = this.getStudentGender();
+        for (Map.Entry<String, GenderWordPair> entry : genderWordsDict_.entrySet()) {
+            String needle = "_" + entry.getKey().toUpperCase().trim();
+            String replacement = entry.getValue().getGenderWord(sg).trim();
+
+            // Create upper case first character replacement
+            char[] r1 = replacement.toCharArray();
+            r1[0] = Character.toUpperCase(r1[0]);
+            String replacementUC = new String(r1);
+
+            // If needle is at beginning of sentence then replacement must start
+            // with an uppercase character
+            if (retVal.indexOf(needle) == 0) {
+                retVal = replacementUC + retVal.substring(needle.length());
+            }
+
+            // Look for the needle at the beginning of a sentence.
+            String[] endSent = {".", "?", "!"};
+            for (String es : endSent) {
+                String needle1 = es + " " + needle;
+                retVal = retVal.replace(needle1, es + " " + replacementUC);
+                needle1 = es + "  " + needle;
+                retVal = retVal.replace(needle1, es + "  " + replacementUC);
+            }
+            retVal = retVal.replace(needle, replacement);
+        }
+
+        return retVal;
+    }
+
+
+    public void updateStudentReportFromEditableText() {
+        if (students_.size() == 0)
+            return;
+        if (studentsIndex_ == -1)
+            return;
+        if (reportFx_ == null)
+            return;
+        String r = reportFx_.getReport();
+        setStudentReport(r);
+    }
+
+    public void updateEditableTextFromStudentReport() {
+        String sr;
+        if (students_.size() == 0)
+            sr = "";
+        else if (studentsIndex_ == -1)
+            sr = "";
+        else
+            sr = students_.get(studentsIndex_).getReport();
+        if (reportFx_ != null)
+            reportFx_.setReport(sr);
+    }
+
+    // Perform all actions required when the report has been updated
+    public void reportChanged() {
+        unsavedWork_ = true;
+        menuBar_.enableSaveMenuItems(true);
+        setWindowTitle(true);
+    }
+
+    public void reportSaved() {
+        unsavedWork_ = false;
+        menuBar_.enableSaveMenuItems(false);
+        setWindowTitle(false);
+    }
+
+    // Names file just read
+    public void namesFileOpened() {
+        unsavedWork_ = false;
+        // save and saveAs unavailable
+        menuBar_.enableSaveMenuItems(false);
+        // Window Title without Star
+        setWindowTitle(false);
+        // Reset Template Widget to first tab
+        if (templatesFx_ != null) templatesFx_.selectTab(0);
+        // Clear reports widget
+        if (reportFx_ != null) reportFx_.setReport("");
+    }
+
+    private void setWindowTitle(boolean withStar) {
+        String title = "Teacher Report Tool";
+        if (withStar) title += "*";
+        stage_.setTitle(title);
+    }
+
+    public boolean isThereUnsavedWork() {
+        return unsavedWork_;
+    }
+
+
 }
