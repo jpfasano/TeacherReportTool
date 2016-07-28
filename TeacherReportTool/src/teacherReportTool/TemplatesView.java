@@ -22,10 +22,9 @@
 package teacherReportTool;
 
 import javafx.geometry.Insets;
+import javafx.geometry.VPos;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Pair;
@@ -39,7 +38,6 @@ public class TemplatesView extends TabPane {
 
     // 2D Array of CheckBoxes
     CheckBox[][] checkBoxes_;
-
 
     public TemplatesView(TeacherReportTool trt, Templates templates) {
 
@@ -58,6 +56,7 @@ public class TemplatesView extends TabPane {
         }));
 
 
+
         for (int i = 0; i < templates.size(); i++) {
             TemplateCategory tc = templates.get(i);
             checkBoxes_[i] = new CheckBox[tc.getTemplates().size()];
@@ -65,9 +64,12 @@ public class TemplatesView extends TabPane {
             Tab tab = new Tab();
             tab.setText(tc.getName());
 
+            GridPane hb2 = new GridPane();
+            hb2.setHgap(2);
 
             ScrollPane sentences = new ScrollPane();
-            sentences.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+            sentences.setFitToWidth(true);
+
             VBox vb = new VBox();
             vb.setPadding(new Insets(0, 0, 0, 5));
 
@@ -83,28 +85,24 @@ public class TemplatesView extends TabPane {
                 Font f = Font.getDefault();
 
                 commentLabel.setFont(Font.font(Font.getDefault().getName(), FontWeight.BOLD, Font.getDefault().getSize()));
-                HBox hb1 = new HBox();
-                hb1.setSpacing(5);
-                hb1.getChildren().addAll(pick, commentLabel);
+                commentLabel.setMinWidth(Region.USE_PREF_SIZE);
 
                 Label sentTemplate = new Label(templateWoComment);
                 sentTemplate.setWrapText(true);
 
 
-                //HBox hb2 = new HBox();
-                //hb2.setSpacing(5);
-                //hb2.getChildren().addAll(hb1,sentTemplate);
-
-                GridPane hb2 = new GridPane();
-                hb2.setHgap(5);
-                hb2.add(hb1, 0, 0);
-                hb2.add(sentTemplate, 1, 0);
-
-
-                vb.getChildren().add(hb2);
+                hb2.setValignment(pick, VPos.TOP);
+                hb2.setValignment(commentLabel, VPos.TOP);
+                hb2.setValignment(sentTemplate, VPos.TOP);
+                hb2.add(pick, 0, j);
+                hb2.add(commentLabel,1,j);
+                hb2.add(sentTemplate, 2, j);
 
 
             }
+            vb.getChildren().add(hb2);
+
+
 
             sentences.setContent(vb);
             tab.setContent(sentences);
