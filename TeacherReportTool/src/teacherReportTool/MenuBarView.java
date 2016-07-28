@@ -24,6 +24,9 @@ package teacherReportTool;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyCodeCombination;
+import javafx.scene.input.KeyCombination;
 
 public class MenuBarView extends MenuBar {
 
@@ -79,6 +82,7 @@ public class MenuBarView extends MenuBar {
         saveMenuItem_.setOnAction(e -> {
             osc_.doSave();
         });
+        saveMenuItem_.setAccelerator(new KeyCodeCombination(KeyCode.S, KeyCombination.CONTROL_DOWN));
 
         saveAsMenuItem_ = new MenuItem("Save As ...");
         saveAsMenuItem_.setOnAction(e -> {

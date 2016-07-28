@@ -273,8 +273,10 @@ public class TeacherReportTool extends Application {
         if (students_ == null) return;
         // copy checked templates to editable text
 
-        applySelectedTemplates();
-        templatesFx_.selectTab(0);
+        if(templatesFx_!=null) {
+            applySelectedTemplates();
+            templatesFx_.selectTab(0);
+        }
 
         updateStudentReportFromEditableText();
 
