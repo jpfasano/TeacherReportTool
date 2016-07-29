@@ -12,4 +12,4 @@ Two input files are required:
 
 ## Alternate Tools
 
-This tool is similar to the Teachers Report Assistant available at [www.rayslearning.com/repview.htm](www.rayslearning.com/repview.htm).  
+This tool is similar to the Teachers Report Assistant available at [www.rayslearning.com/repview.htm](https://www.rayslearning.com/repview.htm).  
