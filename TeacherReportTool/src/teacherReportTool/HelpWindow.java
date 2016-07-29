@@ -39,7 +39,8 @@ import java.net.URL;
 public class HelpWindow {
     public void display() {
         Stage stage = new Stage();
-        stage.initModality(Modality.APPLICATION_MODAL);
+        //stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initModality(Modality.NONE);
         stage.setTitle("Help");
         stage.setMinWidth(250);
 
