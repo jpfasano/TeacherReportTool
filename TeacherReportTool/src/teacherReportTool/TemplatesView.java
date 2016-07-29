@@ -66,6 +66,7 @@ public class TemplatesView extends TabPane {
 
             GridPane hb2 = new GridPane();
             hb2.setHgap(2);
+            hb2.setVgap(4);
 
             ScrollPane sentences = new ScrollPane();
             sentences.setFitToWidth(true);

@@ -42,6 +42,8 @@ public class MenuBarView extends MenuBar {
     private MenuItem saveAsMenuItem_;
     private MenuItem exit_;
 
+    private MenuItem pasteReportsToClipboard_, selectAll_, copy_, cut_, paste_;
+
     private Boolean saveFileDefined_ = false;
 
 
@@ -51,7 +53,8 @@ public class MenuBarView extends MenuBar {
         osc_ = new OpenSaveControlView(trt_, trtOpenSaveControlClient_);
 
         // --- Menu File
-        Menu menuFile = new Menu("File");
+        Menu menuFile = new Menu("_File");
+
         Menu preferences = new Menu("Preferences");
         CheckMenuItem insertAtCursor = new CheckMenuItem("Insert at cursor");
         insertAtCursor.selectedProperty().addListener(new ChangeListener<Boolean>() {
@@ -97,6 +100,49 @@ public class MenuBarView extends MenuBar {
                 saveMenuItem_, saveAsMenuItem_, new SeparatorMenuItem(),
                 exit);
 
+        // --- Menu Edit
+        Menu menuEdit = new Menu("_Edit");
+
+        pasteReportsToClipboard_ = new MenuItem("All reports to clipboard");
+        pasteReportsToClipboard_.setOnAction(event -> {
+            trt_.pasteReportsToClipboard();
+        });
+
+        selectAll_ = new MenuItem("Select All");
+        selectAll_.setOnAction(event -> {
+            trt_.selectAll();
+        });
+        selectAll_.setAccelerator(new KeyCodeCombination(KeyCode.A, KeyCombination.CONTROL_DOWN));
+
+        copy_ = new MenuItem("Copy");
+        copy_.setOnAction(event -> {
+            trt_.copy();
+        });
+        copy_.setAccelerator(new KeyCodeCombination(KeyCode.C, KeyCombination.CONTROL_DOWN));
+
+        cut_ = new MenuItem("Cut");
+        cut_.setOnAction(event -> {
+            trt_.cut();
+            trt_.reportChanged();
+        });
+        cut_.setAccelerator(new KeyCodeCombination(KeyCode.X, KeyCombination.CONTROL_DOWN));
+
+        paste_ = new MenuItem("Paste");
+        paste_.setOnAction(event -> {
+            trt_.paste();
+            trt_.reportChanged();
+        });
+        paste_.setAccelerator(new KeyCodeCombination(KeyCode.V, KeyCombination.CONTROL_DOWN));
+
+        // Edit menu items are not available until student names have been read.
+        pasteReportsToClipboard_.setDisable(true);
+        selectAll_.setDisable(true);
+        copy_.setDisable(true);
+        cut_.setDisable(true);
+        paste_.setDisable(true);
+
+
+        menuEdit.getItems().addAll(pasteReportsToClipboard_, selectAll_, copy_, cut_, paste_);
 
         // --- Menu Help
         Menu menuHelp = new Menu("Help");
@@ -106,7 +152,7 @@ public class MenuBarView extends MenuBar {
         about.setOnAction(e -> (new AboutWindow()).display());
         menuHelp.getItems().addAll(help, about);
 
-        this.getMenus().addAll(menuFile, menuHelp);
+        this.getMenus().addAll(menuFile, menuEdit, menuHelp);
 
         // Save and SaveAs are not available until after OpenDir or
         // OpenSentenceTemplates are done.
@@ -167,6 +213,14 @@ public class MenuBarView extends MenuBar {
 
     public TrtOpenSaveControlClient getTrtOpenSaveControlClient() {
         return trtOpenSaveControlClient_;
+    }
+
+    public void enableEditMenuItems() {
+        pasteReportsToClipboard_.setDisable(false);
+        selectAll_.setDisable(false);
+        copy_.setDisable(false);
+        cut_.setDisable(false);
+        paste_.setDisable(false);
     }
 
 }

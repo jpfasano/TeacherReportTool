@@ -73,4 +73,9 @@ public class ReportView extends TextArea {
         this.setText(text);
         //trt_.reportChanged();
     }
+
+
+    public void selectAll() {
+        super.selectAll();
+    }
 }

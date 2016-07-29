@@ -27,6 +27,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -48,7 +50,7 @@ public class TeacherReportTool extends Application {
     private Stage stage_;
     private MenuBarView menuBar_;
     private TemplatesView templatesFx_;
-    private ReportView reportFx_;
+    private ReportView reportView_;
 
     private ArrayList<Student> students_;
     private int studentsIndex_ = -1;
@@ -105,10 +107,10 @@ public class TeacherReportTool extends Application {
         sp1_.setBottom(hb);
 
 
-        reportFx_ = new ReportView(this);
-        reportFx_.setWrapText(true);
+        reportView_ = new ReportView(this);
+        reportView_.setWrapText(true);
 
-        sp.getItems().addAll(sp1_, reportFx_);
+        sp.getItems().addAll(sp1_, reportView_);
         sp.setDividerPositions(0.6f);
 
 
@@ -331,9 +333,9 @@ public class TeacherReportTool extends Application {
         String templates = templates_.getSentenceTemplates(templatesFx_.getPickedSentenceTemplates());
         templates = substituteWords(templates);
         if (menuBar_.getInsertAtCursorEnabled())
-            reportFx_.insertText(templates);
+            reportView_.insertText(templates);
         else
-            reportFx_.appendText(templates);
+            reportView_.appendText(templates);
         //System.out.println(templates);
     }
 
@@ -407,9 +409,9 @@ public class TeacherReportTool extends Application {
             return;
         if (studentsIndex_ == -1)
             return;
-        if (reportFx_ == null)
+        if (reportView_ == null)
             return;
-        String r = reportFx_.getReport();
+        String r = reportView_.getReport();
         setStudentReport(r);
     }
 
@@ -421,8 +423,8 @@ public class TeacherReportTool extends Application {
             sr = "";
         else
             sr = students_.get(studentsIndex_).getReport();
-        if (reportFx_ != null)
-            reportFx_.setReport(sr);
+        if (reportView_ != null)
+            reportView_.setReport(sr);
     }
 
     // Perform all actions required when the report has been updated
@@ -448,7 +450,9 @@ public class TeacherReportTool extends Application {
         // Reset Template Widget to first tab
         if (templatesFx_ != null) templatesFx_.selectTab(0);
         // Clear reports widget
-        if (reportFx_ != null) reportFx_.setReport("");
+        if (reportView_ != null) reportView_.setReport("");
+        // Enable Edit menu items
+        menuBar_.enableEditMenuItems();
     }
 
     private void setWindowTitle(boolean withStar) {
@@ -460,6 +464,35 @@ public class TeacherReportTool extends Application {
     public boolean isThereUnsavedWork() {
         return unsavedWork_;
     }
+
+    public void selectAll() {
+        if ( reportView_==null) return;
+        reportView_.selectAll();
+    }
+
+    public void copy() {
+        if ( reportView_==null) return;
+        reportView_.copy();
+    }
+
+    public void cut() {
+        if ( reportView_==null) return;
+        reportView_.cut();
+    }
+
+    public void paste() {
+        if ( reportView_==null) return;
+        reportView_.paste();
+    }
+
+    public void pasteReportsToClipboard() {
+        final Clipboard clipboard = Clipboard.getSystemClipboard();
+        final ClipboardContent content = new ClipboardContent();
+        String reports = getReports();
+        content.putString(reports);
+        clipboard.setContent(content);
+    }
+
 
 
 }
