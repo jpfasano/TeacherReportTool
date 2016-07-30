@@ -10,6 +10,9 @@ Two input files are required:
 * List of student names and gender. [Example](https://github.com/jpfasano/TeacherReportTool/blob/master/TeacherReportTool/trtSamleFiles/period1Class.trn)
 * Sentence templates. [Example](https://github.com/jpfasano/TeacherReportTool/blob/master/TeacherReportTool/trtSamleFiles/period1Class.trs)
 
+## Additional Information
+More documentation is available by running the application and selecting Help on the menu bar.
+
 ## Alternate Tools
 
 This tool is similar to the Teachers Report Assistant available at [www.rayslearning.com/repview.htm](http://www.rayslearning.com/repview.htm).  
