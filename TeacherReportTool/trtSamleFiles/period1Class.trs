@@ -27,6 +27,9 @@
 #    _HE becomes he or she.
 #    _HIM becomes him or her.
 #    _SON becomes son or daughter.
+#    _MAN becomes man or woman.
+#    _BOY becomes boy or girl
+#    _HIMSELF becomes himself or herself
 #
 
 "Scores
